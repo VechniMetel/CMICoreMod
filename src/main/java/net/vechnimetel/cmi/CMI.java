@@ -1,4 +1,4 @@
-package net.vechnimetel.ueaddons;
+package net.vechnimetel.cmi;
 
 import net.minecraftforge.fml.common.Mod;
 
