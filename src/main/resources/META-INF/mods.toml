@@ -9,7 +9,7 @@ displayName = "${mod_name}"
 authors = "${mod_authors}"
 description = '''
 Core mod of Create: Mechanism and Innovation
-机械动力: 构建与革新的核心Mod
+机械动力: 构件与革新的核心Mod
 '''
 [[dependencies."${mod_id}"]]
 modId = "forge"
