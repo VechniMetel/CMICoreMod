@@ -1,21 +1,24 @@
-modLoader="javafml"
-loaderVersion="${loader_version_range}"
-license="${mod_license}"
+modLoader = "javafml"
+loaderVersion = "${loader_version_range}"
+license = "${mod_license}"
 [[mods]]
-modId="${mod_id}"
-version="${mod_version}"
-displayName="${mod_name}"
-authors="${mod_authors}"
-description='''${mod_description}'''
+modId = "${mod_id}"
+version = "${mod_version}"
+displayName = "${mod_name}"
+authors = "${mod_authors}"
+description = '''
+Core mod of Create: Mechanism and Innovation
+机械动力: 构建与革新的核心Mod
+'''
 [[dependencies."${mod_id}"]]
-    modId="forge"
-    mandatory=true
-    versionRange="${forge_version_range}"
-    ordering="NONE"
-    side="BOTH"
+modId = "forge"
+mandatory = true
+versionRange = "${forge_version_range}"
+ordering = "NONE"
+side = "BOTH"
 [[dependencies."${mod_id}"]]
-    modId="minecraft"
-    mandatory=true
-    versionRange="${minecraft_version_range}"
-    ordering="NONE"
-    side="BOTH"
+modId = "minecraft"
+mandatory = true
+versionRange = "${minecraft_version_range}"
+ordering = "NONE"
+side = "BOTH"
