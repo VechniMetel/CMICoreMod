@@ -11,14 +11,12 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BiomeTags;
-import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraft.world.level.material.Fluids;
-import net.minecraftforge.common.Tags;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraftforge.common.util.Lazy;
@@ -87,42 +85,48 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
     };
 
     private boolean testStructure() {
-        return level.getBlockState(getBlockPos().north()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().south()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
-                level.getBlockState(getBlockPos().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
-                level.getBlockState(getBlockPos().above().above().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
-                level.getBlockState(getBlockPos().above().above().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
-                level.getBlockState(getBlockPos().above().above().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
-                level.getBlockState(getBlockPos().above().above().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
-                level.getBlockState(getBlockPos().above().above().above().north()).getBlock().equals(IEBlocks.TO_STAIRS.get(new ResourceLocation("immersiveengineering:treated_wood_horizontal")).get()) &&
-                level.getBlockState(getBlockPos().above().above().above().south()).getBlock().equals(IEBlocks.TO_STAIRS.get(new ResourceLocation("immersiveengineering:treated_wood_horizontal")).get()) &&
-                level.getBlockState(getBlockPos().above().above().above().west()).getBlock().equals(IEBlocks.TO_STAIRS.get(new ResourceLocation("immersiveengineering:treated_wood_horizontal")).get()) &&
-                level.getBlockState(getBlockPos().above().above().above().east()).getBlock().equals(IEBlocks.TO_STAIRS.get(new ResourceLocation("immersiveengineering:treated_wood_horizontal")).get()) &&
-                level.getBlockState(getBlockPos().above().above().above().north()).getValue(StairBlock.HALF).equals(Half.TOP) &&
-                level.getBlockState(getBlockPos().above().above().above().south()).getValue(StairBlock.HALF).equals(Half.TOP) &&
-                level.getBlockState(getBlockPos().above().above().above().west()).getValue(StairBlock.HALF).equals(Half.TOP) &&
-                level.getBlockState(getBlockPos().above().above().above().east()).getValue(StairBlock.HALF).equals(Half.TOP) &&
-                level.getBlockState(getBlockPos().above().above().above().north()).getValue(StairBlock.FACING).equals(Direction.NORTH) &&
-                level.getBlockState(getBlockPos().above().above().above().south()).getValue(StairBlock.FACING).equals(Direction.SOUTH) &&
-                level.getBlockState(getBlockPos().above().above().above().west()).getValue(StairBlock.FACING).equals(Direction.WEST) &&
-                level.getBlockState(getBlockPos().above().above().above().east()).getValue(StairBlock.FACING).equals(Direction.EAST);
+        if (level != null) {
+            return level.getBlockState(getBlockPos().north()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().south()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get()) &&
+                    level.getBlockState(getBlockPos().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_FENCE.get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().north().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().north().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().south().west()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().south().east()).getBlock().equals(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().north()).getBlock().equals(IEBlocks.TO_STAIRS.get(ResourceLocation.parse("immersiveengineering:treated_wood_horizontal")).get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().south()).getBlock().equals(IEBlocks.TO_STAIRS.get(ResourceLocation.parse("immersiveengineering:treated_wood_horizontal")).get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().west()).getBlock().equals(IEBlocks.TO_STAIRS.get(ResourceLocation.parse("immersiveengineering:treated_wood_horizontal")).get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().east()).getBlock().equals(IEBlocks.TO_STAIRS.get(ResourceLocation.parse("immersiveengineering:treated_wood_horizontal")).get()) &&
+                    level.getBlockState(getBlockPos().above().above().above().north()).getValue(StairBlock.HALF).equals(Half.TOP) &&
+                    level.getBlockState(getBlockPos().above().above().above().south()).getValue(StairBlock.HALF).equals(Half.TOP) &&
+                    level.getBlockState(getBlockPos().above().above().above().west()).getValue(StairBlock.HALF).equals(Half.TOP) &&
+                    level.getBlockState(getBlockPos().above().above().above().east()).getValue(StairBlock.HALF).equals(Half.TOP) &&
+                    level.getBlockState(getBlockPos().above().above().above().north()).getValue(StairBlock.FACING).equals(Direction.NORTH) &&
+                    level.getBlockState(getBlockPos().above().above().above().south()).getValue(StairBlock.FACING).equals(Direction.SOUTH) &&
+                    level.getBlockState(getBlockPos().above().above().above().west()).getValue(StairBlock.FACING).equals(Direction.WEST) &&
+                    level.getBlockState(getBlockPos().above().above().above().east()).getValue(StairBlock.FACING).equals(Direction.EAST);
+        }
+        return false;
     }
 
     private boolean isOcean() {
-        return this.level.getBiome(this.getBlockPos()).is(BiomeTags.IS_OCEAN) && this.getBlockPos().getY() == 62;
+        if (this.level != null) {
+            return this.level.getBiome(this.getBlockPos()).is(BiomeTags.IS_OCEAN) && this.getBlockPos().getY() == 62;
+        }
+        return false;
     }
 
     public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {

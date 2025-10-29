@@ -2,7 +2,6 @@ package top.nebula.cmi.mixin;
 
 import com.simibubi.create.content.processing.basin.BasinBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.FireBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;

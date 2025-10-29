@@ -4,10 +4,8 @@ import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import org.spongepowered.asm.mixin.*;
 import org.spongepowered.asm.mixin.gen.Invoker;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Mixin(BlazeBurnerBlock.HeatLevel.class)
 public abstract class HeatLevelMixin {
