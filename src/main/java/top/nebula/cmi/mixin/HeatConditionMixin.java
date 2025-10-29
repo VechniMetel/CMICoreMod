@@ -28,7 +28,10 @@ public abstract class HeatConditionMixin {
 
     @Unique
     private static HeatCondition cmi$addVariant(String name, int color) {
-        ArrayList<HeatCondition> variants = new ArrayList<>(Arrays.asList($VALUES));
+        ArrayList<HeatCondition> variants = null;
+        if ($VALUES != null) {
+            variants = new ArrayList<>(Arrays.asList($VALUES));
+        }
         HeatCondition heatCondition = cmi$invokeInit(name, variants.get(variants.size() - 1).ordinal() + 1, color);
         variants.add(heatCondition);
         $VALUES = variants.toArray(new HeatCondition[0]);
