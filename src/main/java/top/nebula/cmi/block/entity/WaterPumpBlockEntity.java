@@ -36,6 +36,9 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
     private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water")));
 
+    // 缓存结构状态
+    private Boolean structureValid = null;
+
     private final IFluidHandler fluidHandler = new IFluidHandler() {
 
         @Override
@@ -45,7 +48,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
         @Override
         public @NotNull FluidStack getFluidInTank(int i) {
-            if (defineStructure()) {
+            if (isStructureValid()) {
                 if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
                 return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
             }
@@ -69,7 +72,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
         @Override
         public @NotNull FluidStack drain(FluidStack fluidStack, FluidAction fluidAction) {
-            if (defineStructure()) {
+            if (isStructureValid()) {
                 if (isOcean()) {
                     if (fluidStack.getFluid() == SEA_WATER.get()) {
                         return fluidStack;
@@ -84,7 +87,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
         @Override
         public @NotNull FluidStack drain(int i, FluidAction fluidAction) {
-            if (defineStructure()) {
+            if (isStructureValid()) {
                 if (isOcean()) {
                     return new FluidStack(SEA_WATER.get(), i);
                 }
@@ -94,10 +97,10 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
         }
     };
 
-    private boolean defineStructure() {
-        ResourceLocation stairs =
-                ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
-        IMultiblock defineStructure = new MultiblockStructureBuilder(new String[][]{
+    // 构建多方块结构
+    private IMultiblock defineStructure() {
+        ResourceLocation stairs = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+        return new MultiblockStructureBuilder(new String[][]{
                 {
                         // 四个角为脚手架, 四边为楼梯, 中心镂空
                         "DFD",
@@ -146,10 +149,32 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
                         .setValue(StairBlock.HALF, Half.TOP)
                         .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
                 .build();
+    }
 
-        defineStructure.validate(level, worldPosition);
+    // 外部可调用的方法，判断结构是否完整
+    public boolean isStructureValid() {
+        // 第一次调用时刷新
+        if (structureValid == null) {
+            refreshStructureStatus();
+        }
+        return structureValid;
+    }
 
-        return false;
+    // 刷新结构状态
+    public void refreshStructureStatus() {
+        if (level == null) {
+            structureValid = false;
+            return;
+        }
+        IMultiblock multiblock = defineStructure();
+        structureValid = true;
+        try {
+            // validate可能是void，这里只是触发Patchouli内部检查
+            multiblock.validate(level, worldPosition);
+            // 如果需要，你可以用Patchouli的 targets 来手动判断
+        } catch (Exception e) {
+            structureValid = false;
+        }
     }
 
     private boolean isOcean() {
@@ -173,7 +198,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
     @Override
     public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        if (defineStructure()) {
+        if (isStructureValid()) {
             ModLang.builder().translate("tooltip.water_pump.functional").forGoggles(tooltip);
         } else {
             ModLang.builder().translate("tooltip.water_pump.non_functional").forGoggles(tooltip);

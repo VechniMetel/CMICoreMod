@@ -15,6 +15,10 @@ public class MultiblockStructureBuilder {
     private final String[][] structure;
     private final List<Object> matchers = new ArrayList<>();
 
+    /**
+     * 定义结构时必须有一个"0"的位置作为整个结构的中心位置
+     * @param structure 定义结构
+     */
     public MultiblockStructureBuilder(String[][] structure) {
         this.structure = structure;
     }
