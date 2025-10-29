@@ -113,12 +113,12 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
                 {
                         // 木板 + 水泵
                         "AAA",
-                        "ABA",
+                        "A0A",
                         "AAA"
                 }
         })
                 .where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
-                .where('B', ModBlocks.WATER_PUMP.get())
+                .where('0', ModBlocks.WATER_PUMP.get())
                 .where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
                 .where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
                 // 北边楼梯(上方), 朝南
