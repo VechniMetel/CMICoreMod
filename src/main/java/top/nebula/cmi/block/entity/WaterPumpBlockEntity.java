@@ -145,21 +145,11 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
                         .setValue(StairBlock.FACING, Direction.NORTH)
                         .setValue(StairBlock.HALF, Half.TOP)
                         .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-                .setCenter('B')
                 .build();
 
         defineStructure.validate(level, worldPosition);
 
-        if (defineStructure == null) {
-            return false;
-        }
-
-        try {
-            defineStructure.validate(level, worldPosition);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        return false;
     }
 
     private boolean isOcean() {
