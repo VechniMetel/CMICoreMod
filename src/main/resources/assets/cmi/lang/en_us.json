@@ -1,0 +1,8 @@
+{
+  "item.cmi.nuclear_mechanism": "Nuclear Mechanism",
+  "block.cmi.water_pump": "Water Pump",
+  "curios.identifier.mechanisms": "Mechanisms",
+  "cmi.tooltip.water_pump.functional": "Water Pump Functional",
+  "cmi.tooltip.water_pump.non_functional": "Water Pump Not Functional",
+  "biome.cmi.andesite_cave": "Andesite Cave"
+}

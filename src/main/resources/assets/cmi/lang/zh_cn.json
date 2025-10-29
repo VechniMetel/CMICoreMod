@@ -1,0 +1,8 @@
+{
+  "item.cmi.nuclear_mechanism": "核构件",
+  "block.cmi.water_pump": "水泵",
+  "curios.identifier.mechanisms": "构件",
+  "cmi.tooltip.water_pump.functional": "水泵工作正常",
+  "cmi.tooltip.water_pump.non_functional": "水泵关键结构缺失",
+  "biome.cmi.andesite_cave": "安山岩洞窟"
+}
