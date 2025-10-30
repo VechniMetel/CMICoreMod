@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Predicate;
-import java.util.function.Supplier;
 
 public class MultiblockStructureBuilder {
 	private final String[][] structure;
@@ -127,7 +126,7 @@ public class MultiblockStructureBuilder {
 	public MultiblockStructureBuilder where(char pos, Block block, ImmutableMap<Property<?>, ? extends Comparable<?>> stateMatcher) {
 		matchers.add(pos);
 		BlockStateMatcher blockStateMatcher = BlockStateMatcher.create();
-		for (var entry : stateMatcher.entrySet()) {
+		for (Map.Entry<Property<?>, ? extends Comparable<?>> entry : stateMatcher.entrySet()) {
 			blockStateMatcher.with(entry.getKey(), entry.getValue());
 		}
 		matchers.add(PatchouliAPI.get().predicateMatcher(block, blockStateMatcher::matches));
