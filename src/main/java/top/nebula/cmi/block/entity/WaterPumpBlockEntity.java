@@ -28,8 +28,8 @@ import net.minecraftforge.fluids.capability.IFluidHandler;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.util.MultiblockStructureBuilder;
+import top.nebula.cmi.util.PropertyImmutableMap;
 import vazkii.patchouli.api.IMultiblock;
-import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.List;
 
@@ -39,7 +39,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		return BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water"));
 	});
 
-	private static final ResourceLocation STRUCTURE_ID = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+	private static final ResourceLocation STAIRS = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
 
 	private static final Lazy<IMultiblock> STRUCTURE = Lazy.of(() -> {
 		return new MultiblockStructureBuilder(new String[][]{
@@ -67,36 +67,49 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
 				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
 				// 北边楼梯(上方), 朝南
-				.where('F', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.SOUTH)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+//            .where('F', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+//                    .defaultBlockState()
+//                    .setValue(StairBlock.FACING, Direction.SOUTH)
+//                    .setValue(StairBlock.HALF, Half.TOP)
+//                    .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.where('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+						.add(StairBlock.FACING, Direction.SOUTH)
+						.add(StairBlock.HALF, Half.TOP)
+						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+						.build())
 				// 西边楼梯(左边), 朝东
-				.where('G', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.EAST)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+//            .where('G', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+//                    .defaultBlockState()
+//                    .setValue(StairBlock.FACING, Direction.EAST)
+//                    .setValue(StairBlock.HALF, Half.TOP)
+//                    .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.where('G', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+						.add(StairBlock.FACING, Direction.EAST)
+						.add(StairBlock.HALF, Half.TOP)
+						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+						.build())
 				// 东边楼梯(右边), 朝西
 //            .where('H', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
 //                    .defaultBlockState()
 //                    .setValue(StairBlock.FACING, Direction.WEST)
 //                    .setValue(StairBlock.HALF, Half.TOP)
 //                    .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				.where('H', PatchouliAPI.get().predicateMatcher(BuiltInRegistries.BLOCK.get(STRUCTURE_ID), (state) -> {
-					MultiblockStructureBuilder.BlockStateMatcher matcher = MultiblockStructureBuilder.BlockStateMatcher.create();
-					matcher.with(StairBlock.FACING, Direction.SOUTH)
-							.with(StairBlock.HALF, Half.TOP)
-							.with(StairBlock.SHAPE, StairsShape.STRAIGHT);
-					return matcher.matches(state);
-				}))
+				.where('H', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+						.add(StairBlock.FACING, Direction.WEST)
+						.add(StairBlock.HALF, Half.TOP)
+						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+						.build())
 				// 南边楼梯(下方), 朝北
-				.where('I', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.NORTH)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+//            .where('I', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+//                    .defaultBlockState()
+//                    .setValue(StairBlock.FACING, Direction.NORTH)
+//                    .setValue(StairBlock.HALF, Half.TOP)
+//                    .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.where('I', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+						.add(StairBlock.FACING, Direction.NORTH)
+						.add(StairBlock.HALF, Half.TOP)
+						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+						.build())
 				.build();
 	});
 
@@ -113,9 +126,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		@Override
 		public @NotNull FluidStack getFluidInTank(int i) {
 			if (isStructureValid()) {
-				if (isOcean()) {
-					return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
-				}
+				if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 				return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
 			}
 			return FluidStack.EMPTY;
@@ -210,9 +221,13 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 	@Override
 	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
 		if (isStructureValid()) {
-			ModLang.builder().translate("tooltip.water_pump.functional").forGoggles(tooltip);
+			ModLang.builder()
+					.translate("tooltip.water_pump.functional")
+					.forGoggles(tooltip);
 		} else {
-			ModLang.builder().translate("tooltip.water_pump.non_functional").forGoggles(tooltip);
+			ModLang.builder()
+					.translate("tooltip.water_pump.non_functional")
+					.forGoggles(tooltip);
 		}
 		return true;
 	}
