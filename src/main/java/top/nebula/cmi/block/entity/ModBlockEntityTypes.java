@@ -9,17 +9,17 @@ import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModBlockEntityTypes {
-    private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES;
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITY_TYPES;
 
-    public static final RegistryObject<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP;
+	public static final RegistryObject<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP;
 
-    public static void register(IEventBus eventBus) {
-        BLOCK_ENTITY_TYPES.register(eventBus);
-    }
+	public static void register(IEventBus eventBus) {
+		BLOCK_ENTITY_TYPES.register(eventBus);
+	}
 
-    static {
-        BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
+	static {
+		BLOCK_ENTITY_TYPES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
 
-        WATER_PUMP = BLOCK_ENTITY_TYPES.register("water_pump", () -> BlockEntityType.Builder.of(WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get()).build(null));
-    }
+		WATER_PUMP = BLOCK_ENTITY_TYPES.register("water_pump", () -> BlockEntityType.Builder.of(WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get()).build(null));
+	}
 }

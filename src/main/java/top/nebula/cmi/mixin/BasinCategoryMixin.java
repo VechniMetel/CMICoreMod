@@ -16,19 +16,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(BasinCategory.class)
 public abstract class BasinCategoryMixin {
-    @Inject(method = "setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Lcom/simibubi/create/content/processing/basin/BasinRecipe;Lmezz/jei/api/recipe/IFocusGroup;)V",
-            at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/basin/BasinRecipe;getRequiredHeat()Lcom/simibubi/create/content/processing/recipe/HeatCondition;"),
-            remap = false, cancellable = true)
-    public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses, CallbackInfo ci) {
-        if (recipe.getRequiredHeat() == HeatCondition.valueOf("GRILLED"))
-            ci.cancel();
-    }
+	@Inject(method = "setRecipe(Lmezz/jei/api/gui/builder/IRecipeLayoutBuilder;Lcom/simibubi/create/content/processing/basin/BasinRecipe;Lmezz/jei/api/recipe/IFocusGroup;)V",
+			at = @At(value = "INVOKE", target = "Lcom/simibubi/create/content/processing/basin/BasinRecipe;getRequiredHeat()Lcom/simibubi/create/content/processing/recipe/HeatCondition;"),
+			remap = false, cancellable = true)
+	public void setRecipe(IRecipeLayoutBuilder builder, BasinRecipe recipe, IFocusGroup focuses, CallbackInfo ci) {
+		if (recipe.getRequiredHeat() == HeatCondition.valueOf("GRILLED"))
+			ci.cancel();
+	}
 
-    @Inject(method = "draw(Lcom/simibubi/create/content/processing/basin/BasinRecipe;Lmezz/jei/api/gui/ingredient/IRecipeSlotsView;Lnet/minecraft/client/gui/GuiGraphics;DD)V",
-            at = @At("HEAD"), remap = false)
-    public void draw(BasinRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY, CallbackInfo ci) {
-        if (recipe.getRequiredHeat() == HeatCondition.valueOf("GRILLED")) {
-            graphics.drawString(Minecraft.getInstance().font, Lang.translateDirect("cmi.recipe.tip.fire"), 9, 2, recipe.getRequiredHeat().getColor(), false);
-        }
-    }
+	@Inject(method = "draw(Lcom/simibubi/create/content/processing/basin/BasinRecipe;Lmezz/jei/api/gui/ingredient/IRecipeSlotsView;Lnet/minecraft/client/gui/GuiGraphics;DD)V",
+			at = @At("HEAD"), remap = false)
+	public void draw(BasinRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics graphics, double mouseX, double mouseY, CallbackInfo ci) {
+		if (recipe.getRequiredHeat() == HeatCondition.valueOf("GRILLED")) {
+			graphics.drawString(Minecraft.getInstance().font, Lang.translateDirect("cmi.recipe.tip.fire"), 9, 2, recipe.getRequiredHeat().getColor(), false);
+		}
+	}
 }

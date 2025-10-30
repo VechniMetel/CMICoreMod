@@ -11,10 +11,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(BasinBlockEntity.class)
 public abstract class BasinBlockEntityMixin {
-    @Inject(method = "getHeatLevelOf", at = @At("HEAD"), remap = false, cancellable = true)
-    private static void getHeatLevelOf(BlockState state, CallbackInfoReturnable<BlazeBurnerBlock.HeatLevel> cir) {
-        if (state.is(Blocks.FIRE)) {
-            cir.setReturnValue(BlazeBurnerBlock.HeatLevel.valueOf("GRILLED"));
-        }
-    }
+	@Inject(method = "getHeatLevelOf", at = @At("HEAD"), remap = false, cancellable = true)
+	private static void getHeatLevelOf(BlockState state, CallbackInfoReturnable<BlazeBurnerBlock.HeatLevel> cir) {
+		if (state.is(Blocks.FIRE)) {
+			cir.setReturnValue(BlazeBurnerBlock.HeatLevel.valueOf("GRILLED"));
+		}
+	}
 }

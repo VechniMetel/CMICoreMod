@@ -13,15 +13,15 @@ import java.util.concurrent.CompletableFuture;
 
 @Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class DataGenerators {
-    @SubscribeEvent
-    public static void gatherData(GatherDataEvent event) {
-        DataGenerator generator = event.getGenerator();
-        PackOutput packOutput = generator.getPackOutput();
-        CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
-        ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
+	@SubscribeEvent
+	public static void gatherData(GatherDataEvent event) {
+		DataGenerator generator = event.getGenerator();
+		PackOutput packOutput = generator.getPackOutput();
+		CompletableFuture<HolderLookup.Provider> lookupProvider = event.getLookupProvider();
+		ExistingFileHelper existingFileHelper = event.getExistingFileHelper();
 
-        generator.addProvider(event.includeServer(), new ModWorldgenProvider(packOutput, lookupProvider));
-        generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
-        generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
-    }
+		generator.addProvider(event.includeServer(), new ModWorldgenProvider(packOutput, lookupProvider));
+		generator.addProvider(event.includeClient(), new ModBlockStateProvider(packOutput, existingFileHelper));
+		generator.addProvider(event.includeClient(), new ModItemModelProvider(packOutput, existingFileHelper));
+	}
 }

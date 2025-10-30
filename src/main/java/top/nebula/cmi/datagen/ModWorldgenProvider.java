@@ -13,11 +13,11 @@ import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 
 public class ModWorldgenProvider extends DatapackBuiltinEntriesProvider {
-    public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
-            .add(Registries.BIOME, ModBiomes::bootstrap);
+	public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
+			.add(Registries.CONFIGURED_FEATURE, ModConfiguredFeatures::bootstrap)
+			.add(Registries.BIOME, ModBiomes::bootstrap);
 
-    public ModWorldgenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-        super(output, registries, BUILDER, Set.of(CMI.MODID));
-    }
+	public ModWorldgenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
+		super(output, registries, BUILDER, Set.of(CMI.MODID));
+	}
 }

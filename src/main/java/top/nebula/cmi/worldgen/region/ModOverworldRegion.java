@@ -15,14 +15,14 @@ import terrablender.api.RegionType;
 import java.util.function.Consumer;
 
 public class ModOverworldRegion extends Region {
-    public ModOverworldRegion(int weight) {
-        super(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "overworld"), RegionType.OVERWORLD, weight);
-    }
+	public ModOverworldRegion(int weight) {
+		super(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "overworld"), RegionType.OVERWORLD, weight);
+	}
 
-    @Override
-    public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
-        this.addModifiedVanillaOverworldBiomes(mapper, modifiedVanillaOverworldBuilder -> {
-            modifiedVanillaOverworldBuilder.replaceBiome(Biomes.DRIPSTONE_CAVES, ModBiomes.ANDESITE_CAVE);
-        });
-    }
+	@Override
+	public void addBiomes(Registry<Biome> registry, Consumer<Pair<Climate.ParameterPoint, ResourceKey<Biome>>> mapper) {
+		this.addModifiedVanillaOverworldBiomes(mapper, modifiedVanillaOverworldBuilder -> {
+			modifiedVanillaOverworldBuilder.replaceBiome(Biomes.DRIPSTONE_CAVES, ModBiomes.ANDESITE_CAVE);
+		});
+	}
 }

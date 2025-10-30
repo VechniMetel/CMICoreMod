@@ -15,25 +15,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(FluidType.class)
 public abstract class FluidTypeMixin {
+	@Shadow(remap = false)
+	public abstract String getDescriptionId();
 
-    @Shadow(remap = false)
-    public abstract String getDescriptionId();
+	@Inject(method = "move", at = @At("HEAD"), remap = false)
+	public void move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity, CallbackInfoReturnable<Boolean> cir) {
+		String[] idComponents = this.getDescriptionId().split("\\.");
+		String fluidID = idComponents[1] + ":" + idComponents[2];
+		if (CommonConfig.BURNING_FLUIDS.get().contains(fluidID)) {
+			entity.lavaHurt();
+		}
+	}
 
-    @Inject(method = "move", at = @At("HEAD"), remap = false)
-    public void move(FluidState state, LivingEntity entity, Vec3 movementVector, double gravity, CallbackInfoReturnable<Boolean> cir) {
-        String[] idComponents = this.getDescriptionId().split("\\.");
-        String fluidID = idComponents[1] + ":" + idComponents[2];
-        if (CommonConfig.BURNING_FLUIDS.get().contains(fluidID)) {
-            entity.lavaHurt();
-        }
-    }
-
-    @Inject(method = "setItemMovement", at = @At("HEAD"), remap = false)
-    public void setItemMovement(ItemEntity entity, CallbackInfo ci) {
-        String[] idComponents = this.getDescriptionId().split("\\.");
-        String fluidID = idComponents[1] + ":" + idComponents[2];
-        if (CommonConfig.BURNING_FLUIDS.get().contains(fluidID)) {
-            entity.lavaHurt();
-        }
-    }
+	@Inject(method = "setItemMovement", at = @At("HEAD"), remap = false)
+	public void setItemMovement(ItemEntity entity, CallbackInfo ci) {
+		String[] idComponents = this.getDescriptionId().split("\\.");
+		String fluidID = idComponents[1] + ":" + idComponents[2];
+		if (CommonConfig.BURNING_FLUIDS.get().contains(fluidID)) {
+			entity.lavaHurt();
+		}
+	}
 }

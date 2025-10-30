@@ -11,19 +11,18 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import net.minecraftforge.registries.RegistryObject;
 
 public class ModItemModelProvider extends ItemModelProvider {
+	public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
+		super(output, CMI.MODID, existingFileHelper);
+	}
 
-    public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, CMI.MODID, existingFileHelper);
-    }
+	@Override
+	protected void registerModels() {
+		simpleItem(ModItems.NUCLEAR_MECHANISM);
+	}
 
-    @Override
-    protected void registerModels() {
-        simpleItem(ModItems.NUCLEAR_MECHANISM);
-    }
-
-    private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
-        return withExistingParent(item.getId().getPath(),
-                ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-                ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + item.getId().getPath()));
-    }
+	private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
+		return withExistingParent(item.getId().getPath(),
+				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
+				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + item.getId().getPath()));
+	}
 }

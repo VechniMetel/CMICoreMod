@@ -7,17 +7,17 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
-    public WaterPumpBlock() {
-        super(Properties.of());
-    }
+	public WaterPumpBlock() {
+		super(Properties.of());
+	}
 
-    @Override
-    public Class<WaterPumpBlockEntity> getBlockEntityClass() {
-        return WaterPumpBlockEntity.class;
-    }
+	@Override
+	public Class<WaterPumpBlockEntity> getBlockEntityClass() {
+		return WaterPumpBlockEntity.class;
+	}
 
-    @Override
-    public BlockEntityType<? extends WaterPumpBlockEntity> getBlockEntityType() {
-        return ModBlockEntityTypes.WATER_PUMP.get();
-    }
+	@Override
+	public BlockEntityType<? extends WaterPumpBlockEntity> getBlockEntityType() {
+		return ModBlockEntityTypes.WATER_PUMP.get();
+	}
 }

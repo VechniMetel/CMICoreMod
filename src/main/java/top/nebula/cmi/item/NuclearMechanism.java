@@ -16,35 +16,35 @@ import top.theillusivec4.curios.api.type.capability.ICurio;
 
 public class NuclearMechanism extends Item {
 
-    public NuclearMechanism() {
-        super(new Properties());
-    }
+	public NuclearMechanism() {
+		super(new Properties());
+	}
 
-    @Override
-    public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
-        return new ICapabilityProvider() {
-            @Override
-            public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction direction) {
-                if (capability == CapabilityManager.get(new CapabilityToken<ICurio>() {
-                })) {
-                    return LazyOptional.of(() -> new ICurio() {
-                        @Override
-                        public ItemStack getStack() {
-                            return stack;
-                        }
-                    }).cast();
-                }
-                if (capability == CapabilityManager.get(new CapabilityToken<IRadiationShielding>() {
-                })) {
-                    return LazyOptional.of(() -> new IRadiationShielding() {
-                        @Override
-                        public double getRadiationShielding() {
-                            return 1.0;
-                        }
-                    }).cast();
-                }
-                return LazyOptional.empty();
-            }
-        };
-    }
+	@Override
+	public @Nullable ICapabilityProvider initCapabilities(ItemStack stack, @Nullable CompoundTag nbt) {
+		return new ICapabilityProvider() {
+			@Override
+			public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction direction) {
+				if (capability == CapabilityManager.get(new CapabilityToken<ICurio>() {
+				})) {
+					return LazyOptional.of(() -> new ICurio() {
+						@Override
+						public ItemStack getStack() {
+							return stack;
+						}
+					}).cast();
+				}
+				if (capability == CapabilityManager.get(new CapabilityToken<IRadiationShielding>() {
+				})) {
+					return LazyOptional.of(() -> new IRadiationShielding() {
+						@Override
+						public double getRadiationShielding() {
+							return 1.0;
+						}
+					}).cast();
+				}
+				return LazyOptional.empty();
+			}
+		};
+	}
 }

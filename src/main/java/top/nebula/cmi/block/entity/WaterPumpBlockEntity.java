@@ -34,175 +34,175 @@ import java.util.List;
 
 public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
-    private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water")));
+	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water")));
 
-    // 缓存结构状态
-    private Boolean structureValid = null;
+	// 缓存结构状态
+	private Boolean structureValid = null;
 
-    private final IFluidHandler fluidHandler = new IFluidHandler() {
+	private final IFluidHandler fluidHandler = new IFluidHandler() {
 
-        @Override
-        public int getTanks() {
-            return 1;
-        }
+		@Override
+		public int getTanks() {
+			return 1;
+		}
 
-        @Override
-        public @NotNull FluidStack getFluidInTank(int i) {
-            if (isStructureValid()) {
-                if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
-                return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
-            }
-            return FluidStack.EMPTY;
-        }
+		@Override
+		public @NotNull FluidStack getFluidInTank(int i) {
+			if (isStructureValid()) {
+				if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
+				return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
+			}
+			return FluidStack.EMPTY;
+		}
 
-        @Override
-        public int getTankCapacity(int i) {
-            return Integer.MAX_VALUE;
-        }
+		@Override
+		public int getTankCapacity(int i) {
+			return Integer.MAX_VALUE;
+		}
 
-        @Override
-        public boolean isFluidValid(int i, @NotNull FluidStack fluidStack) {
-            return false;
-        }
+		@Override
+		public boolean isFluidValid(int i, @NotNull FluidStack fluidStack) {
+			return false;
+		}
 
-        @Override
-        public int fill(FluidStack fluidStack, FluidAction fluidAction) {
-            return 0;
-        }
+		@Override
+		public int fill(FluidStack fluidStack, FluidAction fluidAction) {
+			return 0;
+		}
 
-        @Override
-        public @NotNull FluidStack drain(FluidStack fluidStack, FluidAction fluidAction) {
-            if (isStructureValid()) {
-                if (isOcean()) {
-                    if (fluidStack.getFluid() == SEA_WATER.get()) {
-                        return fluidStack;
-                    }
-                } else if (fluidStack.getFluid() == Fluids.WATER) {
-                    return fluidStack;
-                }
-                return FluidStack.EMPTY;
-            }
-            return FluidStack.EMPTY;
-        }
+		@Override
+		public @NotNull FluidStack drain(FluidStack fluidStack, FluidAction fluidAction) {
+			if (isStructureValid()) {
+				if (isOcean()) {
+					if (fluidStack.getFluid() == SEA_WATER.get()) {
+						return fluidStack;
+					}
+				} else if (fluidStack.getFluid() == Fluids.WATER) {
+					return fluidStack;
+				}
+				return FluidStack.EMPTY;
+			}
+			return FluidStack.EMPTY;
+		}
 
-        @Override
-        public @NotNull FluidStack drain(int i, FluidAction fluidAction) {
-            if (isStructureValid()) {
-                if (isOcean()) {
-                    return new FluidStack(SEA_WATER.get(), i);
-                }
-                return new FluidStack(Fluids.WATER, i);
-            }
-            return FluidStack.EMPTY;
-        }
-    };
+		@Override
+		public @NotNull FluidStack drain(int i, FluidAction fluidAction) {
+			if (isStructureValid()) {
+				if (isOcean()) {
+					return new FluidStack(SEA_WATER.get(), i);
+				}
+				return new FluidStack(Fluids.WATER, i);
+			}
+			return FluidStack.EMPTY;
+		}
+	};
 
-    // 构建多方块结构
-    private IMultiblock defineStructure() {
-        ResourceLocation stairs = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
-        return new MultiblockStructureBuilder(new String[][]{
-                {
-                        // 四个角为脚手架, 四边为楼梯, 中心镂空
-                        "DFD",
-                        "G H",
-                        "DID"
-                },
-                {
-                        // 木栅栏
-                        "C C",
-                        "   ",
-                        "C C"
-                },
-                {
-                        // 木板 + 水泵
-                        "AAA",
-                        "A0A",
-                        "AAA"
-                }
-        })
-                .where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
-                .where('0', ModBlocks.WATER_PUMP.get())
-                .where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
-                .where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
-                // 北边楼梯(上方), 朝南
-                .where('F', BuiltInRegistries.BLOCK.get(stairs)
-                        .defaultBlockState()
-                        .setValue(StairBlock.FACING, Direction.SOUTH)
-                        .setValue(StairBlock.HALF, Half.TOP)
-                        .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-                // 西边楼梯(左边), 朝东
-                .where('G', BuiltInRegistries.BLOCK.get(stairs)
-                        .defaultBlockState()
-                        .setValue(StairBlock.FACING, Direction.EAST)
-                        .setValue(StairBlock.HALF, Half.TOP)
-                        .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-                // 东边楼梯(右边), 朝西
-                .where('H', BuiltInRegistries.BLOCK.get(stairs)
-                        .defaultBlockState()
-                        .setValue(StairBlock.FACING, Direction.WEST)
-                        .setValue(StairBlock.HALF, Half.TOP)
-                        .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-                // 南边楼梯(下方), 朝北
-                .where('I', BuiltInRegistries.BLOCK.get(stairs)
-                        .defaultBlockState()
-                        .setValue(StairBlock.FACING, Direction.NORTH)
-                        .setValue(StairBlock.HALF, Half.TOP)
-                        .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-                .build();
-    }
+	// 构建多方块结构
+	private IMultiblock defineStructure() {
+		ResourceLocation stairs = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+		return new MultiblockStructureBuilder(new String[][]{
+				{
+						// 四个角为脚手架, 四边为楼梯, 中心镂空
+						"DFD",
+						"G H",
+						"DID"
+				},
+				{
+						// 木栅栏
+						"C C",
+						"   ",
+						"C C"
+				},
+				{
+						// 木板 + 水泵
+						"AAA",
+						"A0A",
+						"AAA"
+				}
+		})
+				.where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
+				.where('0', ModBlocks.WATER_PUMP.get())
+				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
+				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
+				// 北边楼梯(上方), 朝南
+				.where('F', BuiltInRegistries.BLOCK.get(stairs)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.SOUTH)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				// 西边楼梯(左边), 朝东
+				.where('G', BuiltInRegistries.BLOCK.get(stairs)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.EAST)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				// 东边楼梯(右边), 朝西
+				.where('H', BuiltInRegistries.BLOCK.get(stairs)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.WEST)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				// 南边楼梯(下方), 朝北
+				.where('I', BuiltInRegistries.BLOCK.get(stairs)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.NORTH)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.build();
+	}
 
-    // 外部可调用的方法，判断结构是否完整
-    public boolean isStructureValid() {
-        // 第一次调用时刷新
-        if (structureValid == null) {
-            refreshStructureStatus();
-        }
-        return structureValid;
-    }
+	// 外部可调用的方法，判断结构是否完整
+	public boolean isStructureValid() {
+		// 第一次调用时刷新
+		if (structureValid == null) {
+			refreshStructureStatus();
+		}
+		return structureValid;
+	}
 
-    // 刷新结构状态
-    public void refreshStructureStatus() {
-        if (level == null) {
-            structureValid = false;
-            return;
-        }
-        IMultiblock multiblock = defineStructure();
-        structureValid = true;
-        try {
-            // validate可能是void，这里只是触发Patchouli内部检查
-            multiblock.validate(level, worldPosition);
-            // 如果需要，你可以用Patchouli的 targets 来手动判断
-        } catch (Exception e) {
-            structureValid = false;
-        }
-    }
+	// 刷新结构状态
+	public void refreshStructureStatus() {
+		if (level == null) {
+			structureValid = false;
+			return;
+		}
+		IMultiblock multiblock = defineStructure();
+		structureValid = true;
+		try {
+			// validate可能是void，这里只是触发Patchouli内部检查
+			multiblock.validate(level, worldPosition);
+			// 如果需要，你可以用Patchouli的 targets 来手动判断
+		} catch (Exception e) {
+			structureValid = false;
+		}
+	}
 
-    private boolean isOcean() {
-        if (this.level != null) {
-            return this.level.getBiome(this.getBlockPos()).is(BiomeTags.IS_OCEAN) && this.getBlockPos().getY() == 62;
-        }
-        return false;
-    }
+	private boolean isOcean() {
+		if (this.level != null) {
+			return this.level.getBiome(this.getBlockPos()).is(BiomeTags.IS_OCEAN) && this.getBlockPos().getY() == 62;
+		}
+		return false;
+	}
 
-    public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {
-        super(ModBlockEntityTypes.WATER_PUMP.get(), pPos, pBlockState);
-    }
+	public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {
+		super(ModBlockEntityTypes.WATER_PUMP.get(), pPos, pBlockState);
+	}
 
-    @Override
-    public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-        if (cap == ForgeCapabilities.FLUID_HANDLER) {
-            return LazyOptional.of(() -> fluidHandler).cast();
-        }
-        return super.getCapability(cap, side);
-    }
+	@Override
+	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+		if (cap == ForgeCapabilities.FLUID_HANDLER) {
+			return LazyOptional.of(() -> fluidHandler).cast();
+		}
+		return super.getCapability(cap, side);
+	}
 
-    @Override
-    public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
-        if (isStructureValid()) {
-            ModLang.builder().translate("tooltip.water_pump.functional").forGoggles(tooltip);
-        } else {
-            ModLang.builder().translate("tooltip.water_pump.non_functional").forGoggles(tooltip);
-        }
-        return true;
-    }
+	@Override
+	public boolean addToGoggleTooltip(List<Component> tooltip, boolean isPlayerSneaking) {
+		if (isStructureValid()) {
+			ModLang.builder().translate("tooltip.water_pump.functional").forGoggles(tooltip);
+		} else {
+			ModLang.builder().translate("tooltip.water_pump.non_functional").forGoggles(tooltip);
+		}
+		return true;
+	}
 }
