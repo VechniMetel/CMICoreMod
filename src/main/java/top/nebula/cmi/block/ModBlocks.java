@@ -32,12 +32,21 @@ public class ModBlocks {
 	static {
 		BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CMI.MODID);
 
-		GOLD_SAPLING = BLOCKS.register("gold_sapling", () -> new SaplingBlock(new AbstractTreeGrower() {
-			@Override
-			protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull RandomSource randomSource, boolean b) {
-				return ModConfiguredFeatures.GOLDEN_TREE;
-			}
-		}, BlockBehaviour.Properties.of().mapColor(MapColor.PLANT).noCollission().randomTicks().instabreak().sound(SoundType.GRASS).pushReaction(PushReaction.DESTROY)));
+		GOLD_SAPLING = BLOCKS.register("gold_sapling", () -> {
+			return new SaplingBlock(new AbstractTreeGrower() {
+				@Override
+				protected @Nullable ResourceKey<ConfiguredFeature<?, ?>> getConfiguredFeature(@NotNull RandomSource randomSource, boolean b) {
+					return ModConfiguredFeatures.GOLDEN_TREE;
+				}
+			}, BlockBehaviour.Properties.of()
+					.mapColor(MapColor.PLANT)
+					.noCollission()
+					.randomTicks()
+					.instabreak()
+					.sound(SoundType.GRASS)
+					.pushReaction(PushReaction.DESTROY)
+			);
+		});
 		WATER_PUMP = BLOCKS.register("water_pump", WaterPumpBlock::new);
 	}
 }
