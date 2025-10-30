@@ -264,7 +264,7 @@ publishing {
 
     publications {
         maven(MavenPublication) {
-            groupId = "dev.fiberoptics"
+            groupId = "top.nebula"
             artifactId = "cmi"
             version = mod_version
             from components.java

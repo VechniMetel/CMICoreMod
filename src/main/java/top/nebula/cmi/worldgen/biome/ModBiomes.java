@@ -12,7 +12,6 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.level.biome.*;
 
 public class ModBiomes {
-
 	public static final ResourceKey<Biome> ANDESITE_CAVE = register("andesite_cave");
 
 	public static void bootstrap(BootstapContext<Biome> context) {

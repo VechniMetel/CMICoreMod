@@ -19,11 +19,12 @@ public class ModBlockStateProvider extends BlockStateProvider {
 	protected void registerStatesAndModels() {
 		saplingBlock(ModBlocks.GOLD_SAPLING);
 		simpleBlockWithItem(ModBlocks.WATER_PUMP.get(), new ModelFile.UncheckedModelFile(modLoc("block/water_pump")));
-
 	}
 
 	private void saplingBlock(RegistryObject<Block> blockRegistryObject) {
-		simpleBlock(blockRegistryObject.get(),
-				models().cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(), blockTexture(blockRegistryObject.get())).renderType("cutout"));
+		simpleBlock(blockRegistryObject.get(), models()
+				.cross(ForgeRegistries.BLOCKS.getKey(blockRegistryObject.get()).getPath(),
+						blockTexture(blockRegistryObject.get()))
+				.renderType("cutout"));
 	}
 }

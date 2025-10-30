@@ -32,8 +32,7 @@ public class ModConfiguredFeatures {
 		return createStraightBlobTree(Blocks.GOLD_BLOCK, Blocks.GOLD_ORE, 4, 2, 0, 2).ignoreVines();
 	}
 
-	private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context,
-	                                                                                      ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC featureConfiguration) {
+	private static <FC extends FeatureConfiguration, F extends Feature<FC>> void register(BootstapContext<ConfiguredFeature<?, ?>> context, ResourceKey<ConfiguredFeature<?, ?>> key, F feature, FC featureConfiguration) {
 		context.register(key, new ConfiguredFeature<>(feature, featureConfiguration));
 	}
 
