@@ -29,12 +29,76 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.util.MultiblockStructureBuilder;
 import vazkii.patchouli.api.IMultiblock;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.List;
 
 public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInformation {
 
-	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water")));
+	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
+		return BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water"));
+	});
+
+	private static final ResourceLocation STRUCTURE_ID = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+
+	private static final Lazy<IMultiblock> STRUCTURE = Lazy.of(() -> {
+		return new MultiblockStructureBuilder(new String[][]{
+				{
+						// 四个角为脚手架, 四边为楼梯, 中心镂空
+						"DFD",
+						"G H",
+						"DID"
+				},
+				{
+						// 木栅栏
+						"C C",
+						"   ",
+						"C C"
+				},
+				{
+						// 木板 + 水泵
+						"AAA",
+						"A0A",
+						"AAA"
+				}
+		})
+				.where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
+				.where('0', ModBlocks.WATER_PUMP.get())
+				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
+				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
+				// 北边楼梯(上方), 朝南
+				.where('F', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.SOUTH)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				// 西边楼梯(左边), 朝东
+				.where('G', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.EAST)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				// 东边楼梯(右边), 朝西
+//            .where('H', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+//                    .defaultBlockState()
+//                    .setValue(StairBlock.FACING, Direction.WEST)
+//                    .setValue(StairBlock.HALF, Half.TOP)
+//                    .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.where('H', PatchouliAPI.get().predicateMatcher(BuiltInRegistries.BLOCK.get(STRUCTURE_ID), (state) -> {
+					MultiblockStructureBuilder.BlockStateMatcher matcher = MultiblockStructureBuilder.BlockStateMatcher.create();
+					matcher.with(StairBlock.FACING, Direction.SOUTH)
+							.with(StairBlock.HALF, Half.TOP)
+							.with(StairBlock.SHAPE, StairsShape.STRAIGHT);
+					return matcher.matches(state);
+				}))
+				// 南边楼梯(下方), 朝北
+				.where('I', BuiltInRegistries.BLOCK.get(STRUCTURE_ID)
+						.defaultBlockState()
+						.setValue(StairBlock.FACING, Direction.NORTH)
+						.setValue(StairBlock.HALF, Half.TOP)
+						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.build();
+	});
 
 	// 缓存结构状态
 	private Boolean structureValid = null;
@@ -97,60 +161,6 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		}
 	};
 
-	// 构建多方块结构
-	private IMultiblock defineStructure() {
-		ResourceLocation stairs = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
-		return new MultiblockStructureBuilder(new String[][]{
-				{
-						// 四个角为脚手架, 四边为楼梯, 中心镂空
-						"DFD",
-						"G H",
-						"DID"
-				},
-				{
-						// 木栅栏
-						"C C",
-						"   ",
-						"C C"
-				},
-				{
-						// 木板 + 水泵
-						"AAA",
-						"A0A",
-						"AAA"
-				}
-		})
-				.where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
-				.where('0', ModBlocks.WATER_PUMP.get())
-				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
-				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
-				// 北边楼梯(上方), 朝南
-				.where('F', BuiltInRegistries.BLOCK.get(stairs)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.SOUTH)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				// 西边楼梯(左边), 朝东
-				.where('G', BuiltInRegistries.BLOCK.get(stairs)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.EAST)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				// 东边楼梯(右边), 朝西
-				.where('H', BuiltInRegistries.BLOCK.get(stairs)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.WEST)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				// 南边楼梯(下方), 朝北
-				.where('I', BuiltInRegistries.BLOCK.get(stairs)
-						.defaultBlockState()
-						.setValue(StairBlock.FACING, Direction.NORTH)
-						.setValue(StairBlock.HALF, Half.TOP)
-						.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				.build();
-	}
-
 	// 外部可调用的方法，判断结构是否完整
 	public boolean isStructureValid() {
 		// 第一次调用时刷新
@@ -166,11 +176,10 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 			structureValid = false;
 			return;
 		}
-		IMultiblock multiblock = defineStructure();
 		structureValid = true;
 		try {
 			// validate可能是void，这里只是触发Patchouli内部检查
-			multiblock.validate(level, worldPosition);
+			STRUCTURE.get().validate(level, worldPosition);
 			// 如果需要，你可以用Patchouli的 targets 来手动判断
 		} catch (Exception e) {
 			structureValid = false;
