@@ -44,7 +44,16 @@ public class MoonGeothermalVentBlockEntity extends BlockEntity {
 		}
 		float x = (level.random.nextFloat() - 0.5F) * 0.25F;
 		float z = (level.random.nextFloat() - 0.5F) * 0.25F;
-		level.addAlwaysVisibleParticle(particle, true, pos.getX() + 0.5F + x, pos.getY() + 1.0F, pos.getZ() + 0.5F + z, x * 0.15F, 0.03F + level.random.nextFloat() * 0.2F, z * 0.15F);
+		level.addAlwaysVisibleParticle(
+				particle,
+				true,
+				pos.getX() + 0.5F + x,
+				pos.getY() + 1.0F,
+				pos.getZ() + 0.5F + z,
+				x * 0.15F,
+				0.03F + level.random.nextFloat() * 0.2F,
+				z * 0.15F
+		);
 		if (entity.soundTime-- <= 0) {
 			entity.soundTime = level.getRandom().nextInt(20) + 30;
 			boolean underwater = !state.getFluidState()

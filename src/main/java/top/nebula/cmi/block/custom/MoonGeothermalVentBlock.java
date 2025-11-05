@@ -1,16 +1,9 @@
 package top.nebula.cmi.block.custom;
 
-import com.github.alexmodguy.alexscaves.server.item.ACItemRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.util.RandomSource;
-import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -28,7 +21,6 @@ import net.minecraft.world.level.block.state.properties.BooleanProperty;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
-import net.minecraft.world.phys.BlockHitResult;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.block.ModBlockEntityTypes;
@@ -50,11 +42,11 @@ public class MoonGeothermalVentBlock extends BaseEntityBlock {
 	}
 
 	public BlockState getStateForPlacement(BlockPlaceContext context) {
-		LevelAccessor levelaccessor = context.getLevel();
+		LevelAccessor accessor = context.getLevel();
 		BlockPos blockpos = context.getClickedPos();
 		return this.defaultBlockState()
-				.setValue(SMOKE_TYPE, getSmokeType(levelaccessor, blockpos))
-				.setValue(SPAWNING_PARTICLES, isSpawningParticles(blockpos, levelaccessor));
+				.setValue(SMOKE_TYPE, getSmokeType(accessor, blockpos))
+				.setValue(SPAWNING_PARTICLES, isSpawningParticles(blockpos, accessor));
 	}
 
 	public @NotNull BlockState updateShape(BlockState state, @NotNull Direction direction, @NotNull BlockState state1, @NotNull LevelAccessor accessor, @NotNull BlockPos pos, @NotNull BlockPos pos1) {
@@ -90,23 +82,7 @@ public class MoonGeothermalVentBlock extends BaseEntityBlock {
 
 	}
 
-	public @NotNull InteractionResult use(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult result) {
-		ItemStack heldItem = player.getItemInHand(hand);
-		if (heldItem.is(Items.GLASS_BOTTLE) && state.getValue(SMOKE_TYPE) == 3 && state.getValue(SPAWNING_PARTICLES)) {
-			ItemStack bottle = new ItemStack(ACItemRegistry.RADON_BOTTLE.get());
-			if (!player.addItem(bottle)) {
-				player.drop(bottle, false);
-			}
-			if (!player.isCreative()) {
-				heldItem.shrink(1);
-			}
-			player.playSound(SoundEvents.BOTTLE_FILL);
-			return InteractionResult.SUCCESS;
-		}
-		return super.use(state, level, pos, player, hand, result);
-	}
-
-	@javax.annotation.Nullable
+	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		if (level.isClientSide) {
 			return state.getValue(SMOKE_TYPE) > 0 && state.getValue(SPAWNING_PARTICLES) ?

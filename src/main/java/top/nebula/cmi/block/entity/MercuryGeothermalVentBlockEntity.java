@@ -12,7 +12,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.custom.MoonGeothermalVentBlock;
+import top.nebula.cmi.block.custom.MercuryGeothermalVentBlock;
 
 public class MercuryGeothermalVentBlockEntity extends BlockEntity {
 	private static final double PARTICLE_DIST = 120 * 120;
@@ -28,7 +28,7 @@ public class MercuryGeothermalVentBlockEntity extends BlockEntity {
 		if (player.distanceToSqr(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5) > PARTICLE_DIST || level.random.nextBoolean()) {
 			return;
 		}
-		int smokeType = state.getValue(MoonGeothermalVentBlock.SMOKE_TYPE);
+		int smokeType = state.getValue(MercuryGeothermalVentBlock.SMOKE_TYPE);
 		ParticleOptions particle = ParticleTypes.SMOKE;
 		switch (smokeType) {
 			case 1:
@@ -43,7 +43,16 @@ public class MercuryGeothermalVentBlockEntity extends BlockEntity {
 		}
 		float x = (level.random.nextFloat() - 0.5F) * 0.25F;
 		float z = (level.random.nextFloat() - 0.5F) * 0.25F;
-		level.addAlwaysVisibleParticle(particle, true, pos.getX() + 0.5F + x, pos.getY() + 1.0F, pos.getZ() + 0.5F + z, x * 0.15F, 0.03F + level.random.nextFloat() * 0.2F, z * 0.15F);
+		level.addAlwaysVisibleParticle(
+				particle,
+				true,
+				pos.getX() + 0.5F + x,
+				pos.getY() + 1.0F,
+				pos.getZ() + 0.5F + z,
+				x * 0.15F,
+				0.03F + level.random.nextFloat() * 0.2F,
+				z * 0.15F
+		);
 		if (entity.soundTime-- <= 0) {
 			entity.soundTime = level.getRandom().nextInt(20) + 30;
 			boolean underwater = !state.getFluidState()
