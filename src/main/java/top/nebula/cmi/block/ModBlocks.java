@@ -1,6 +1,9 @@
 package top.nebula.cmi.block;
 
 import top.nebula.cmi.CMI;
+import top.nebula.cmi.block.custom.MercuryGeothermalVentBlock;
+import top.nebula.cmi.block.custom.MoonGeothermalVentBlock;
+import top.nebula.cmi.block.custom.WaterPumpBlock;
 import top.nebula.cmi.worldgen.ModConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;
@@ -24,6 +27,8 @@ public class ModBlocks {
 
 	public static final RegistryObject<Block> GOLD_SAPLING;
 	public static final RegistryObject<Block> WATER_PUMP;
+	public static final RegistryObject<Block> MOON_GEO;
+	public static final RegistryObject<Block> MERCURY_GEO;
 
 	public static void register(IEventBus eventBus) {
 		BLOCKS.register(eventBus);
@@ -48,5 +53,7 @@ public class ModBlocks {
 			);
 		});
 		WATER_PUMP = BLOCKS.register("water_pump", WaterPumpBlock::new);
+		MOON_GEO = BLOCKS.register("moon_geothermal_vent", MoonGeothermalVentBlock::new);
+		MERCURY_GEO = BLOCKS.register("mercury_geothermal_vent", MercuryGeothermalVentBlock::new);
 	}
 }

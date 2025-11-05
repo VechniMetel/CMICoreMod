@@ -1,8 +1,8 @@
-package top.nebula.cmi.block;
+package top.nebula.cmi.block.custom;
 
 import com.simibubi.create.foundation.block.IBE;
 import net.minecraft.world.level.block.Blocks;
-import top.nebula.cmi.block.entity.ModBlockEntityTypes;
+import top.nebula.cmi.block.ModBlockEntityTypes;
 import top.nebula.cmi.block.entity.WaterPumpBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;

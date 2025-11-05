@@ -1,7 +1,8 @@
 package top.nebula.cmi;
 
+import net.minecraftforge.eventbus.api.IEventBus;
 import top.nebula.cmi.block.ModBlocks;
-import top.nebula.cmi.block.entity.ModBlockEntityTypes;
+import top.nebula.cmi.block.ModBlockEntityTypes;
 import top.nebula.cmi.item.ModItems;
 import top.nebula.cmi.worldgen.region.ModOverworldRegion;
 import top.nebula.cmi.worldgen.surfacerule.ModSurfaceRuleData;
@@ -18,25 +19,23 @@ public class CMI {
 	public static final String MODID = "cmi";
 
 	public CMI(FMLJavaModLoadingContext context) {
+		IEventBus event = context.getModEventBus();
+
 		context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, CMI.MODID + "/common.toml");
 
-		ModBlocks.register(context.getModEventBus());
-		ModItems.register(context.getModEventBus());
-		ModBlockEntityTypes.register(context.getModEventBus());
+		ModBlocks.register(event);
+		ModItems.register(event);
+		ModBlockEntityTypes.register(event);
 
-		context.getModEventBus().addListener(this::commonSetup);
+		event.addListener(this::commonSetup);
 	}
 
 	private void commonSetup(FMLCommonSetupEvent event) {
 		event.enqueueWork(() -> {
 			Regions.register(new ModOverworldRegion(5));
 
-			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, CMI.MODID,
-					ModSurfaceRuleData.makeRules()
-			);
-			SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD,
-					SurfaceRuleManager.RuleStage.AFTER_BEDROCK, 0, ModSurfaceRuleData.makeInjections()
-			);
+			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, CMI.MODID, ModSurfaceRuleData.makeRules());
+			SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.AFTER_BEDROCK, 0, ModSurfaceRuleData.makeInjections());
 		});
 	}
 }

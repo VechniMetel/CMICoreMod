@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import top.nebula.cmi.CMI;
+import top.nebula.cmi.block.ModBlockEntityTypes;
 import top.nebula.cmi.block.ModBlocks;
 import top.nebula.cmi.util.ModLang;
 import net.minecraft.core.BlockPos;
@@ -34,6 +35,9 @@ import vazkii.patchouli.api.IMultiblock;
 import java.util.List;
 
 public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInformation {
+	public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntityTypes.WATER_PUMP.get(), pos, state);
+	}
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
 		return BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water"));
@@ -175,6 +179,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		try {
 			// validate可能是void，这里只是触发Patchouli内部检查
 			STRUCTURE.get().validate(level, worldPosition);
+			structureValid = true;
 			// 如果需要，你可以用Patchouli的 targets 来手动判断
 		} catch (Exception e) {
 			structureValid = false;
@@ -188,16 +193,14 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		return false;
 	}
 
-	public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {
-		super(ModBlockEntityTypes.WATER_PUMP.get(), pPos, pBlockState);
-	}
-
 	@Override
-	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (cap == ForgeCapabilities.FLUID_HANDLER) {
-			return LazyOptional.of(() -> fluidHandler).cast();
+	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side) {
+		if (capability == ForgeCapabilities.FLUID_HANDLER) {
+			return LazyOptional.of(() -> {
+				return fluidHandler;
+			}).cast();
 		}
-		return super.getCapability(cap, side);
+		return super.getCapability(capability, side);
 	}
 
 	@Override

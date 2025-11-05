@@ -58,6 +58,10 @@ modId = "terrablender"
 mandatory = true
 versionRange = "[3.0.1,)"
 [[dependencies."${mod_id}"]]
+modId = "alexscaves"
+mandatory = true
+versionRange = "[2.0.2,)"
+[[dependencies."${mod_id}"]]
 modId = "jei"
 mandatory = true
 versionRange = "${jei_version_range}"
