@@ -20,7 +20,7 @@ public class MercuryGeothermalVentBlockEntity extends BlockEntity {
 	private int soundTime = 0;
 
 	public MercuryGeothermalVentBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.MOON_GEO.get(), pos, state);
+		super(ModBlockEntityTypes.MERCURY_GEO.get(), pos, state);
 	}
 
 	public static void particleTick(Level level, BlockPos pos, BlockState state, MercuryGeothermalVentBlockEntity entity) {

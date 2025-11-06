@@ -30,7 +30,7 @@ public class ModBlockEntityTypes {
 		});
 
 		MERCURY_GEO = BLOCK_ENTITY_TYPES.register("mercury_geothermal_vent", () -> {
-			return BlockEntityType.Builder.of(MercuryGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO.get())
+			return BlockEntityType.Builder.of(MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO.get())
 					.build(null);
 		});
 
