@@ -17,8 +17,8 @@ public class ModItems {
 	public static final RegistryObject<Item> MOON_GEO;
 	public static final RegistryObject<Item> MERCURY_GEO;
 
-	public static void register(IEventBus eventBus) {
-		ITEMS.register(eventBus);
+	public static void register(IEventBus event) {
+		ITEMS.register(event);
 	}
 
 	static {

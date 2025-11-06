@@ -24,8 +24,10 @@ public class ModSurfaceRuleData {
 
 	public static SurfaceRules.RuleSource makeInjections() {
 		return SurfaceRules.sequence(
-				SurfaceRules.ifTrue(SurfaceRules.abovePreliminarySurface(),
-						SurfaceRules.ifTrue(SurfaceRules.ON_FLOOR,
+				SurfaceRules.ifTrue(
+						SurfaceRules.abovePreliminarySurface(),
+						SurfaceRules.ifTrue(
+								SurfaceRules.ON_FLOOR,
 								SurfaceRules.sequence(
 										SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.MANGROVE_SWAMP),
 												SurfaceRules.sequence(
@@ -40,7 +42,8 @@ public class ModSurfaceRuleData {
 
 				),
 				SurfaceRules.ifTrue(SurfaceRules.waterStartCheck(-6, -1),
-						SurfaceRules.ifTrue(SurfaceRules.UNDER_FLOOR,
+						SurfaceRules.ifTrue(
+								SurfaceRules.UNDER_FLOOR,
 								SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.MANGROVE_SWAMP, Biomes.SWAMP), PEAT)
 						)
 				)

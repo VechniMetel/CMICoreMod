@@ -1,8 +1,10 @@
 {
-  "item.cmi.nuclear_mechanism": "Nuclear Mechanism",
-  "block.cmi.water_pump": "Water Pump",
-  "curios.identifier.mechanisms": "Mechanisms",
-  "cmi.tooltip.water_pump.functional": "Water Pump Functional",
-  "cmi.tooltip.water_pump.non_functional": "Water Pump Not Functional",
-  "biome.cmi.andesite_cave": "Andesite Cave"
+	"item.cmi.nuclear_mechanism": "Nuclear Mechanism",
+	"block.cmi.water_pump": "Water Pump",
+	"block.cmi.moon_geothermal_vent": "莫托斯地热通口",
+	"block.cmi.mercury_geothermal_vent": "赫尔墨斯地热通口",
+	"curios.identifier.mechanisms": "Mechanisms",
+	"cmi.tooltip.water_pump.functional": "Water Pump Functional",
+	"cmi.tooltip.water_pump.non_functional": "Water Pump Not Functional",
+	"biome.cmi.andesite_cave": "Andesite Cave"
 }
