@@ -4,6 +4,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
@@ -31,10 +32,15 @@ public class TestGravelBlockEntity extends BrushableBlockEntity {
 
 		// 设置战利品表
 		if (player.getMainHandItem().is(ModItems.TEST_BRUSH.get())) {
-			this.setLootTable(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "archaeology/custom_brush_loot"), gameTime);
+			ResourceLocation customLootTables =
+					ResourceLocation.fromNamespaceAndPath(CMI.MODID, "archaeology/custom_brush_loot");
+			this.setLootTable(customLootTables, gameTime);
 		} else {
-			this.setLootTable(ResourceLocation.withDefaultNamespace("archaeology/desert_pyramid"), gameTime);
+			ResourceLocation vanillaLootTables =
+					ResourceLocation.withDefaultNamespace("archaeology/desert_pyramid");
+			this.setLootTable(vanillaLootTables, gameTime);
 		}
+		level.setBlock(worldPosition, Blocks.GRAVEL.defaultBlockState(), 3);
 		return super.brush(gameTime, player, direction);
 	}
 }
