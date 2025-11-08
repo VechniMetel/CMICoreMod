@@ -25,17 +25,19 @@ import net.minecraftforge.registries.RegistryObject;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.function.Supplier;
+
 public class ModBlocks {
 	private static final DeferredRegister<Block> BLOCKS;
 
-	public static final RegistryObject<Block> GOLD_SAPLING;
-	public static final RegistryObject<Block> WATER_PUMP;
-	public static final RegistryObject<Block> MOON_GEO;
-	public static final RegistryObject<Block> MERCURY_GEO;
-	public static final RegistryObject<Block> TEST_GRAVEL;
+	public static final Supplier<Block> GOLD_SAPLING;
+	public static final Supplier<Block> WATER_PUMP;
+	public static final Supplier<Block> MOON_GEO;
+	public static final Supplier<Block> MERCURY_GEO;
+	public static final Supplier<Block> TEST_GRAVEL;
 
-	public static void register(IEventBus eventBus) {
-		BLOCKS.register(eventBus);
+	public static void register(IEventBus event) {
+		BLOCKS.register(event);
 	}
 
 	static {

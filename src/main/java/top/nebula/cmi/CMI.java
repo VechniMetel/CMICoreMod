@@ -24,8 +24,8 @@ public class CMI {
 		context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, CMI.MODID + "/common.toml");
 
 		ModBlocks.register(event);
-		ModItems.register(event);
 		ModBlockEntityTypes.register(event);
+		ModItems.register(event);
 
 		event.addListener(this::commonSetup);
 	}

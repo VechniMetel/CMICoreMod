@@ -1,5 +1,6 @@
 package top.nebula.cmi.datagen;
 
+import net.minecraft.core.registries.BuiltInRegistries;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.item.ModItems;
 import net.minecraft.data.PackOutput;
@@ -8,7 +9,8 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.client.model.generators.ItemModelBuilder;
 import net.minecraftforge.client.model.generators.ItemModelProvider;
 import net.minecraftforge.common.data.ExistingFileHelper;
-import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class ModItemModelProvider extends ItemModelProvider {
 	public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -20,9 +22,9 @@ public class ModItemModelProvider extends ItemModelProvider {
 		simpleItem(ModItems.NUCLEAR_MECHANISM);
 	}
 
-	private ItemModelBuilder simpleItem(RegistryObject<Item> item) {
-		return withExistingParent(item.getId().getPath(),
+	private ItemModelBuilder simpleItem(Supplier<Item> item) {
+		return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).toString(),
 				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
-				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + item.getId().getPath()));
+				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
 	}
 }

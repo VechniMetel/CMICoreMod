@@ -8,17 +8,18 @@ import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.RegistryObject;
+
+import java.util.function.Supplier;
 
 public class ModItems {
 	private static final DeferredRegister<Item> ITEMS;
 
-	public static final RegistryObject<Item> NUCLEAR_MECHANISM;
-	public static final RegistryObject<Item> WATER_PUMP;
-	public static final RegistryObject<Item> MOON_GEO;
-	public static final RegistryObject<Item> MERCURY_GEO;
-	public static final RegistryObject<Item> TEST_BRUSH;
-	public static final RegistryObject<Item> TEST_GRAVEL;
+	public static final Supplier<Item> NUCLEAR_MECHANISM;
+	public static final Supplier<Item> WATER_PUMP;
+	public static final Supplier<Item> MOON_GEO;
+	public static final Supplier<Item> MERCURY_GEO;
+	public static final Supplier<Item> TEST_BRUSH;
+	public static final Supplier<Item> TEST_GRAVEL;
 
 	public static void register(IEventBus event) {
 		ITEMS.register(event);
@@ -37,6 +38,7 @@ public class ModItems {
 		});
 
 		NUCLEAR_MECHANISM = ITEMS.register("nuclear_mechanism", NuclearMechanism::new);
+
 		MOON_GEO = ITEMS.register("moon_geothermal_vent", () -> {
 			return new BlockItem(ModBlocks.MOON_GEO.get(), new Item.Properties());
 		});
