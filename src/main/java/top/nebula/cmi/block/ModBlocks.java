@@ -1,8 +1,11 @@
 package top.nebula.cmi.block;
 
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.entity.BrushableBlockEntity;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.block.custom.MercuryGeothermalVentBlock;
 import top.nebula.cmi.block.custom.MoonGeothermalVentBlock;
+import top.nebula.cmi.block.custom.TestGravelBlock;
 import top.nebula.cmi.block.custom.WaterPumpBlock;
 import top.nebula.cmi.worldgen.ModConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
@@ -29,6 +32,7 @@ public class ModBlocks {
 	public static final RegistryObject<Block> WATER_PUMP;
 	public static final RegistryObject<Block> MOON_GEO;
 	public static final RegistryObject<Block> MERCURY_GEO;
+	public static final RegistryObject<Block> TEST_GRAVEL;
 
 	public static void register(IEventBus eventBus) {
 		BLOCKS.register(eventBus);
@@ -36,6 +40,8 @@ public class ModBlocks {
 
 	static {
 		BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CMI.MODID);
+
+		TEST_GRAVEL = BLOCKS.register("test_gravel", TestGravelBlock::new);
 
 		GOLD_SAPLING = BLOCKS.register("gold_sapling", () -> {
 			return new SaplingBlock(new AbstractTreeGrower() {

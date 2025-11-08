@@ -1,0 +1,25 @@
+{
+	"type": "minecraft:archaeology",
+	"pools": [
+		{
+			"rolls": 1,
+			"entries": [
+				{
+					"type": "item",
+					"name": "minecraft:diamond",
+					"weight": 1
+				},
+				{
+					"type": "item",
+					"name": "minecraft:emerald",
+					"weight": 2
+				},
+				{
+					"type": "item",
+					"name": "minecraft:coal",
+					"weight": 3
+				}
+			]
+		}
+	]
+}

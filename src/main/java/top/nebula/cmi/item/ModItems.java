@@ -1,5 +1,6 @@
 package top.nebula.cmi.item;
 
+import net.minecraft.world.item.BrushItem;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.block.ModBlocks;
 import net.minecraft.world.item.BlockItem;
@@ -16,6 +17,8 @@ public class ModItems {
 	public static final RegistryObject<Item> WATER_PUMP;
 	public static final RegistryObject<Item> MOON_GEO;
 	public static final RegistryObject<Item> MERCURY_GEO;
+	public static final RegistryObject<Item> TEST_BRUSH;
+	public static final RegistryObject<Item> TEST_GRAVEL;
 
 	public static void register(IEventBus event) {
 		ITEMS.register(event);
@@ -23,6 +26,15 @@ public class ModItems {
 
 	static {
 		ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CMI.MODID);
+
+		TEST_BRUSH = ITEMS.register("test_brush", () -> {
+			return new BrushItem(new Item.Properties()
+					.durability(128));
+		});
+
+		TEST_GRAVEL = ITEMS.register("test_gravel", () -> {
+			return new BlockItem(ModBlocks.TEST_GRAVEL.get(), new Item.Properties());
+		});
 
 		NUCLEAR_MECHANISM = ITEMS.register("nuclear_mechanism", NuclearMechanism::new);
 		MOON_GEO = ITEMS.register("moon_geothermal_vent", () -> {
