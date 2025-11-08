@@ -28,7 +28,11 @@ public class ModBlockEntityTypes {
 	 * @param factory BlockEntity 构造方法引用 (例如 CustomBlockEntity::new)
 	 * @param blocks  绑定的方块实例
 	 */
-	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(String name, BlockEntityType.BlockEntitySupplier<T> factory, Block... blocks) {
+	private static <T extends BlockEntity> RegistryObject<BlockEntityType<T>> register(
+			String name,
+			BlockEntityType.BlockEntitySupplier<T> factory,
+			Block... blocks
+	) {
 		return BLOCK_ENTITIES.register(name, () -> {
 			return BlockEntityType.Builder.of(factory, blocks)
 					.build(null);
