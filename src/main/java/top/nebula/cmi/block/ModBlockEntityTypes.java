@@ -11,16 +11,22 @@ import top.nebula.cmi.CMI;
 import top.nebula.cmi.block.entity.*;
 
 public class ModBlockEntityTypes {
-	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES =
-			DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
-	public static final RegistryObject<BlockEntityType<TestGravelBlockEntity>> TEST_GRAVEL =
-			register("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL.get());
-	public static final RegistryObject<BlockEntityType<MoonGeothermalVentBlockEntity>> MOON_GEO =
-			register("moon_geothermal_vent", MoonGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO.get());
-	public static final RegistryObject<BlockEntityType<MercuryGeothermalVentBlockEntity>> MERCURY_GEO =
-			register("mercury_geothermal_vent", MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO.get());
-	public static final RegistryObject<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP =
-			register("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get());
+	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES;
+	public static final RegistryObject<BlockEntityType<TestGravelBlockEntity>> TEST_GRAVEL;
+	public static final RegistryObject<BlockEntityType<MoonGeothermalVentBlockEntity>> MOON_GEO;
+	public static final RegistryObject<BlockEntityType<MercuryGeothermalVentBlockEntity>> MERCURY_GEO;
+	public static final RegistryObject<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP;
+
+	static {
+		BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
+
+		TEST_GRAVEL = register("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL.get());
+
+		MOON_GEO = register("moon_geothermal_vent", MoonGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO.get());
+		MERCURY_GEO = register("mercury_geothermal_vent", MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO.get());
+
+		WATER_PUMP = register("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP.get());
+	}
 
 	/**
 	 *
