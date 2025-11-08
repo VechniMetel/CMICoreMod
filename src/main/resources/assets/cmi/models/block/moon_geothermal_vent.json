@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "cmi:block/moon_geothermal_vent_top",
+    "side": "cmi:block/moon_geothermal_vent"
+  }
+}
