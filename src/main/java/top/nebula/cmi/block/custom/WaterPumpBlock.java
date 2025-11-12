@@ -26,9 +26,6 @@ public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
 		super(Properties.copy(Blocks.OAK_PLANKS));
 	}
 
-	BlockPos pos;
-	BlockState state;
-
 	@Override
 	public Class<WaterPumpBlockEntity> getBlockEntityClass() {
 		return WaterPumpBlockEntity.class;
@@ -40,7 +37,7 @@ public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
 	}
 
 	@SubscribeEvent
-	public void rightClickShow(PlayerInteractEvent.RightClickBlock event) {
+	public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
 		Level level = event.getLevel();
 		BlockPos pos = event.getPos();
 		Player player = event.getEntity();
@@ -48,16 +45,16 @@ public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
 		ItemStack item = player.getItemInHand(hand);
 		BlockState state = level.getBlockState(pos);
 
-		WaterPumpBlockEntity entity = (WaterPumpBlockEntity) level.getBlockEntity(pos);
-
-		if (level.isClientSide()) {
+		if (!level.isClientSide) {
 			return;
 		}
 
-		if (item.is(AllTags.AllItemTags.WRENCH.tag) && hand == InteractionHand.MAIN_HAND && state.is(ModBlocks.WATER_PUMP.get())) {
-			player.swing(hand);
-
-			entity.showMultiblock();
+		if (state.is(ModBlocks.WATER_PUMP.get()) && item.is(AllTags.AllItemTags.WRENCH.tag) && hand == InteractionHand.MAIN_HAND) {
+			WaterPumpBlockEntity entity = (WaterPumpBlockEntity) level.getBlockEntity(pos);
+			if (entity != null) {
+				player.swing(hand);
+				entity.showMultiblock();
+			}
 		}
 	}
 }

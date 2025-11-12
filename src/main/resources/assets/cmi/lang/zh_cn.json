@@ -1,10 +1,11 @@
 {
 	"item.cmi.nuclear_mechanism": "核构件",
-	"block.cmi.water_pump": "水泵",
+	"block.cmi.water_pump": "水井",
 	"block.cmi.moon_geothermal_vent": "莫托斯地热通口",
 	"block.cmi.mercury_geothermal_vent": "赫尔墨斯地热通口",
 	"curios.identifier.mechanisms": "构件",
-	"cmi.tooltip.water_pump.functional": "水泵工作正常",
-	"cmi.tooltip.water_pump.non_functional": "水泵关键结构缺失",
+	"cmi.tooltip.water_pump.functional": "水井工作正常",
+	"cmi.tooltip.water_pump.non_functional": "水井关键结构缺失",
+	"multi_block.building.cmi.water_pump": "多方块水井搭建",
 	"biome.cmi.andesite_cave": "安山岩洞窟"
 }

@@ -6,5 +6,6 @@
 	"curios.identifier.mechanisms": "Mechanisms",
 	"cmi.tooltip.water_pump.functional": "Water Pump Functional",
 	"cmi.tooltip.water_pump.non_functional": "Water Pump Not Functional",
+	"multi_block.building.cmi.water_pump": "Multiblock Water Pump Build",
 	"biome.cmi.andesite_cave": "Andesite Cave"
 }

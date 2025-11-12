@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
+import org.checkerframework.checker.units.qual.C;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.block.ModBlockEntityTypes;
 import top.nebula.cmi.block.ModBlocks;
@@ -86,6 +87,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 				.where('0', ModBlocks.WATER_PUMP.get())
 				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
 				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
+				.where(' ', PatchouliAPI.get().anyMatcher())
 				// 北边楼梯(上方), 朝南
 				.where('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
 						.add(StairBlock.FACING, Direction.WEST)
@@ -192,7 +194,8 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		if (isShowMultiblock()) {
 			PatchouliAPI.get().showMultiblock(
 					STRUCTURE.get(),
-					Component.literal("structureValid: " + isStructureValid()),
+//					Component.literal("structureValid: " + isStructureValid()),
+					Component.translatable("multi_block.building." + CMI.MODID + "water_pump"),
 					worldPosition.offset(0, -1, 0),
 					Rotation.NONE
 			);
