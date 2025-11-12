@@ -3,6 +3,7 @@ package top.nebula.cmi.block.entity;
 import blusunrize.immersiveengineering.common.blocks.wooden.TreatedWoodStyles;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
 import com.simibubi.create.content.equipment.goggles.IHaveGoggleInformation;
+import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
@@ -31,27 +32,39 @@ import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.util.MultiblockStructureBuilder;
 import top.nebula.cmi.util.PropertyImmutableMap;
 import vazkii.patchouli.api.IMultiblock;
+import vazkii.patchouli.api.PatchouliAPI;
 
 import java.util.List;
 
 public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInformation {
-	public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
-		super(ModBlockEntityTypes.WATER_PUMP.get(), pos, state);
-	}
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
 		return BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water"));
 	});
 
-	private static final ResourceLocation STAIRS = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+	private static final ResourceLocation STAIRS =
+			ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
 
 	private static final Lazy<IMultiblock> STRUCTURE = Lazy.of(() -> {
 		return new MultiblockStructureBuilder(new String[][]{
+				/*
+					W
+					|
+				N --+-- S
+					|
+					E
+				*/
 				{
 						// 四个角为脚手架, 四边为楼梯, 中心镂空
 						"DFD",
 						"G H",
 						"DID"
+				},
+				{
+						// 木栅栏
+						"C C",
+						"   ",
+						"C C"
 				},
 				{
 						// 木栅栏
@@ -72,36 +85,32 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
 				// 北边楼梯(上方), 朝南
 				.where('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.SOUTH)
+						.add(StairBlock.FACING, Direction.WEST)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
 				// 西边楼梯(左边), 朝东
 				.where('G', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.EAST)
+						.add(StairBlock.FACING, Direction.NORTH)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
 				// 东边楼梯(右边), 朝西
 				.where('H', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.WEST)
+						.add(StairBlock.FACING, Direction.SOUTH)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
-				// 南边楼梯(下方), 朝北
+				// 南边楼梯(下方),
 				.where('I', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.NORTH)
+						.add(StairBlock.FACING, Direction.EAST)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
 				.build();
 	});
 
-	// 缓存结构状态
-	private Boolean structureValid = null;
-
 	private final IFluidHandler fluidHandler = new IFluidHandler() {
-
 		@Override
 		public int getTanks() {
 			return 1;
@@ -110,9 +119,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		@Override
 		public @NotNull FluidStack getFluidInTank(int i) {
 			if (isStructureValid()) {
-				if (isOcean()) {
-					return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
-				}
+				if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 				return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
 			}
 			return FluidStack.EMPTY;
@@ -160,30 +167,39 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		}
 	};
 
-	// 外部可调用的方法，判断结构是否完整
-	public boolean isStructureValid() {
-		// 第一次调用时刷新
-		if (structureValid == null) {
-			refreshStructureStatus();
+	private boolean isShowMultiblock = false;
+
+	private boolean isShowMultiblock() {
+		if (isStructureValid()) {
+			isShowMultiblock = false;
+		} else {
+			isShowMultiblock = !isShowMultiblock;
 		}
-		return structureValid;
+		return isShowMultiblock;
 	}
 
-	// 刷新结构状态
-	public void refreshStructureStatus() {
-		if (level == null) {
-			structureValid = false;
-			return;
+	/**
+	 * 显示结构
+	 * 由于客户端渲染因为某些不可抗因素 需要Y轴下沉一格
+	 */
+	public void showMultiblock() {
+		if (level != null && !level.isClientSide) return;
+		if (isShowMultiblock()) {
+			PatchouliAPI.get().showMultiblock(
+					STRUCTURE.get(),
+					Component.literal("structureValid: " + isStructureValid()),
+					worldPosition.offset(0, -1, 0),
+					Rotation.NONE
+			);
+		} else {
+			// 清理掉 所有 显示结构
+			PatchouliAPI.get().clearMultiblock();
 		}
-		structureValid = true;
-		try {
-			// validate可能是void，这里只是触发Patchouli内部检查
-			STRUCTURE.get().validate(level, worldPosition);
-			structureValid = true;
-			// 如果需要，你可以用Patchouli的 targets 来手动判断
-		} catch (Exception e) {
-			structureValid = false;
-		}
+	}
+
+	// 外部可调用的方法，判断结构是否完整
+	public boolean isStructureValid() {
+		return STRUCTURE.get().validate(level, worldPosition) != null;
 	}
 
 	private boolean isOcean() {
@@ -193,14 +209,18 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		return false;
 	}
 
+	public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {
+		super(ModBlockEntityTypes.WATER_PUMP.get(), pPos, pBlockState);
+	}
+
 	@Override
-	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side) {
-		if (capability == ForgeCapabilities.FLUID_HANDLER) {
+	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
+		if (cap == ForgeCapabilities.FLUID_HANDLER) {
 			return LazyOptional.of(() -> {
 				return fluidHandler;
 			}).cast();
 		}
-		return super.getCapability(capability, side);
+		return super.getCapability(cap, side);
 	}
 
 	@Override

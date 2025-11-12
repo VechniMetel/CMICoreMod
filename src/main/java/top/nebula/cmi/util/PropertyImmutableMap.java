@@ -10,7 +10,6 @@ import java.util.Map;
  * 确保Property与对应的值类型严格匹配
  */
 public class PropertyImmutableMap {
-
 	// 底层的ImmutableMap构建器
 	private final ImmutableMap.Builder<Property<?>, Comparable<?>> internalBuilder;
 
