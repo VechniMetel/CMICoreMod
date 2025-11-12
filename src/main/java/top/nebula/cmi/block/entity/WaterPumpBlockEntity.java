@@ -37,6 +37,9 @@ import vazkii.patchouli.api.PatchouliAPI;
 import java.util.List;
 
 public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInformation {
+	public WaterPumpBlockEntity(BlockPos pos, BlockState state) {
+		super(ModBlockEntityTypes.WATER_PUMP.get(), pos, state);
+	}
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
 		return BuiltInRegistries.FLUID.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "sea_water"));
@@ -183,7 +186,9 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 	 * 由于客户端渲染因为某些不可抗因素 需要Y轴下沉一格
 	 */
 	public void showMultiblock() {
-		if (level != null && !level.isClientSide) return;
+		if (level != null && !level.isClientSide) {
+			return;
+		}
 		if (isShowMultiblock()) {
 			PatchouliAPI.get().showMultiblock(
 					STRUCTURE.get(),
@@ -209,18 +214,14 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		return false;
 	}
 
-	public WaterPumpBlockEntity(BlockPos pPos, BlockState pBlockState) {
-		super(ModBlockEntityTypes.WATER_PUMP.get(), pPos, pBlockState);
-	}
-
 	@Override
-	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> cap, @Nullable Direction side) {
-		if (cap == ForgeCapabilities.FLUID_HANDLER) {
+	public @NotNull <T> LazyOptional<T> getCapability(@NotNull Capability<T> capability, @Nullable Direction side) {
+		if (capability == ForgeCapabilities.FLUID_HANDLER) {
 			return LazyOptional.of(() -> {
 				return fluidHandler;
 			}).cast();
 		}
-		return super.getCapability(cap, side);
+		return super.getCapability(capability, side);
 	}
 
 	@Override
