@@ -1,9 +1,6 @@
 package top.nebula.cmi.util;
 
 import com.google.common.collect.ImmutableMap;
-import com.mojang.serialization.Decoder;
-import com.mojang.serialization.Encoder;
-import com.mojang.serialization.MapCodec;
 import net.minecraft.world.level.block.state.properties.Property;
 import vazkii.patchouli.api.IMultiblock;
 import vazkii.patchouli.api.PatchouliAPI;
