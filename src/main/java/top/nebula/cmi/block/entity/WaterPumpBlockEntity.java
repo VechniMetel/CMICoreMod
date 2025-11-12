@@ -194,7 +194,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 			PatchouliAPI.get().showMultiblock(
 					STRUCTURE.get(),
 //					Component.literal("structureValid: " + isStructureValid()),
-					Component.translatable("multi_block.building." + CMI.MODID + ".water_pump"),
+					Component.translatable("multiblock.building." + CMI.MODID + ".water_pump"),
 					worldPosition.offset(0, -1, 0),
 					Rotation.NONE
 			);

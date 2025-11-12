@@ -6,6 +6,6 @@
 	"curios.identifier.mechanisms": "构件",
 	"cmi.tooltip.water_pump.functional": "水井工作正常",
 	"cmi.tooltip.water_pump.non_functional": "水井关键结构缺失",
-	"multi_block.building.cmi.water_pump": "多方块水井搭建",
+	"multiblock.building.cmi.water_pump": "多方块水井搭建",
 	"biome.cmi.andesite_cave": "安山岩洞窟"
 }
