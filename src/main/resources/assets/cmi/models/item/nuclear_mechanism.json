@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:item/generated",
-  "textures": {
-    "layer0": "cmi:item/nuclear_mechanism"
-  }
+	"parent": "minecraft:item/generated",
+	"textures": {
+		"layer0": "cmi:item/nuclear_mechanism"
+	}
 }
