@@ -50,9 +50,9 @@ public class MultiblockStructureBuilder {
 		return this;
 	}
 
-	public MultiblockStructureBuilder where(char pos, IStateMatcher stateMatcher) {
+	public MultiblockStructureBuilder where(char pos, IStateMatcher matcher) {
 		matchers.add(pos);
-		matchers.add(stateMatcher);
+		matchers.add(matcher);
 		return this;
 	}
 
@@ -74,7 +74,6 @@ public class MultiblockStructureBuilder {
 		matchers.add(PatchouliAPI.get().stateMatcher(state));
 		return this;
 	}
-
 
 	public IMultiblock build() {
 		return PatchouliAPI.get().makeMultiblock(structure, matchers.toArray());

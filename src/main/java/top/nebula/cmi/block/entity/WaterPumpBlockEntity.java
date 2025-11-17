@@ -121,21 +121,23 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		}
 
 		@Override
-		public @NotNull FluidStack getFluidInTank(int i) {
+		public @NotNull FluidStack getFluidInTank(int amount) {
 			if (isStructureValid()) {
-				if (isOcean()) return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
+				if (isOcean()) {
+					return new FluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
+				}
 				return new FluidStack(Fluids.WATER, Integer.MAX_VALUE);
 			}
 			return FluidStack.EMPTY;
 		}
 
 		@Override
-		public int getTankCapacity(int i) {
+		public int getTankCapacity(int amount) {
 			return Integer.MAX_VALUE;
 		}
 
 		@Override
-		public boolean isFluidValid(int i, @NotNull FluidStack fluidStack) {
+		public boolean isFluidValid(int amount, @NotNull FluidStack fluidStack) {
 			return false;
 		}
 
