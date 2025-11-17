@@ -21,15 +21,15 @@ public class ModBlockEntityTypes {
 	static {
 		BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
 
-		TEST_GRAVEL = registerBlockEntity("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL);
+		TEST_GRAVEL = register("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL);
 
-		MOON_GEO = registerBlockEntity("moon_geothermal_vent", MoonGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO);
-		MERCURY_GEO = registerBlockEntity("mercury_geothermal_vent", MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO);
+		MOON_GEO = register("moon_geothermal_vent", MoonGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO);
+		MERCURY_GEO = register("mercury_geothermal_vent", MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO);
 
-		WATER_PUMP = registerBlockEntity("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
+		WATER_PUMP = register("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 	}
 
-	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> registerBlockEntity(
+	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(
 			String id,
 			BlockEntityType.BlockEntitySupplier<T> entity,
 			Supplier<? extends Block> block
