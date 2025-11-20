@@ -23,7 +23,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 	}
 
 	private ItemModelBuilder simpleItem(Supplier<Item> item) {
-		return withExistingParent(BuiltInRegistries.ITEM.getKey(item.get()).toString(),
+		return withExistingParent(
+				BuiltInRegistries.ITEM.getKey(item.get()).toString(),
 				ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated")).texture("layer0",
 				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + BuiltInRegistries.ITEM.getKey(item.get()).getPath()));
 	}

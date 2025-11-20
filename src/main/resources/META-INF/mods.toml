@@ -62,6 +62,14 @@ modId = "alexscaves"
 mandatory = true
 versionRange = "[2.0.2,)"
 [[dependencies."${mod_id}"]]
+modId = "kubejs"
+mandatory = true
+versionRange = "[2001.6.5-build.16,)"
+[[dependencies."${mod_id}"]]
+modId = "rhino"
+mandatory = true
+versionRange = "[2001.2.3-build.10,)"
+[[dependencies."${mod_id}"]]
 modId = "jei"
 mandatory = true
 versionRange = "${jei_version_range}"
