@@ -11,16 +11,16 @@ import java.time.LocalDate;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class GetDateModifyTitle {
-	public static boolean isOsNameContains(String name) {
+	private static boolean isOsNameContains(String name) {
 		return System.getProperty("os.name").toLowerCase().contains(name);
 	}
 
-	public static void modifyTitle(String title) {
+	private static void modifyTitle(String title) {
 		Minecraft.getInstance().getWindow().setTitle(title);
 	}
 
 	@SubscribeEvent
-	public static void onClientSetup(FMLClientSetupEvent event) {
+	private static void onClientSetup(FMLClientSetupEvent event) {
 		int month = LocalDate.now().getMonthValue();
 		int day = LocalDate.now().getDayOfMonth();
 
