@@ -38,7 +38,7 @@ public class MercuryGeothermalVentBlockEntity extends BlockEntity {
 				particle = level.random.nextInt(3) == 0 ? ParticleTypes.SQUID_INK : ACParticleRegistry.BLACK_VENT_SMOKE.get();
 				break;
 			case 3:
-				particle = level.random.nextInt(3) == 0 ? ACParticleRegistry.ACID_BUBBLE.get() : ACParticleRegistry.WHITE_VENT_SMOKE.get();
+				particle = level.random.nextInt(3) == 0 ? ACParticleRegistry.ACID_BUBBLE.get() : ACParticleRegistry.BLACK_VENT_SMOKE.get();
 				break;
 		}
 		float x = (level.random.nextFloat() - 0.5F) * 0.25F;

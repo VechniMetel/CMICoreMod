@@ -13,8 +13,8 @@ import net.minecraftforge.common.data.ExistingFileHelper;
 import java.util.function.Supplier;
 
 public class ModItemModelProvider extends ItemModelProvider {
-	public ModItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-		super(output, CMI.MODID, existingFileHelper);
+	public ModItemModelProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, CMI.MODID, helper);
 	}
 
 	@Override

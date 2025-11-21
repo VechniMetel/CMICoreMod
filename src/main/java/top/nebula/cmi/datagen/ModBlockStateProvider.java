@@ -12,8 +12,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 import java.util.function.Supplier;
 
 public class ModBlockStateProvider extends BlockStateProvider {
-	public ModBlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-		super(output, CMI.MODID, exFileHelper);
+	public ModBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
+		super(output, CMI.MODID, helper);
 	}
 
 	@Override

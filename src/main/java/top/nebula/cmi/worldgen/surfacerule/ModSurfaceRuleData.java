@@ -41,7 +41,8 @@ public class ModSurfaceRuleData {
 						)
 
 				),
-				SurfaceRules.ifTrue(SurfaceRules.waterStartCheck(-6, -1),
+				SurfaceRules.ifTrue(
+						SurfaceRules.waterStartCheck(-6, -1),
 						SurfaceRules.ifTrue(
 								SurfaceRules.UNDER_FLOOR,
 								SurfaceRules.ifTrue(SurfaceRules.isBiome(Biomes.MANGROVE_SWAMP, Biomes.SWAMP), PEAT)
