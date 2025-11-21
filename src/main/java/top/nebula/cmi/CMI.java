@@ -1,5 +1,6 @@
 package top.nebula.cmi;
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import top.nebula.cmi.block.ModBlocks;
 import top.nebula.cmi.block.ModBlockEntityTypes;
@@ -18,10 +19,14 @@ import terrablender.api.SurfaceRuleManager;
 public class CMI {
 	public static final String MODID = "cmi";
 
+	public static ResourceLocation loadResource(String path) {
+		return ResourceLocation.fromNamespaceAndPath(MODID, path);
+	}
+
 	public CMI(FMLJavaModLoadingContext context) {
 		IEventBus event = context.getModEventBus();
 
-		context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, CMI.MODID + "/common.toml");
+		context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, MODID + "/common.toml");
 
 		ModBlocks.register(event);
 		ModBlockEntityTypes.register(event);

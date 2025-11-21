@@ -5,7 +5,6 @@ import top.nebula.cmi.CMI;
 import top.nebula.cmi.worldgen.biome.ModBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.biome.Climate;
@@ -16,7 +15,7 @@ import java.util.function.Consumer;
 
 public class ModOverworldRegion extends Region {
 	public ModOverworldRegion(int weight) {
-		super(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "overworld"), RegionType.OVERWORLD, weight);
+		super(CMI.loadResource("overworld"), RegionType.OVERWORLD, weight);
 	}
 
 	@Override

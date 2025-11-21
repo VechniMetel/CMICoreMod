@@ -21,11 +21,29 @@ public class ModConfiguredFeatures {
 	public static ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_TREE = registerKey("golden_tree");
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, ResourceLocation.fromNamespaceAndPath(CMI.MODID, name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, CMI.loadResource(name));
 	}
 
 	private static TreeConfiguration.TreeConfigurationBuilder createStraightBlobTree(Block logBlock, Block leavesBlock, int baseHeight, int heightRandA, int heightRandB, int radius) {
-		return new TreeConfiguration.TreeConfigurationBuilder(BlockStateProvider.simple(logBlock), new StraightTrunkPlacer(baseHeight, heightRandA, heightRandB), BlockStateProvider.simple(leavesBlock), new BlobFoliagePlacer(ConstantInt.of(radius), ConstantInt.of(0), 3), new TwoLayersFeatureSize(1, 0, 1));
+		return new TreeConfiguration.TreeConfigurationBuilder(
+				BlockStateProvider.simple(logBlock),
+				new StraightTrunkPlacer(
+						baseHeight,
+						heightRandA,
+						heightRandB
+				),
+				BlockStateProvider.simple(leavesBlock),
+				new BlobFoliagePlacer(
+						ConstantInt.of(radius),
+						ConstantInt.of(0),
+						3
+				),
+				new TwoLayersFeatureSize(
+						1,
+						0,
+						1
+				)
+		);
 	}
 
 	private static TreeConfiguration.TreeConfigurationBuilder createGold() {

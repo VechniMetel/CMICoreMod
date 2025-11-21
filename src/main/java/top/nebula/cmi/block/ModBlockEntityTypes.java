@@ -29,6 +29,13 @@ public class ModBlockEntityTypes {
 		WATER_PUMP = register("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);
 	}
 
+	/**
+	 * 注册方块实体类型
+	 *
+	 * @param id     注册id
+	 * @param entity 方块实体类
+	 * @param block  方块
+	 */
 	private static <T extends BlockEntity> Supplier<BlockEntityType<T>> register(
 			String id,
 			BlockEntityType.BlockEntitySupplier<T> entity,

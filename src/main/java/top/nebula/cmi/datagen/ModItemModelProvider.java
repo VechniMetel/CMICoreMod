@@ -25,8 +25,8 @@ public class ModItemModelProvider extends ItemModelProvider {
 	private ItemModelBuilder simpleItem(Supplier<Item> item) {
 		String getItemKey = BuiltInRegistries.ITEM.getKey(item.get()).toString();
 		String getItemPath = BuiltInRegistries.ITEM.getKey(item.get()).getPath();
-		ResourceLocation texture = ResourceLocation.fromNamespaceAndPath(CMI.MODID, "item/" + getItemPath);
-		ResourceLocation parent = ResourceLocation.fromNamespaceAndPath("minecraft", "item/generated");
+		ResourceLocation texture = CMI.loadResource("item/" + getItemPath);
+		ResourceLocation parent = ResourceLocation.withDefaultNamespace("item/generated");
 
 		return withExistingParent(getItemKey, parent)
 				.texture("layer0", texture);

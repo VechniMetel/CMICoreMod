@@ -54,6 +54,6 @@ public class ModBiomes {
 	}
 
 	private static ResourceKey<Biome> register(String name) {
-		return ResourceKey.create(Registries.BIOME, ResourceLocation.fromNamespaceAndPath(CMI.MODID, name));
+		return ResourceKey.create(Registries.BIOME, CMI.loadResource(name));
 	}
 }
