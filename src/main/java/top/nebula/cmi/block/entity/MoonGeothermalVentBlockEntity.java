@@ -2,11 +2,9 @@ package top.nebula.cmi.block.entity;
 
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
-import com.github.alexmodguy.alexscaves.server.misc.ACSoundRegistry;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -52,18 +50,8 @@ public class MoonGeothermalVentBlockEntity extends BlockEntity {
 		);
 		if (entity.soundTime-- <= 0) {
 			entity.soundTime = level.getRandom().nextInt(20) + 30;
-			boolean underwater = !state.getFluidState()
-					.isEmpty() || !level.getBlockState(pos.above()).getFluidState().isEmpty();
-			level.playLocalSound(
-					(double) pos.getX() + 0.5D,
-					(double) pos.getY() + 0.5D,
-					(double) pos.getZ() + 0.5D,
-					underwater ? ACSoundRegistry.GEOTHERMAL_VENT_BUBBLE_UNDERWATER.get() :
-							ACSoundRegistry.GEOTHERMAL_VENT_BUBBLE.get(),
-					SoundSource.BLOCKS, underwater ? 2.5F : 1.5F,
-					level.random.nextFloat() * 0.4F + 0.8F,
-					false
-			);
+			boolean underwater = !state.getFluidState().isEmpty()
+					|| !level.getBlockState(pos.above()).getFluidState().isEmpty();
 		}
 	}
 }
