@@ -7,7 +7,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
 public class GetDateModifyTitle {
@@ -21,8 +21,8 @@ public class GetDateModifyTitle {
 
 	@SubscribeEvent
 	public static void onClientSetup(FMLClientSetupEvent event) {
-		int month = LocalDate.now().getMonthValue();
-		int day = LocalDate.now().getDayOfMonth();
+		int month = LocalDateTime.now().getMonthValue();
+		int day = LocalDateTime.now().getDayOfMonth();
 
 		event.enqueueWork(() -> {
 			if (PlatformWrapper.isClientEnvironment()) {
