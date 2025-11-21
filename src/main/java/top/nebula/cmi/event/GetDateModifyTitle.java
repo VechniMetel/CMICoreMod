@@ -20,7 +20,7 @@ public class GetDateModifyTitle {
 	}
 
 	@SubscribeEvent
-	private static void onClientSetup(FMLClientSetupEvent event) {
+	public static void onClientSetup(FMLClientSetupEvent event) {
 		int month = LocalDate.now().getMonthValue();
 		int day = LocalDate.now().getDayOfMonth();
 
