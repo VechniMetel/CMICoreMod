@@ -39,8 +39,8 @@ public class ModItems {
 
 		NUCLEAR_MECHANISM = ITEMS.register("nuclear_mechanism", NuclearMechanism::new);
 
-		MOON_GEO = ITEMS.register("moon_geothermal_vent", () -> {
-			return new BlockItem(ModBlocks.MOON_GEO.get(), new Item.Properties());
+		MOON_GEO = ITEMS.register("mars_geothermal_vent", () -> {
+			return new BlockItem(ModBlocks.MARS_GEO.get(), new Item.Properties());
 		});
 		MERCURY_GEO = ITEMS.register("mercury_geothermal_vent", () -> {
 			return new BlockItem(ModBlocks.MERCURY_GEO.get(), new Item.Properties());

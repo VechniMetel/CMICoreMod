@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 public class ModBlockEntityTypes {
 	private static final DeferredRegister<BlockEntityType<?>> BLOCK_ENTITIES;
 	public static final Supplier<BlockEntityType<TestGravelBlockEntity>> TEST_GRAVEL;
-	public static final Supplier<BlockEntityType<MoonGeothermalVentBlockEntity>> MOON_GEO;
+	public static final Supplier<BlockEntityType<MarsGeothermalVentBlockEntity>> MARS_GEO;
 	public static final Supplier<BlockEntityType<MercuryGeothermalVentBlockEntity>> MERCURY_GEO;
 	public static final Supplier<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP;
 
@@ -23,7 +23,7 @@ public class ModBlockEntityTypes {
 
 		TEST_GRAVEL = register("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL);
 
-		MOON_GEO = register("moon_geothermal_vent", MoonGeothermalVentBlockEntity::new, ModBlocks.MOON_GEO);
+		MARS_GEO = register("mars_geothermal_vent", MarsGeothermalVentBlockEntity::new, ModBlocks.MARS_GEO);
 		MERCURY_GEO = register("mercury_geothermal_vent", MercuryGeothermalVentBlockEntity::new, ModBlocks.MERCURY_GEO);
 
 		WATER_PUMP = register("water_pump", WaterPumpBlockEntity::new, ModBlocks.WATER_PUMP);

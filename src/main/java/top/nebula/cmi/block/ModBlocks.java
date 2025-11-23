@@ -2,7 +2,7 @@ package top.nebula.cmi.block;
 
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.block.custom.MercuryGeothermalVentBlock;
-import top.nebula.cmi.block.custom.MoonGeothermalVentBlock;
+import top.nebula.cmi.block.custom.MarsGeothermalVentBlock;
 import top.nebula.cmi.block.custom.TestGravelBlock;
 import top.nebula.cmi.block.custom.WaterPumpBlock;
 import top.nebula.cmi.worldgen.ModConfiguredFeatures;
@@ -29,7 +29,7 @@ public class ModBlocks {
 
 	public static final Supplier<Block> GOLD_SAPLING;
 	public static final Supplier<Block> WATER_PUMP;
-	public static final Supplier<Block> MOON_GEO;
+	public static final Supplier<Block> MARS_GEO;
 	public static final Supplier<Block> MERCURY_GEO;
 	public static final Supplier<Block> TEST_GRAVEL;
 
@@ -58,7 +58,7 @@ public class ModBlocks {
 			);
 		});
 		WATER_PUMP = BLOCKS.register("water_pump", WaterPumpBlock::new);
-		MOON_GEO = BLOCKS.register("moon_geothermal_vent", MoonGeothermalVentBlock::new);
+		MARS_GEO = BLOCKS.register("mars_geothermal_vent", MarsGeothermalVentBlock::new);
 		MERCURY_GEO = BLOCKS.register("mercury_geothermal_vent", MercuryGeothermalVentBlock::new);
 	}
 }

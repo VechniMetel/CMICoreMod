@@ -24,13 +24,13 @@ import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.entity.MoonGeothermalVentBlockEntity;
+import top.nebula.cmi.block.entity.MarsGeothermalVentBlockEntity;
 
-public class MoonGeothermalVentBlock extends BaseEntityBlock {
+public class MarsGeothermalVentBlock extends BaseEntityBlock {
 	public static final IntegerProperty SMOKE_TYPE = IntegerProperty.create("smoke_type", 0, 3);
 	public static final BooleanProperty SPAWNING_PARTICLES = BooleanProperty.create("spawning_particles");
 
-	public MoonGeothermalVentBlock() {
+	public MarsGeothermalVentBlock() {
 		super(BlockBehaviour.Properties.of()
 				.mapColor(MapColor.STONE)
 				.requiresCorrectToolForDrops()
@@ -60,7 +60,7 @@ public class MoonGeothermalVentBlock extends BaseEntityBlock {
 
 	public int getSmokeType(LevelAccessor level, BlockPos pos) {
 		BlockState state = level.getBlockState(pos.below());
-		if (state.getBlock() instanceof MoonGeothermalVentBlock) {
+		if (state.getBlock() instanceof MarsGeothermalVentBlock) {
 			return state.getValue(SMOKE_TYPE);
 		}
 		if (state.getFluidState().getFluidType() == Fluids.LAVA.getFluidType()) {
@@ -86,8 +86,8 @@ public class MoonGeothermalVentBlock extends BaseEntityBlock {
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
 		if (level.isClientSide) {
 			return state.getValue(SMOKE_TYPE) > 0 && state.getValue(SPAWNING_PARTICLES) ?
-					createTickerHelper(type, ModBlockEntityTypes.MOON_GEO.get(),
-							MoonGeothermalVentBlockEntity::particleTick) : null;
+					createTickerHelper(type, ModBlockEntityTypes.MARS_GEO.get(),
+							MarsGeothermalVentBlockEntity::particleTick) : null;
 		} else {
 			return null;
 		}
@@ -100,6 +100,6 @@ public class MoonGeothermalVentBlock extends BaseEntityBlock {
 	@Nullable
 	@Override
 	public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-		return new MoonGeothermalVentBlockEntity(pos, state);
+		return new MarsGeothermalVentBlockEntity(pos, state);
 	}
 }
