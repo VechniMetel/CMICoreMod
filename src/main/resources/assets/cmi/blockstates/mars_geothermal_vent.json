@@ -1,7 +1,7 @@
 {
 	"variants": {
 		"": {
-			"model": "cmi:block/moon_geothermal_vent"
+			"model": "cmi:block/mars_geothermal_vent"
 		}
 	}
 }
