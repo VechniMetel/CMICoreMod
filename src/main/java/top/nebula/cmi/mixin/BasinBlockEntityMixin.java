@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(BasinBlockEntity.class)
+@Mixin(value = BasinBlockEntity.class, remap = false)
 public abstract class BasinBlockEntityMixin {
 	@Inject(method = "getHeatLevelOf", at = @At("HEAD"), remap = false, cancellable = true)
 	private static void getHeatLevelOf(BlockState state, CallbackInfoReturnable<BlazeBurnerBlock.HeatLevel> cir) {

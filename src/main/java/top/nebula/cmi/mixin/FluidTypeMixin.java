@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FluidType.class)
+@Mixin(value = FluidType.class, remap = false)
 public abstract class FluidTypeMixin {
 	@Shadow(remap = false)
 	public abstract String getDescriptionId();

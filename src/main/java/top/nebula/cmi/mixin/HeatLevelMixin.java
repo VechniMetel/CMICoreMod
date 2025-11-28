@@ -7,7 +7,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Mixin(BlazeBurnerBlock.HeatLevel.class)
+@Mixin(value = BlazeBurnerBlock.HeatLevel.class, remap = false)
 public abstract class HeatLevelMixin {
 
 	@Shadow

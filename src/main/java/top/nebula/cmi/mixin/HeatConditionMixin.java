@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Mixin(HeatCondition.class)
+@Mixin(value = HeatCondition.class, remap = false)
 public abstract class HeatConditionMixin {
 	@Shadow
 	@Final

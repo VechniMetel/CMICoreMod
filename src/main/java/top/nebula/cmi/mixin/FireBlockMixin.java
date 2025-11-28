@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(FireBlock.class)
+@Mixin(value = FireBlock.class, remap = false)
 public class FireBlockMixin {
 	@Inject(method = "onPlace", at = @At("RETURN"))
 	private void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving, CallbackInfo ci) {

@@ -13,7 +13,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(AnimatedBlazeBurner.class)
+@Mixin(value = AnimatedBlazeBurner.class, remap = false)
 public abstract class AnimatedBlazeBurnerMixin extends AnimatedKinetics {
 	@Shadow
 	private BlazeBurnerBlock.HeatLevel heatLevel;
