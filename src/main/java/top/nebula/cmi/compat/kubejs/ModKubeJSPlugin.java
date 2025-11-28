@@ -1,0 +1,19 @@
+package top.nebula.cmi.compat.kubejs;
+
+import dev.latvian.mods.kubejs.KubeJSPlugin;
+import dev.latvian.mods.kubejs.script.BindingsEvent;
+import top.nebula.cmi.CMI;
+import top.nebula.cmi.util.ModLang;
+import top.nebula.cmi.util.MultiblockStructureBuilder;
+import top.nebula.cmi.util.PropertyImmutableMap;
+
+public class ModKubeJSPlugin extends KubeJSPlugin {
+	public void registerBindings(BindingsEvent event) {
+		super.registerBindings(event);
+
+		event.add("CMI", CMI.class);
+		event.add("MultiblockStructureBuilder", MultiblockStructureBuilder.class);
+		event.add("PropertyImmutableMap", PropertyImmutableMap.class);
+		event.add("ModLang", ModLang.class);
+	}
+}

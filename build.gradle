@@ -189,6 +189,8 @@ dependencies {
     implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
     // Rhino
     implementation fg.deobf("curse.maven:rhino-416294:6186971")
+    // Jade
+    implementation fg.deobf("curse.maven:jade-324717:6106101")
     // KubeJS
     implementation fg.deobf("curse.maven:kubejs-238086:5853326")
     // TerraBlender
