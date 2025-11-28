@@ -11,9 +11,9 @@ public class ModKubeJSPlugin extends KubeJSPlugin {
 	public void registerBindings(BindingsEvent event) {
 		super.registerBindings(event);
 
-		event.add("CMI", CMI.class);
+		event.add("CMICore", CMI.class);
 		event.add("MultiblockStructureBuilder", MultiblockStructureBuilder.class);
 		event.add("PropertyImmutableMap", PropertyImmutableMap.class);
-		event.add("ModLang", ModLang.class);
+		event.add("CMIModLang", ModLang.class);
 	}
 }
