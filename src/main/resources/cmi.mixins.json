@@ -11,7 +11,8 @@
 		"FireBlockMixin",
 		"FluidTypeMixin",
 		"HeatConditionMixin",
-		"HeatLevelMixin"
+		"HeatLevelMixin",
+		"ClassFilterMixin"
 	],
 	"client": [
 	],
