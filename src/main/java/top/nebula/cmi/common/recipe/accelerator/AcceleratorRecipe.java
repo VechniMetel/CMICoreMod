@@ -1,12 +1,9 @@
-package top.nebula.cmi.common.recipe.accelerator;
+package top.nebula.cmi.common.recipe;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.GsonHelper;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -20,44 +17,20 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import top.nebula.cmi.CMI;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 public class AcceleratorRecipe implements Recipe<SimpleContainer> {
+
 	private final ResourceLocation id;
 	private final Ingredient input;
 	private final Block targetBlock;
-	private final List<OutputEntry> outputs;
+	private final Block outputBlock;
 
-	// 单个输出项(包含方块 + 概率)
-	public static class OutputEntry {
-		public final Block block;
-		public final float chance;
-
-		public OutputEntry(Block block, float chance) {
-			this.block = block;
-			this.chance = chance;
-		}
-	}
-
-	public AcceleratorRecipe(ResourceLocation id, Ingredient input, Block targetBlock, List<OutputEntry> outputs) {
+	public AcceleratorRecipe(ResourceLocation id, Ingredient input, Block targetBlock, Block outputBlock) {
 		this.id = id;
 		this.input = input;
 		this.targetBlock = targetBlock;
-		this.outputs = outputs;
-	}
-
-	public Ingredient getInput() {
-		return input;
-	}
-
-	public Block getTargetBlock() {
-		return targetBlock;
-	}
-
-	public List<OutputEntry> getOutputs() {
-		return outputs;
+		this.outputBlock = outputBlock;
 	}
 
 	@Override
@@ -67,11 +40,11 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 
 	@Override
 	public @NotNull ItemStack assemble(@NotNull SimpleContainer container, @NotNull RegistryAccess access) {
-		return ItemStack.EMPTY;
+		return ItemStack.EMPTY; // 不产生物品
 	}
 
 	@Override
-	public boolean canCraftInDimensions(int w, int h) {
+	public boolean canCraftInDimensions(int width, int height) {
 		return true;
 	}
 
@@ -95,87 +68,53 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 		return Type.INSTANCE;
 	}
 
-	// RecipeType
+	public Ingredient getInput() {
+		return input;
+	}
+
+	public Block getTargetBlock() {
+		return targetBlock;
+	}
+
+	public Block getOutputBlock() {
+		return outputBlock;
+	}
+
 	public static class Type implements RecipeType<AcceleratorRecipe> {
+		private Type() {
+		}
+
 		public static final Type INSTANCE = new Type();
 		public static final String ID = "accelerator";
 	}
 
-	// Serializer
 	public static class Serializer implements RecipeSerializer<AcceleratorRecipe> {
-
 		public static final Serializer INSTANCE = new Serializer();
 		public static final ResourceLocation ID =
 				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "accelerator");
 
 		@Override
 		public @NotNull AcceleratorRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
+			Ingredient input = Ingredient.fromJson(json.getAsJsonObject("input"));
 
-			// input 可为 object 或 array
-			Ingredient input;
-			if (json.get("input").isJsonArray()) {
-				input = Ingredient.fromJson(json.getAsJsonArray("input"));
-			} else {
-				input = Ingredient.fromJson(json.getAsJsonObject("input"));
-			}
-
-			// target
 			String targetName = json.get("target").getAsString();
 			Block targetBlock = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(targetName));
 			Objects.requireNonNull(targetBlock, "Unknown target block: " + targetName);
 
-			// output: [{ id:"xxx", chance:0.5 }, ...]
-			List<OutputEntry> outputs = new ArrayList<>();
-			JsonArray arr = GsonHelper.getAsJsonArray(json, "output");
+			String outputName = json.get("output").getAsString();
+			Block outputBlock = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(outputName));
+			Objects.requireNonNull(outputBlock, "Unknown output block: " + outputName);
 
-			for (JsonElement el : arr) {
-				JsonObject obj = el.getAsJsonObject();
-				String blockID = obj.get("id").getAsString();
-				float chance = GsonHelper.getAsFloat(obj, "chance", 1.0f);
-
-				Block b = ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse(blockID));
-				Objects.requireNonNull(b, "Unknown output block: " + blockID);
-
-				outputs.add(new OutputEntry(b, chance));
-			}
-
-			return new AcceleratorRecipe(id, input, targetBlock, outputs);
+			return new AcceleratorRecipe(id, input, targetBlock, outputBlock);
 		}
 
 
 		@Override
 		public @Nullable AcceleratorRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buf) {
 			Ingredient input = Ingredient.fromNetwork(buf);
-
-			Block target = ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
-			Objects.requireNonNull(target);
-
-			// 读取输出数量
-			int size = buf.readInt();
-			List<OutputEntry> outputs = new ArrayList<>();
-
-			for (int i = 0; i < size; i++) {
-				Block block = ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
-				float chance = buf.readFloat();
-				outputs.add(new OutputEntry(block, chance));
-			}
-
-			return new AcceleratorRecipe(id, input, target, outputs);
-		}
-
-		@Override
-		public void toNetwork(@NotNull FriendlyByteBuf buf, @NotNull AcceleratorRecipe recipe) {
-			recipe.input.toNetwork(buf);
-
-			// target
-			buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(recipe.targetBlock)));
-
-			// outputs
-			buf.writeInt(recipe.outputs.size());
-			for (OutputEntry e : recipe.outputs) {
-				buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(e.block)));
-				buf.writeFloat(e.chance);
-			}
+			Block targetBlock = ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
+			Block outputBlock = ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
+			return new AcceleratorRecipe(id, input, targetBlock, outputBlock);
 		}
 	}
 }

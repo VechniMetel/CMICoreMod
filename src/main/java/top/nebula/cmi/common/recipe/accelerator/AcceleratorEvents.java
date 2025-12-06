@@ -12,6 +12,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.nebula.cmi.CMI;
+import top.nebula.cmi.common.recipe.AcceleratorRecipe;
 
 @SuppressWarnings("ALL")
 @Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -20,59 +21,27 @@ public class AcceleratorEvents {
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 		Level level = event.getLevel();
 		Player player = event.getEntity();
-		ItemStack item = player.getItemInHand(event.getHand());
+		ItemStack heldItem = player.getItemInHand(event.getHand());
 		BlockPos pos = event.getPos();
 
-		if (level.isClientSide())
-			return;
+		if (level.isClientSide()) return;
+
 
 		SimpleContainer container = new SimpleContainer(1);
-		container.setItem(0, item);
+		container.setItem(0, heldItem);
 
-		level.getRecipeManager()
-				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
-				.ifPresent((recipe) -> {
-					if (level.getBlockState(pos).getBlock() != recipe.getTargetBlock()) {
-						return;
-					}
+		level.getRecipeManager().getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
+				.ifPresent(recipe -> {
+					if (level.getBlockState(pos).getBlock() == recipe.getTargetBlock()) {
+						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
 
-					Block chosen = null;
-					float roll = level.random.nextFloat();
-					float sum = 0;
-
-					for (AcceleratorRecipe.OutputEntry o : recipe.getOutputs()) {
-						sum += o.chance;
-						if (roll <= sum) {
-							chosen = o.block;
-							break;
+						if (!player.isCreative()) {
+							heldItem.shrink(1);
 						}
-					}
 
-					if (!player.isCreative()) {
-						item.shrink(1);
+						event.setCanceled(true);
+						event.setCancellationResult(InteractionResult.SUCCESS);
 					}
-
-					if (chosen != null) {
-						level.destroyBlock(pos, false);
-						level.setBlock(pos, chosen.defaultBlockState(), 3);
-					}
-
-					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
 				});
-	}
-
-	// 按概率返回输出方块
-	private static Block chooseOutput(AcceleratorRecipe recipe, RandomSource rand) {
-		float roll = rand.nextFloat();
-		float cumulative = 0;
-
-		for (AcceleratorRecipe.OutputEntry entry : recipe.getOutputs()) {
-			cumulative += entry.chance;
-			if (roll <= cumulative) {
-				return entry.block;
-			}
-		}
-		return null;
 	}
 }
