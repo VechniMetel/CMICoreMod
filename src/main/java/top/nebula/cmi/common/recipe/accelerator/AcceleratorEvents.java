@@ -30,8 +30,9 @@ public class AcceleratorEvents {
 		SimpleContainer container = new SimpleContainer(1);
 		container.setItem(0, heldItem);
 
-		level.getRecipeManager().getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
-				.ifPresent(recipe -> {
+		level.getRecipeManager()
+				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
+				.ifPresent((recipe) -> {
 					if (level.getBlockState(pos).getBlock() == recipe.getTargetBlock()) {
 						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
 
