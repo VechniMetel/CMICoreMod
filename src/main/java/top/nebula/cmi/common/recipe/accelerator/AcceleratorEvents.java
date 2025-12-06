@@ -21,11 +21,11 @@ public class AcceleratorEvents {
 	public static void onRightClickBlock(PlayerInteractEvent.RightClickBlock event) {
 		Level level = event.getLevel();
 		Player player = event.getEntity();
-		ItemStack heldItem = player.getItemInHand(event.getHand());
+		ItemStack item = player.getItemInHand(event.getHand());
 		BlockPos pos = event.getPos();
 
 		SimpleContainer container = new SimpleContainer(1);
-		container.setItem(0, heldItem);
+		container.setItem(0, item);
 
 		if (level.isClientSide()) {
 			return;
@@ -39,7 +39,7 @@ public class AcceleratorEvents {
 						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
 
 						if (!player.isCreative()) {
-							heldItem.shrink(1);
+							item.shrink(1);
 						}
 
 						event.setCanceled(true);
