@@ -24,11 +24,12 @@ public class AcceleratorEvents {
 		ItemStack heldItem = player.getItemInHand(event.getHand());
 		BlockPos pos = event.getPos();
 
-		if (level.isClientSide()) return;
-
-
 		SimpleContainer container = new SimpleContainer(1);
 		container.setItem(0, heldItem);
+
+		if (level.isClientSide()) {
+			return;
+		}
 
 		level.getRecipeManager()
 				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
