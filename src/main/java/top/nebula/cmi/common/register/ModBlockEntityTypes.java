@@ -1,4 +1,4 @@
-package top.nebula.cmi.common.block;
+package top.nebula.cmi.common.register;
 
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -7,11 +7,7 @@ import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.block.entity.*;
-import top.nebula.cmi.common.block.entity.MarsGeothermalVentBlockEntity;
-import top.nebula.cmi.common.block.entity.MercuryGeothermalVentBlockEntity;
-import top.nebula.cmi.common.block.entity.TestGravelBlockEntity;
-import top.nebula.cmi.common.block.entity.WaterPumpBlockEntity;
+import top.nebula.cmi.common.block.entity.*;
 
 import java.util.function.Supplier;
 

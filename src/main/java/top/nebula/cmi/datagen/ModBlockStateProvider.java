@@ -1,7 +1,7 @@
 package top.nebula.cmi.datagen;
 
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.common.block.ModBlocks;
+import top.nebula.cmi.common.register.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.client.model.generators.BlockStateProvider;

@@ -22,7 +22,7 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.register.ModBlockEntityTypes;
 import top.nebula.cmi.common.block.entity.MercuryGeothermalVentBlockEntity;
 
 public class MercuryGeothermalVentBlock extends BaseEntityBlock {

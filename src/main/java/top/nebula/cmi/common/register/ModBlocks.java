@@ -1,4 +1,4 @@
-package top.nebula.cmi.common.block;
+package top.nebula.cmi.common.register;
 
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.block.custom.MercuryGeothermalVentBlock;

@@ -10,7 +10,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.block.custom.TestGravelBlock;
-import top.nebula.cmi.common.item.ModItems;
+import top.nebula.cmi.common.register.ModItems;
 
 public class TestGravelBlockEntity extends BrushableBlockEntity {
 	public TestGravelBlockEntity(BlockPos pos, BlockState state) {
