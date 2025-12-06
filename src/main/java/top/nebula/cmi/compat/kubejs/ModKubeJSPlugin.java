@@ -7,6 +7,8 @@ import top.nebula.cmi.util.ModLang;
 import top.nebula.cmi.util.MultiblockStructureBuilder;
 import top.nebula.cmi.util.PropertyImmutableMap;
 
+import java.time.LocalDateTime;
+
 public class ModKubeJSPlugin extends KubeJSPlugin {
 	public void registerBindings(BindingsEvent event) {
 		super.registerBindings(event);
@@ -15,5 +17,6 @@ public class ModKubeJSPlugin extends KubeJSPlugin {
 		event.add("MultiblockStructureBuilder", MultiblockStructureBuilder.class);
 		event.add("PropertyImmutableMap", PropertyImmutableMap.class);
 		event.add("CMIModLang", ModLang.class);
+		event.add("LocalDateTime", LocalDateTime.class);
 	}
 }
