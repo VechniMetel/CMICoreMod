@@ -1,4 +1,4 @@
-package top.nebula.cmi.common.recipe;
+package top.nebula.cmi.common.recipe.accelerator;
 
 import com.google.gson.JsonObject;
 import net.minecraft.core.RegistryAccess;
@@ -40,7 +40,7 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 
 	@Override
 	public @NotNull ItemStack assemble(@NotNull SimpleContainer container, @NotNull RegistryAccess access) {
-		return ItemStack.EMPTY; // 不产生物品
+		return ItemStack.EMPTY;
 	}
 
 	@Override
@@ -116,5 +116,13 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 			Block outputBlock = ForgeRegistries.BLOCKS.getValue(buf.readResourceLocation());
 			return new AcceleratorRecipe(id, input, targetBlock, outputBlock);
 		}
+
+		@Override
+		public void toNetwork(@NotNull FriendlyByteBuf buf, @NotNull AcceleratorRecipe recipe) {
+			recipe.input.toNetwork(buf);
+			buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(recipe.targetBlock)));
+			buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(recipe.outputBlock)));
+		}
+
 	}
 }
