@@ -35,6 +35,7 @@ public class AcceleratorEvents {
 				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
 				.ifPresent((recipe) -> {
 					if (level.getBlockState(pos).getBlock() == recipe.getTargetBlock()) {
+						level.destroyBlock(pos, false);
 						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
 
 						if (!player.isCreative()) {
