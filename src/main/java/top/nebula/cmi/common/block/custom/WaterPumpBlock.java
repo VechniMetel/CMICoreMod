@@ -1,4 +1,4 @@
-package top.nebula.cmi.block.custom;
+package top.nebula.cmi.common.block.custom;
 
 import com.simibubi.create.AllTags;
 import com.simibubi.create.foundation.block.IBE;
@@ -13,9 +13,9 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.ModBlocks;
-import top.nebula.cmi.block.entity.WaterPumpBlockEntity;
+import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.block.ModBlocks;
+import top.nebula.cmi.common.block.entity.WaterPumpBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 

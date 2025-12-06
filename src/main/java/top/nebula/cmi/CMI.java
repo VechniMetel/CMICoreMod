@@ -2,9 +2,9 @@ package top.nebula.cmi;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
-import top.nebula.cmi.block.ModBlocks;
-import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.item.ModItems;
+import top.nebula.cmi.common.block.ModBlocks;
+import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.item.ModItems;
 import top.nebula.cmi.worldgen.region.ModOverworldRegion;
 import top.nebula.cmi.worldgen.surfacerule.ModSurfaceRuleData;
 import net.minecraftforge.fml.common.Mod;

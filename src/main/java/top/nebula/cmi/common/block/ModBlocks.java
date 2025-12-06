@@ -1,10 +1,10 @@
-package top.nebula.cmi.block;
+package top.nebula.cmi.common.block;
 
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.block.custom.MercuryGeothermalVentBlock;
-import top.nebula.cmi.block.custom.MarsGeothermalVentBlock;
-import top.nebula.cmi.block.custom.TestGravelBlock;
-import top.nebula.cmi.block.custom.WaterPumpBlock;
+import top.nebula.cmi.common.block.custom.MercuryGeothermalVentBlock;
+import top.nebula.cmi.common.block.custom.MarsGeothermalVentBlock;
+import top.nebula.cmi.common.block.custom.TestGravelBlock;
+import top.nebula.cmi.common.block.custom.WaterPumpBlock;
 import top.nebula.cmi.worldgen.ModConfiguredFeatures;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.util.RandomSource;

@@ -1,8 +1,8 @@
-package top.nebula.cmi.item;
+package top.nebula.cmi.common.item;
 
 import net.minecraft.world.item.BrushItem;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.block.ModBlocks;
+import top.nebula.cmi.common.block.ModBlocks;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;

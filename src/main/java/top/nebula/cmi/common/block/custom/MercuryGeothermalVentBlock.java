@@ -1,4 +1,4 @@
-package top.nebula.cmi.block.custom;
+package top.nebula.cmi.common.block.custom;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
@@ -22,8 +22,8 @@ import net.minecraft.world.level.material.Fluids;
 import net.minecraft.world.level.material.MapColor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.entity.MercuryGeothermalVentBlockEntity;
+import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.block.entity.MercuryGeothermalVentBlockEntity;
 
 public class MercuryGeothermalVentBlock extends BaseEntityBlock {
 	public static final IntegerProperty SMOKE_TYPE = IntegerProperty.create("smoke_type", 0, 3);

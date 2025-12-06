@@ -1,4 +1,4 @@
-package top.nebula.cmi.item;
+package top.nebula.cmi.common.item;
 
 import mekanism.api.radiation.capability.IRadiationShielding;
 import net.minecraft.core.Direction;

@@ -2,7 +2,7 @@ package top.nebula.cmi.datagen;
 
 import net.minecraft.core.registries.BuiltInRegistries;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.item.ModItems;
+import top.nebula.cmi.common.item.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;

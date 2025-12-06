@@ -1,4 +1,4 @@
-package top.nebula.cmi.block.entity;
+package top.nebula.cmi.common.block.entity;
 
 import blusunrize.immersiveengineering.common.blocks.wooden.TreatedWoodStyles;
 import blusunrize.immersiveengineering.common.register.IEBlocks;
@@ -8,8 +8,8 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.ModBlocks;
+import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.block.ModBlocks;
 import top.nebula.cmi.util.ModLang;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

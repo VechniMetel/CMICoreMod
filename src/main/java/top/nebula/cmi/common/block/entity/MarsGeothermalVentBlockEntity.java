@@ -1,4 +1,4 @@
-package top.nebula.cmi.block.entity;
+package top.nebula.cmi.common.block.entity;
 
 import com.github.alexmodguy.alexscaves.AlexsCaves;
 import com.github.alexmodguy.alexscaves.client.particle.ACParticleRegistry;
@@ -9,8 +9,8 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import top.nebula.cmi.block.ModBlockEntityTypes;
-import top.nebula.cmi.block.custom.MarsGeothermalVentBlock;
+import top.nebula.cmi.common.block.ModBlockEntityTypes;
+import top.nebula.cmi.common.block.custom.MarsGeothermalVentBlock;
 
 public class MarsGeothermalVentBlockEntity extends BlockEntity {
 	private static final double PARTICLE_DIST = 120 * 120;
