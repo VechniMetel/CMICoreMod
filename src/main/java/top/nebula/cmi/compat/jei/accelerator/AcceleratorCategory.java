@@ -43,11 +43,21 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	private final IDrawable icon;
 
 	public AcceleratorCategory(IGuiHelper helper) {
-		this.background = helper.createBlankDrawable(150, 60);
+		this.background = helper.createBlankDrawable(0, 0);
 		this.icon = new DoubleItemIcon(
 				() -> ACCELERATOR_Item.get().getDefaultInstance(),
 				() -> PRECISION_MECHANISM.get().getDefaultInstance()
 		);
+	}
+
+	@Override
+	public int getWidth() {
+		return 178;
+	}
+
+	@Override
+	public int getHeight() {
+		return 72;
 	}
 
 	@Override
@@ -72,13 +82,17 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 
 	@Override
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull AcceleratorRecipe recipe, @NotNull IFocusGroup group) {
-		builder.addSlot(RecipeIngredientRole.INPUT, 21, 48)
+		builder.addSlot(RecipeIngredientRole.INPUT, 51, 5)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
 				.addIngredients(recipe.getInput());
 
+		builder.addSlot(RecipeIngredientRole.INPUT, 27, 38)
+				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+				.addItemStack(recipe.targetBlock.asItem().getDefaultInstance());
+
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 141, 48)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addItemStack(recipe.getResultItem(null));
+				.addItemStack(recipe.outputBlock.asItem().getDefaultInstance());
 	}
 
 	@Override
