@@ -6,6 +6,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -20,6 +21,7 @@ public class AcceleratorEvents {
 		Player player = event.getEntity();
 		ItemStack item = player.getItemInHand(event.getHand());
 		BlockPos pos = event.getPos();
+		BlockState state = level.getBlockState(pos);
 
 		SimpleContainer container = new SimpleContainer(1);
 		container.setItem(0, item);
@@ -31,7 +33,7 @@ public class AcceleratorEvents {
 		level.getRecipeManager()
 				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
 				.ifPresent((recipe) -> {
-					if (level.getBlockState(pos).getBlock() == recipe.getTargetBlock()) {
+					if (state.getBlock() == recipe.getTargetBlock()) {
 						// 破坏方块其实是为了粒子效果和音效
 						level.destroyBlock(pos, false);
 						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
