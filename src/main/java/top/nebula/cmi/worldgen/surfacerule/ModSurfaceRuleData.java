@@ -16,7 +16,7 @@ public class ModSurfaceRuleData {
 	private static final SurfaceRules.RuleSource ANDESITE = makeStateRule(Blocks.ANDESITE);
 	private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
 	private static final SurfaceRules.RuleSource PEAT = makeStateRule(
-			BuiltInRegistries.BLOCK.get(ResourceLocation.fromNamespaceAndPath(CMI.MODID, "peat_block")));
+			BuiltInRegistries.BLOCK.get(CMI.loadResource("peat_block")));
 
 	public static SurfaceRules.RuleSource makeRules() {
 		return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ANDESITE_CAVE), ANDESITE));

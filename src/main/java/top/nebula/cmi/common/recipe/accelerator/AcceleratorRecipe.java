@@ -20,10 +20,10 @@ import top.nebula.cmi.CMI;
 import java.util.Objects;
 
 public class AcceleratorRecipe implements Recipe<SimpleContainer> {
-	private final ResourceLocation id;
-	private final Ingredient input;
-	private final Block targetBlock;
-	private final Block outputBlock;
+	public final ResourceLocation id;
+	public final Ingredient input;
+	public final Block targetBlock;
+	public final Block outputBlock;
 
 	public AcceleratorRecipe(ResourceLocation id, Ingredient input, Block targetBlock, Block outputBlock) {
 		this.id = id;
@@ -120,6 +120,5 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 			buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(recipe.targetBlock)));
 			buf.writeResourceLocation(Objects.requireNonNull(ForgeRegistries.BLOCKS.getKey(recipe.outputBlock)));
 		}
-
 	}
 }

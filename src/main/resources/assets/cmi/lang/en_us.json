@@ -7,5 +7,6 @@
 	"cmi.tooltip.water_pump.functional": "Water Pump Functional",
 	"cmi.tooltip.water_pump.non_functional": "Water Pump Not Functional",
 	"multiblock.building.cmi.water_pump": "Multiblock Water Pump Build",
-	"biome.cmi.andesite_cave": "Andesite Cave"
+	"biome.cmi.andesite_cave": "Andesite Cave",
+	"jei.category.cmi.accelerator": "Mechanism Accelerator"
 }

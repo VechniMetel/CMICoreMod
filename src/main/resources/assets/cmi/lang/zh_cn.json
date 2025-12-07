@@ -7,5 +7,6 @@
 	"cmi.tooltip.water_pump.functional": "水井工作正常",
 	"cmi.tooltip.water_pump.non_functional": "水井关键结构缺失",
 	"multiblock.building.cmi.water_pump": "多方块水井搭建",
-	"biome.cmi.andesite_cave": "安山岩洞窟"
+	"biome.cmi.andesite_cave": "安山岩洞窟",
+	"jei.category.cmi.accelerator": "构件催化"
 }

@@ -1,0 +1,104 @@
+package top.nebula.cmi.compat.jei.accelerator;
+
+import com.mojang.blaze3d.vertex.PoseStack;
+import com.mojang.math.Axis;
+import com.simibubi.create.compat.jei.DoubleItemIcon;
+import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
+import com.simibubi.create.foundation.gui.AllGuiTextures;
+import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
+import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
+import mezz.jei.api.helpers.IGuiHelper;
+import mezz.jei.api.recipe.IFocusGroup;
+import mezz.jei.api.recipe.RecipeIngredientRole;
+import mezz.jei.api.recipe.RecipeType;
+import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.Item;
+import net.minecraft.world.level.block.Block;
+import net.minecraftforge.common.util.Lazy;
+import org.jetbrains.annotations.NotNull;
+import top.nebula.cmi.CMI;
+import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
+
+public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
+	public static final Lazy<Item> ACCELERATOR_Item = Lazy.of(() -> {
+		return BuiltInRegistries.ITEM.get(CMI.loadResource("accelerator"));
+	});
+	public static final Lazy<Block> ACCELERATOR_BLOCK = Lazy.of(() -> {
+		return BuiltInRegistries.BLOCK.get(CMI.loadResource("accelerator"));
+	});
+	private static final Lazy<Item> PRECISION_MECHANISM = Lazy.of(() -> {
+		return BuiltInRegistries.ITEM.get(ResourceLocation.parse("create:precision_mechanism"));
+	});
+	public static final ResourceLocation UID = CMI.loadResource("accelerator");
+	public static final RecipeType<AcceleratorRecipe> ACCELERATOR_TYPE =
+			RecipeType.create(CMI.MODID, "accelerator", AcceleratorRecipe.class);
+
+	private final IDrawable background;
+	private final IDrawable icon;
+
+	public AcceleratorCategory(IGuiHelper helper) {
+		this.background = helper.createBlankDrawable(150, 60);
+		this.icon = new DoubleItemIcon(
+				() -> ACCELERATOR_Item.get().getDefaultInstance(),
+				() -> PRECISION_MECHANISM.get().getDefaultInstance()
+		);
+	}
+
+	@Override
+	public @NotNull RecipeType<AcceleratorRecipe> getRecipeType() {
+		return ACCELERATOR_TYPE;
+	}
+
+	@Override
+	public @NotNull Component getTitle() {
+		return Component.translatable("jei.category.cmi.accelerator");
+	}
+
+	@Override
+	public @NotNull IDrawable getBackground() {
+		return this.background;
+	}
+
+	@Override
+	public @NotNull IDrawable getIcon() {
+		return this.icon;
+	}
+
+	@Override
+	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull AcceleratorRecipe recipe, @NotNull IFocusGroup group) {
+		builder.addSlot(RecipeIngredientRole.INPUT, 21, 48)
+				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+				.addIngredients(recipe.getInput());
+
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 141, 48)
+				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+				.addItemStack(recipe.getResultItem(null));
+	}
+
+	@Override
+	public void draw(@NotNull AcceleratorRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+		AllGuiTextures.JEI_SHADOW.render(graphics, 62, 47);
+		AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 74, 10);
+
+		PoseStack pose = graphics.pose();
+
+		pose.pushPose();
+		pose.translate(74, 51, 100);
+		pose.mulPose(Axis.XP.rotationDegrees(-15.5f));
+		pose.mulPose(Axis.YP.rotationDegrees(22.5f));
+
+		AnimatedKinetics.defaultBlockElement(ACCELERATOR_BLOCK.get().defaultBlockState())
+				.rotateBlock(0, 180, 0)
+				.atLocal(0.0, 0.0, 0.0)
+				.scale(24.0)
+				.render(graphics);
+
+		pose.popPose();
+	}
+}
