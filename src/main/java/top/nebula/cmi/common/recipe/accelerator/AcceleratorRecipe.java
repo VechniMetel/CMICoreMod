@@ -20,7 +20,6 @@ import top.nebula.cmi.CMI;
 import java.util.Objects;
 
 public class AcceleratorRecipe implements Recipe<SimpleContainer> {
-
 	private final ResourceLocation id;
 	private final Ingredient input;
 	private final Block targetBlock;
@@ -90,8 +89,7 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 
 	public static class Serializer implements RecipeSerializer<AcceleratorRecipe> {
 		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID =
-				ResourceLocation.fromNamespaceAndPath(CMI.MODID, "accelerator");
+		public static final ResourceLocation ID = CMI.loadResource("accelerator");
 
 		@Override
 		public @NotNull AcceleratorRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
@@ -107,7 +105,6 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 
 			return new AcceleratorRecipe(id, input, targetBlock, outputBlock);
 		}
-
 
 		@Override
 		public @Nullable AcceleratorRecipe fromNetwork(@NotNull ResourceLocation id, @NotNull FriendlyByteBuf buf) {

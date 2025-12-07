@@ -32,6 +32,7 @@ public class AcceleratorEvents {
 				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
 				.ifPresent((recipe) -> {
 					if (level.getBlockState(pos).getBlock() == recipe.getTargetBlock()) {
+						// 破坏方块其实是为了粒子效果和音效
 						level.destroyBlock(pos, false);
 						level.setBlock(pos, recipe.getOutputBlock().defaultBlockState(), 3);
 

@@ -2,6 +2,8 @@ package top.nebula.cmi;
 
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.common.register.ModBlockEntityTypes;
 import top.nebula.cmi.common.register.ModItems;
@@ -19,6 +21,8 @@ import terrablender.api.SurfaceRuleManager;
 @Mod(CMI.MODID)
 public class CMI {
 	public static final String MODID = "cmi";
+	public static final String NAME = "CMI";
+	public static final Logger LOGGER = LogManager.getLogger(NAME);
 
 	public static ResourceLocation loadResource(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
