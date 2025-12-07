@@ -19,6 +19,7 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.NotNull;
@@ -84,15 +85,32 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull AcceleratorRecipe recipe, @NotNull IFocusGroup group) {
 		builder.addSlot(RecipeIngredientRole.INPUT, 51, 5)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addIngredients(recipe.getInput());
+				.addIngredients(Ingredient.merge(recipe.inputs));
 
 		builder.addSlot(RecipeIngredientRole.INPUT, 27, 38)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
 				.addItemStack(recipe.targetBlock.asItem().getDefaultInstance());
 
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 141, 48)
-				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addItemStack(recipe.outputBlock.asItem().getDefaultInstance());
+		int xStart = 120;
+		int yStart = 5;
+		int id = 0;
+
+		for (AcceleratorRecipe.OutputEntry out : recipe.outputs) {
+			int x = xStart + (id % 3) * 18;
+			int y = yStart + (id / 3) * 18;
+
+			builder.addSlot(RecipeIngredientRole.OUTPUT, x, y)
+					.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+					.addItemStack(out.block.asItem().getDefaultInstance())
+					.addTooltipCallback((view, tooltip) -> {
+						float chance = out.chance;
+
+						if (chance != 1) {
+							tooltip.add(1, Component.translatable("create.recipe.processing.chance", chance < 0.01 ? "<1" : (int) (chance * 100)));
+						}
+					});
+			id++;
+		}
 	}
 
 	@Override
