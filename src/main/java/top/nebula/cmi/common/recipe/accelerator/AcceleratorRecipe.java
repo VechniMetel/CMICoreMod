@@ -91,7 +91,6 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 	}
 
 	public static class Serializer implements RecipeSerializer<AcceleratorRecipe> {
-
 		public static final Serializer INSTANCE = new Serializer();
 		public static final ResourceLocation ID = CMI.loadResource("accelerator");
 
