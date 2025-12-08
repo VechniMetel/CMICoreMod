@@ -14,9 +14,11 @@ import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -27,6 +29,10 @@ import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
 
 public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
+	private final IDrawable background;
+	private final IDrawable icon;
+	private static final int SLOT_SIZE = 18;
+
 	public static final Lazy<Item> ACCELERATOR_Item = Lazy.of(() -> {
 		return BuiltInRegistries.ITEM.get(CMI.loadResource("accelerator"));
 	});
@@ -39,9 +45,6 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	public static final ResourceLocation UID = CMI.loadResource("accelerator");
 	public static final RecipeType<AcceleratorRecipe> ACCELERATOR_TYPE =
 			RecipeType.create(CMI.MODID, "accelerator", AcceleratorRecipe.class);
-
-	private final IDrawable background;
-	private final IDrawable icon;
 
 	public AcceleratorCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
@@ -96,17 +99,27 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 		int id = 0;
 
 		for (AcceleratorRecipe.OutputEntry out : recipe.outputs) {
-			int x = xStart + (id % 3) * 18;
-			int y = yStart + (id / 3) * 18;
+			int x = xStart + (id % 3) * SLOT_SIZE;
+			int y = yStart + (id / 3) * SLOT_SIZE;
+			float chance = out.chance;
 
 			builder.addSlot(RecipeIngredientRole.OUTPUT, x, y)
-					.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+					.setBackground(CreateRecipeCategory.getRenderedSlot(chance), -1, -1)
 					.addItemStack(out.block.asItem().getDefaultInstance())
 					.addTooltipCallback((view, tooltip) -> {
-						float chance = out.chance;
+
+						MutableComponent tranKey = Component.translatable(
+								"create.recipe.processing.chance",
+								chance < 0.01 ? "<1" : (int) (chance * 100)
+						).withStyle(ChatFormatting.GOLD);
 
 						if (chance != 1) {
-							tooltip.add(1, Component.translatable("create.recipe.processing.chance", chance < 0.01 ? "<1" : (int) (chance * 100)));
+							/*
+							 * index参数指的是在第几行添加Tooltip
+							 * 如果写1就指在第一行添加Tooltip
+							 * 其它数字同理
+							 */
+							tooltip.add(1, tranKey);
 						}
 					});
 			id++;
