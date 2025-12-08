@@ -95,9 +95,9 @@ public class AcceleratorEvent {
                     // 申必音效
                     level.playSound(
                             null,
-                            pos.getX(),
-                            pos.getY(),
-                            pos.getZ(),
+                            pos.getX() + 0.5,
+                            pos.getY() + 1.0,
+                            pos.getZ() + 0.5,
                             AllSoundEvents.CRAFTER_CRAFT.getMainEvent(),
                             SoundSource.VOICE,
                             3,

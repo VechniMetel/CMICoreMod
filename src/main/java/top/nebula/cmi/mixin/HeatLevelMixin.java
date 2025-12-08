@@ -9,7 +9,6 @@ import java.util.Arrays;
 
 @Mixin(value = BlazeBurnerBlock.HeatLevel.class, remap = false)
 public abstract class HeatLevelMixin {
-
 	@Shadow
 	@Final
 	@Mutable
