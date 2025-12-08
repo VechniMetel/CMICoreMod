@@ -1,4 +1,4 @@
-package top.nebula.cmi.compat.jei.accelerator;
+package top.nebula.cmi.compat.jei.category;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.math.Axis;
@@ -31,7 +31,6 @@ import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
 public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	private final IDrawable background;
 	private final IDrawable icon;
-	private static final int SLOT_SIZE = 18;
 
 	public static final Lazy<Item> ACCELERATOR_Item = Lazy.of(() -> {
 		return BuiltInRegistries.ITEM.get(CMI.loadResource("accelerator"));
@@ -99,15 +98,17 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 		int id = 0;
 
 		for (AcceleratorRecipe.OutputEntry out : recipe.outputs) {
-			int x = xStart + (id % 3) * SLOT_SIZE;
-			int y = yStart + (id / 3) * SLOT_SIZE;
+			final int OUTPUT_SLOT_SIZE = 18;
+			final int OUTPUT_SLOT_GAP = 1;
+
+			int x = xStart + (id % 3) * (OUTPUT_SLOT_SIZE + OUTPUT_SLOT_GAP);
+			int y = yStart + (id / 3) * (OUTPUT_SLOT_SIZE + OUTPUT_SLOT_GAP);
 			float chance = out.chance;
 
 			builder.addSlot(RecipeIngredientRole.OUTPUT, x, y)
 					.setBackground(CreateRecipeCategory.getRenderedSlot(chance), -1, -1)
 					.addItemStack(out.block.asItem().getDefaultInstance())
 					.addTooltipCallback((view, tooltip) -> {
-
 						MutableComponent tranKey = Component.translatable(
 								"create.recipe.processing.chance",
 								chance < 0.01 ? "<1" : (int) (chance * 100)

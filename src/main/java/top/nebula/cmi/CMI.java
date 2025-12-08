@@ -4,10 +4,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import top.nebula.cmi.common.register.ModBlocks;
-import top.nebula.cmi.common.register.ModBlockEntityTypes;
-import top.nebula.cmi.common.register.ModItems;
-import top.nebula.cmi.common.register.ModRecipeType;
+import top.nebula.cmi.common.register.*;
 import top.nebula.cmi.worldgen.region.ModOverworldRegion;
 import top.nebula.cmi.worldgen.surfacerule.ModSurfaceRuleData;
 import net.minecraftforge.fml.common.Mod;
@@ -37,6 +34,7 @@ public class CMI {
 		ModBlockEntityTypes.register(event);
 		ModItems.register(event);
 		ModRecipeType.register(event);
+		ModRecipeSerializer.register(event);
 
 		event.addListener(this::commonSetup);
 	}

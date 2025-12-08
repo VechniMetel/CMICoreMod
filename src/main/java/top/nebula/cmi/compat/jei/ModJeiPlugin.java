@@ -12,7 +12,7 @@ import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
-import top.nebula.cmi.compat.jei.accelerator.AcceleratorCategory;
+import top.nebula.cmi.compat.jei.category.AcceleratorCategory;
 
 import java.util.List;
 
