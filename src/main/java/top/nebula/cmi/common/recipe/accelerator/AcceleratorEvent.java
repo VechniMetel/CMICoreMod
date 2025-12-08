@@ -22,7 +22,7 @@ import top.nebula.cmi.CMI;
 
 @SuppressWarnings("ALL")
 @Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
-public class AcceleratorEvents {
+public class AcceleratorEvent {
 	public static final Lazy<Block> ACCELERATOR_BLOCK = Lazy.of(() -> {
 		return BuiltInRegistries.BLOCK.get(CMI.loadResource("accelerator"));
 	});
