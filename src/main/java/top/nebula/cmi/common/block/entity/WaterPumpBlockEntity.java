@@ -50,13 +50,6 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 
 	private static final Lazy<IMultiblock> STRUCTURE = Lazy.of(() -> {
 		return new MultiblockStructureBuilder(new String[][]{
-				/*
-					W
-					|
-				N --+-- S
-					|
-					E
-				*/
 				{
 						// 四个角为脚手架, 四边为楼梯, 中心镂空
 						"DFD",
