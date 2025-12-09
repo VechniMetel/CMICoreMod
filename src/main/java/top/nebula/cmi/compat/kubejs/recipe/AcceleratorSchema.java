@@ -7,16 +7,17 @@ import dev.latvian.mods.kubejs.recipe.schema.RecipeSchema;
 import net.minecraft.world.level.block.Block;
 
 public interface AcceleratorSchema {
-	RecipeKey<RecipeComponentBuilderMap> OUTPUT = output().key("output");
+	RecipeKey<RecipeComponentBuilderMap[]> OUTPUT = output().key("output");
 	RecipeKey<InputItem[]> INPUT = ItemComponents.INPUT_ARRAY.key("input").defaultOptional();
 	RecipeKey<Block> TARGET = BlockComponent.OUTPUT.key("target").defaultOptional();
 
 	RecipeSchema SCHEMA = new RecipeSchema(OUTPUT, INPUT, TARGET);
 
-	private static RecipeComponentBuilder output() {
+	private static ArrayRecipeComponent<RecipeComponentBuilderMap> output() {
 		return new RecipeComponentBuilder(2)
 				.add(BlockComponent.OUTPUT.key("id"))
 				.add(NumberComponent.DOUBLE.key("chance"))
-				.inputRole();
+				.inputRole()
+				.asArray();
 	}
 }
