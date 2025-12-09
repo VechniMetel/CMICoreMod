@@ -15,7 +15,7 @@ public interface AcceleratorSchema {
 
 	private static RecipeComponentBuilder output() {
 		return new RecipeComponentBuilder(2)
-				.add(StringComponent.NON_BLANK.key("id"))
+				.add(BlockComponent.OUTPUT.key("id"))
 				.add(NumberComponent.DOUBLE.key("chance"))
 				.inputRole();
 	}
