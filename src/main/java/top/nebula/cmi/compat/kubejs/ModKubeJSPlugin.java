@@ -12,11 +12,11 @@ import top.nebula.cmi.util.PropertyImmutableMap;
 import java.time.LocalDateTime;
 
 public class ModKubeJSPlugin extends KubeJSPlugin {
-//	@Override
-//	public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
-//		event.namespace(CMI.MODID)
-//				.register("accelerator", AcceleratorSchema.SCHEMA);
-//	}
+	@Override
+	public void registerRecipeSchemas(RegisterRecipeSchemasEvent event) {
+		event.namespace(CMI.MODID)
+				.register("accelerator", AcceleratorSchema.SCHEMA);
+	}
 
 	public void registerBindings(BindingsEvent event) {
 		super.registerBindings(event);
