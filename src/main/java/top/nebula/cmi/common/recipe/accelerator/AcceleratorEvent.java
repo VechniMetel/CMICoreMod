@@ -104,7 +104,7 @@ public class AcceleratorEvent {
 							1
 					);
 					// 申必粒子效果
-					for (int number = 0; number < 1; number++) {
+					for (int number = 0; number < 10; number++) {
 						double offsetX = (Math.random() - 0.5) * 0.5;
 						double offsetY = Math.random() * 0.5;
 						double offsetZ = (Math.random() - 0.5) * 0.5;
