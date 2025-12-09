@@ -12,12 +12,12 @@ import java.util.function.Supplier;
 public class ModRecipeType {
 	public static final DeferredRegister<RecipeType<?>> RECIPE_TYPES;
 
-	public static final Supplier<RecipeType<AcceleratorRecipe>> ACCELERATOR_RECIPE_TYPE;
+	public static final Supplier<RecipeType<AcceleratorRecipe>> ACCELERATOR;
 
 	static {
 		RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, CMI.MODID);
 
-		ACCELERATOR_RECIPE_TYPE = RECIPE_TYPES.register("accelerator", () -> {
+		ACCELERATOR = RECIPE_TYPES.register("accelerator", () -> {
 			return AcceleratorRecipe.Type.INSTANCE;
 		});
 	}

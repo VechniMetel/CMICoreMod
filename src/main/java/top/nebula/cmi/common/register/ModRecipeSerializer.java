@@ -11,12 +11,12 @@ import java.util.function.Supplier;
 
 public class ModRecipeSerializer {
 	public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS;
-	public static final Supplier<RecipeSerializer<AcceleratorRecipe>> ACCELERATOR_SERIALIZER;
+	public static final Supplier<RecipeSerializer<AcceleratorRecipe>> ACCELERATOR;
 
 	static {
 		SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CMI.MODID);
 
-		ACCELERATOR_SERIALIZER = SERIALIZERS.register("accelerator", () -> {
+		ACCELERATOR = SERIALIZERS.register("accelerator", () -> {
 			return AcceleratorRecipe.Serializer.INSTANCE;
 		});
 	}
