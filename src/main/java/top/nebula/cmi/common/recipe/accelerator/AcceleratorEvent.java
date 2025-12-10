@@ -20,6 +20,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.nebula.cmi.CMI;
 
+import java.util.Optional;
+
 @SuppressWarnings("ALL")
 @Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AcceleratorEvent {
@@ -48,86 +50,98 @@ public class AcceleratorEvent {
 		SimpleContainer container = new SimpleContainer(1);
 		container.setItem(0, item);
 
-		level.getRecipeManager()
-				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
-				.ifPresent((recipe) -> {
-					int required = 24;
-					int matched = 0;
+		Optional<AcceleratorRecipe> recipeFound = level.getRecipeManager()
+				.getAllRecipesFor(AcceleratorRecipe.Type.INSTANCE)
+				.stream()
+				.filter((recipe) -> {
+					return recipe.inputs.stream()
+							.anyMatch((ingredient) -> {
+								return ingredient.test(item);
+							});
+				})
+				.filter((recipe) -> {
+					return state.is(recipe.targetBlock);
+				})
+				.findFirst();
 
-					for (int dx = -2; dx <= 2; dx++) {
-						for (int dz = -2; dz <= 2; dz++) {
+		recipeFound.ifPresent((recipe) -> {
+			int required = 24;
+			int matched = 0;
 
-							if (dx == 0 && dz == 0) {
-								continue;
-							}
+			for (int dx = -2; dx <= 2; dx++) {
+				for (int dz = -2; dz <= 2; dz++) {
 
-							BlockPos checkPos = pos.offset(dx, 0, dz);
-							if (level.getBlockState(checkPos).is(recipe.targetBlock)) {
-								matched++;
+					if (dx == 0 && dz == 0) {
+						continue;
+					}
+
+					BlockPos checkPos = pos.offset(dx, 0, dz);
+					if (level.getBlockState(checkPos).is(recipe.targetBlock)) {
+						matched++;
+					}
+				}
+			}
+
+			if (matched != required) {
+				return;
+			}
+			RandomSource random = level.getRandom();
+
+			for (int dx = -2; dx <= 2; dx++) {
+				for (int dz = -2; dz <= 2; dz++) {
+					BlockPos targetPos = pos.offset(dx, 0, dz);
+
+					if (level.getBlockState(targetPos).is(recipe.targetBlock)) {
+						for (AcceleratorRecipe.OutputEntry out : recipe.outputs) {
+							BlockState outputBlock = out.block.defaultBlockState();
+
+							if (random.nextFloat() <= out.chance) {
+								// 破坏方块为了粒子效果和音效
+								level.destroyBlock(targetPos, false);
+								level.setBlock(targetPos, outputBlock, 3);
+								break;
 							}
 						}
 					}
+				}
+			}
 
-					if (matched != required) {
-						return;
-					}
-					RandomSource random = level.getRandom();
+			// 申必音效
+			level.playSound(
+					null,
+					pos.getX() + 0.5,
+					pos.getY() + 1.0,
+					pos.getZ() + 0.5,
+					AllSoundEvents.CRAFTER_CRAFT.getMainEvent(),
+					SoundSource.VOICE,
+					3,
+					1
+			);
+			// 申必粒子效果
+			for (int number = 0; number < 10; number++) {
+				double offsetX = (Math.random() - 0.5) * 0.5;
+				double offsetY = Math.random() * 0.5;
+				double offsetZ = (Math.random() - 0.5) * 0.5;
 
-					for (int dx = -2; dx <= 2; dx++) {
-						for (int dz = -2; dz <= 2; dz++) {
-							BlockPos targetPos = pos.offset(dx, 0, dz);
+				sl.sendParticles(
+						ParticleTypes.HAPPY_VILLAGER,
+						pos.getX() + 0.5,
+						pos.getY() + 1.2,
+						pos.getZ() + 0.5,
+						1,
+						offsetX,
+						offsetY,
+						offsetZ,
+						0.02
+				);
+			}
 
-							if (level.getBlockState(targetPos).is(recipe.targetBlock)) {
-								for (AcceleratorRecipe.OutputEntry out : recipe.outputs) {
-									BlockState outputBlock = out.block.defaultBlockState();
+			if (!player.isCreative()) {
+				item.shrink(1);
+			}
 
-									if (random.nextFloat() <= out.chance) {
-										// 破坏方块为了粒子效果和音效
-										level.destroyBlock(targetPos, false);
-										level.setBlock(targetPos, outputBlock, 3);
-										break;
-									}
-								}
-							}
-						}
-					}
-
-					// 申必音效
-					level.playSound(
-							null,
-							pos.getX() + 0.5,
-							pos.getY() + 1.0,
-							pos.getZ() + 0.5,
-							AllSoundEvents.CRAFTER_CRAFT.getMainEvent(),
-							SoundSource.VOICE,
-							3,
-							1
-					);
-					// 申必粒子效果
-					for (int number = 0; number < 10; number++) {
-						double offsetX = (Math.random() - 0.5) * 0.5;
-						double offsetY = Math.random() * 0.5;
-						double offsetZ = (Math.random() - 0.5) * 0.5;
-
-						sl.sendParticles(
-								ParticleTypes.HAPPY_VILLAGER,
-								pos.getX() + 0.5,
-								pos.getY() + 1.2,
-								pos.getZ() + 0.5,
-								1,
-								offsetX,
-								offsetY,
-								offsetZ,
-								0.02
-						);
-					}
-
-					if (!player.isCreative()) {
-						item.shrink(1);
-					}
-
-					event.setCanceled(true);
-					event.setCancellationResult(InteractionResult.SUCCESS);
-				});
+			event.setCanceled(true);
+			event.setCancellationResult(InteractionResult.SUCCESS);
+		});
 	}
 }
