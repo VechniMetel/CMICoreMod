@@ -54,10 +54,13 @@ public class AcceleratorEvent {
 				.getAllRecipesFor(AcceleratorRecipe.Type.INSTANCE)
 				.stream()
 				.filter((recipe) -> {
-					return recipe.inputs.stream()
+					boolean input = recipe.inputs.stream()
 							.anyMatch((ingredient) -> {
 								return ingredient.test(item);
 							});
+					boolean target = state.is(recipe.targetBlock);
+
+					return input || target;
 				})
 				.findFirst();
 
