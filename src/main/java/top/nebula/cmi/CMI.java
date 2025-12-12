@@ -1,6 +1,8 @@
 package top.nebula.cmi;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -21,8 +23,23 @@ public class CMI {
 	public static final String NAME = "CMI";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
 
+	/**
+	 * 加载ResourceLocation资源
+	 *
+	 * @param path
+	 * @return
+	 */
 	public static ResourceLocation loadResource(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
+	}
+
+	/**
+	 * 使用图腾动画
+	 *
+	 * @param stack
+	 */
+	public static void useAnimation(ItemStack stack) {
+		Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
 	}
 
 	public CMI(FMLJavaModLoadingContext context) {
