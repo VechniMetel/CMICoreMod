@@ -9,7 +9,6 @@
 		"BasinBlockEntityMixin",
 		"BasinCategoryMixin",
 		"FireBlockMixin",
-		"FluidTypeMixin",
 		"HeatConditionMixin",
 		"HeatLevelMixin",
 		"ClassFilterMixin"

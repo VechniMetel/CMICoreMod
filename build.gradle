@@ -107,6 +107,10 @@ repositories {
 
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    // Nebula Utils
+    implementation files("build/libs/Nebula-Utils-1.5.0.jar")
+    implementation name: 'Nebula-Utils-1.5.0'
+    jarJar(group: "top.nebula", name: "Nebula-Utils", version: "[1.5.0,)")
     // Mekanism
     implementation fg.deobf("mekanism:Mekanism:${mekanism_version}")
     // Curios

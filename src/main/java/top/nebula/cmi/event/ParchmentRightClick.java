@@ -19,6 +19,7 @@ import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import top.nebula.cmi.CMI;
+import top.nebula.utils.NebulaUtils;
 
 @SuppressWarnings("ALL")
 @Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
@@ -31,7 +32,7 @@ public class ParchmentRightClick {
 	});
 
 	@SubscribeEvent
-	public static void onRightClick(PlayerInteractEvent.RightClickBlock event) {
+	public static void onRightClick(PlayerInteractEvent.RightClickItem event) {
 		Level level = event.getLevel();
 		Player player = event.getEntity();
 		ItemStack item = player.getItemInHand(event.getHand());
@@ -96,7 +97,7 @@ public class ParchmentRightClick {
 						0
 				);
 				// 调用动画
-				CMI.useTotemAnimation(PARCHMEMT.get().getDefaultInstance());
+				NebulaUtils.useTotemAnimation(PARCHMEMT.get().getDefaultInstance());
 				// 挥手
 				player.swing(event.getHand());
 				// 消耗物品

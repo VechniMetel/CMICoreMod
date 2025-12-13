@@ -1,8 +1,6 @@
 package top.nebula.cmi;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.eventbus.api.IEventBus;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,10 +8,8 @@ import top.nebula.cmi.common.register.*;
 import top.nebula.cmi.worldgen.region.ModOverworldRegion;
 import top.nebula.cmi.worldgen.surfacerule.ModSurfaceRuleData;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
-import top.nebula.cmi.config.CommonConfig;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
@@ -33,19 +29,8 @@ public class CMI {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
 	}
 
-	/**
-	 * 使用图腾动画
-	 *
-	 * @param stack
-	 */
-	public static void useTotemAnimation(ItemStack stack) {
-		Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
-	}
-
 	public CMI(FMLJavaModLoadingContext context) {
 		IEventBus event = context.getModEventBus();
-
-		context.registerConfig(ModConfig.Type.COMMON, CommonConfig.SPEC, MODID + "/common.toml");
 
 		ModBlocks.register(event);
 		ModBlockEntityTypes.register(event);
