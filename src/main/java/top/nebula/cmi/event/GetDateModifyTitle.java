@@ -1,4 +1,4 @@
-package top.nebula.cmi.common.event;
+package top.nebula.cmi.event;
 
 import dev.latvian.mods.kubejs.script.PlatformWrapper;
 import net.minecraft.client.Minecraft;

@@ -16,7 +16,7 @@ public class ModItems {
 
 	public static final Supplier<Item> NUCLEAR_MECHANISM;
 	public static final Supplier<Item> WATER_PUMP;
-	public static final Supplier<Item> MOON_GEO;
+	public static final Supplier<Item> MARS_GEO;
 	public static final Supplier<Item> MERCURY_GEO;
 	public static final Supplier<Item> TEST_BRUSH;
 	public static final Supplier<Item> TEST_GRAVEL;
@@ -39,7 +39,7 @@ public class ModItems {
 
 		NUCLEAR_MECHANISM = ITEMS.register("nuclear_mechanism", NuclearMechanism::new);
 
-		MOON_GEO = ITEMS.register("mars_geothermal_vent", () -> {
+		MARS_GEO = ITEMS.register("mars_geothermal_vent", () -> {
 			return new BlockItem(ModBlocks.MARS_GEO.get(), new Item.Properties());
 		});
 		MERCURY_GEO = ITEMS.register("mercury_geothermal_vent", () -> {

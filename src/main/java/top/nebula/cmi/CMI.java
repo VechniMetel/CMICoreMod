@@ -38,7 +38,7 @@ public class CMI {
 	 *
 	 * @param stack
 	 */
-	public static void useAnimation(ItemStack stack) {
+	public static void useTotemAnimation(ItemStack stack) {
 		Minecraft.getInstance().gameRenderer.displayItemActivation(stack);
 	}
 
