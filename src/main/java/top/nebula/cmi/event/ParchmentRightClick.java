@@ -46,13 +46,13 @@ public class ParchmentRightClick {
 		// 只能主手触发
 		if (item.is(PARCHMEMT.get()) && event.getHand() == InteractionHand.MAIN_HAND) {
 			// 定位玩家眼睛坐标(Pos)
-			Vec3 startingPosition = player.getEyePosition();
+			Vec3 eyePos = player.getEyePosition();
 
 			// 获取坐标具体数据
 			PlayerPos playerPos = new PlayerPos(
-					startingPosition.x(),
-					startingPosition.y(),
-					startingPosition.z()
+					eyePos.x(),
+					eyePos.y(),
+					eyePos.z()
 			);
 
 			// 给予玩家幸运buff(10分钟, 2级)

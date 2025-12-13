@@ -1,7 +1,8 @@
 buildscript {
     repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
-        maven { url = 'https://repo.spongepowered.org/repository/maven-public/' }
+        maven {
+            url = 'https://repo.spongepowered.org/repository/maven-public/'
+        }
         mavenCentral()
     }
     dependencies {
@@ -72,7 +73,9 @@ mixin {
     config "${mod_id}.mixins.json"
 }
 
-sourceSets.main.resources { srcDir 'src/generated/resources' }
+sourceSets.main.resources {
+    srcDir 'src/generated/resources'
+}
 
 repositories {
     maven {
@@ -187,7 +190,6 @@ tasks.named('jar', Jar).configure {
         archiveFileName.set("CMI Core-" + mod_version + "-" + minecraft_version + ".jar")
     }
 
-    // This is the preferred method to reobfuscate your jar file
     finalizedBy 'reobfJar'
 }
 
@@ -196,7 +198,7 @@ tasks.named('jarJar') {
         attributes([
                 "Specification-Title"     : mod_id,
                 "Specification-Vendor"    : mod_authors,
-                "Specification-Version"   : "1", // We are version 1 of ourselves
+                "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : project.jar.archiveVersion,
                 "Implementation-Vendor"   : mod_authors,
@@ -220,26 +222,4 @@ tasks.withType(JavaCompile).configureEach {
      * static loadResource(path: string): ResourceLocation;
      */
     options.compilerArgs << "-parameters"
-}
-
-publishing {
-    repositories {
-        maven {
-            name = "fiberoptics"
-            url = "https://maven.fiberoptics.dev/releases"
-            credentials(PasswordCredentials)
-            authentication {
-                basic(BasicAuthentication)
-            }
-        }
-    }
-
-    publications {
-        maven(MavenPublication) {
-            groupId = "top.nebula"
-            artifactId = "cmi"
-            version = mod_version
-            from components.java
-        }
-    }
 }
