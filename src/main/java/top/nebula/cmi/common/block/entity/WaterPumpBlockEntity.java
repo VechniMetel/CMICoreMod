@@ -75,31 +75,31 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 						"AAA"
 				}
 		})
-				.where('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
-				.where('0', ModBlocks.WATER_PUMP.get())
-				.where('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
-				.where('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
-				.where(' ', PatchouliAPI.get().anyMatcher())
+				.define('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
+				.define('0', ModBlocks.WATER_PUMP.get())
+				.define('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
+				.define('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
+				.define(' ', PatchouliAPI.get().anyMatcher())
 				// 北边楼梯(上方), 朝南
-				.where('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+				.define('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
 						.add(StairBlock.FACING, Direction.WEST)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
 				// 西边楼梯(左边), 朝东
-				.where('G', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+				.define('G', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
 						.add(StairBlock.FACING, Direction.NORTH)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
 				// 东边楼梯(右边), 朝西
-				.where('H', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+				.define('H', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
 						.add(StairBlock.FACING, Direction.SOUTH)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
 						.build())
-				// 南边楼梯(下方),
-				.where('I', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+				// 南边楼梯(下方), 朝北
+				.define('I', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
 						.add(StairBlock.FACING, Direction.EAST)
 						.add(StairBlock.HALF, Half.TOP)
 						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)

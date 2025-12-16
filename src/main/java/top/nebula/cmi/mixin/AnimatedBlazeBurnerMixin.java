@@ -27,7 +27,9 @@ public abstract class AnimatedBlazeBurnerMixin extends AnimatedKinetics {
 			matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5F));
 			matrixStack.mulPose(Axis.YP.rotationDegrees(22.5F));
 			int scale = 23;
-			blockElement(Blocks.FIRE.defaultBlockState()).atLocal((double) 0.0F, 1.65, (double) 0.0F).scale((double) scale).render(graphics);
+			blockElement(Blocks.FIRE.defaultBlockState())
+					.atLocal((double) 0.0F, 1.65, (double) 0.0F).scale((double) scale)
+					.render(graphics);
 			matrixStack.popPose();
 			ci.cancel();
 		}
