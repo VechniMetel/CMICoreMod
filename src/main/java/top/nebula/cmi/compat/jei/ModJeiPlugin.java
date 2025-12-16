@@ -5,7 +5,9 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
@@ -41,7 +43,10 @@ public class ModJeiPlugin implements IModPlugin {
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(
-				new ItemStack(AcceleratorCategory.ACCELERATOR_Item.get()),
+				new ItemStack(AcceleratorCategory.ACCELERATOR_Item.get())
+						.setHoverName(Component.translatable("jei.catalyst.cmi.accelerator.1")
+								.append(Component.translatable("jei.catalyst.cmi.accelerator.2")
+										.withStyle(ChatFormatting.GRAY))),
 				AcceleratorCategory.ACCELERATOR_TYPE
 		);
 	}
