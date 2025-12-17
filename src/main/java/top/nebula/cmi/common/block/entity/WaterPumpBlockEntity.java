@@ -75,35 +75,58 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 						"AAA"
 				}
 		})
-				.define('A', IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get())
-				.define('0', ModBlocks.WATER_PUMP.get())
-				.define('C', IEBlocks.WoodenDecoration.TREATED_FENCE.get())
-				.define('D', IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get())
-				.define(' ', PatchouliAPI.get().anyMatcher())
+				// 木板
+				.define('A', (builder) -> {
+					builder.block(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).get());
+				})
+				// 水泵
+				.define('0', (builder) -> {
+					builder.block(ModBlocks.WATER_PUMP.get());
+				})
+				// 木栅栏
+				.define('C', (builder) -> {
+					builder.block(IEBlocks.WoodenDecoration.TREATED_FENCE.get());
+				})
+				// 脚手架
+				.define('D', (builder) -> {
+					builder.block(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get());
+				})
+				// 空位
+				.define(' ', (builder) -> {
+					builder.any();
+				})
 				// 北边楼梯(上方), 朝南
-				.define('F', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.WEST)
-						.add(StairBlock.HALF, Half.TOP)
-						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
-						.build())
+				.define('F', (builder) -> {
+					builder.stateMap(BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+							.add(StairBlock.FACING, Direction.WEST)
+							.add(StairBlock.HALF, Half.TOP)
+							.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+							.build());
+				})
 				// 西边楼梯(左边), 朝东
-				.define('G', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.NORTH)
-						.add(StairBlock.HALF, Half.TOP)
-						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
-						.build())
+				.define('G', (builder) -> {
+					builder.stateMap(BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+							.add(StairBlock.FACING, Direction.NORTH)
+							.add(StairBlock.HALF, Half.TOP)
+							.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+							.build());
+				})
 				// 东边楼梯(右边), 朝西
-				.define('H', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.SOUTH)
-						.add(StairBlock.HALF, Half.TOP)
-						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
-						.build())
+				.define('H', (builder) -> {
+					builder.stateMap(BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+							.add(StairBlock.FACING, Direction.SOUTH)
+							.add(StairBlock.HALF, Half.TOP)
+							.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+							.build());
+				})
 				// 南边楼梯(下方), 朝北
-				.define('I', BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
-						.add(StairBlock.FACING, Direction.EAST)
-						.add(StairBlock.HALF, Half.TOP)
-						.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
-						.build())
+				.define('I', (builder) -> {
+					builder.stateMap(BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+							.add(StairBlock.FACING, Direction.EAST)
+							.add(StairBlock.HALF, Half.TOP)
+							.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
+							.build());
+				})
 				.build();
 	});
 
