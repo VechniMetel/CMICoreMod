@@ -7,6 +7,7 @@ import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
+import net.minecraftforge.registries.ForgeRegistries;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.register.ModBlockEntityTypes;
 import top.nebula.cmi.common.register.ModBlocks;
@@ -97,7 +98,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 				})
 				// 北边楼梯(上方), 朝南
 				.define('F', (builder) -> {
-					builder.stateMap(BuiltInRegistries.BLOCK.get(STAIRS), PropertyImmutableMap.create()
+					builder.stateMap(ForgeRegistries.BLOCKS.getValue(STAIRS), PropertyImmutableMap.create()
 							.add(StairBlock.FACING, Direction.WEST)
 							.add(StairBlock.HALF, Half.TOP)
 							.add(StairBlock.SHAPE, StairsShape.STRAIGHT)
