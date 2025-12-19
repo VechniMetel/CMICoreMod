@@ -49,8 +49,8 @@ public class AcceleratorEvent {
 		container.setItem(0, item);
 
 		level.getRecipeManager()
-				.getRecipeFor(AcceleratorRecipe.Type.INSTANCE, container, level)
-				.ifPresent((recipe) -> {
+				.getRecipesFor(AcceleratorRecipe.Type.INSTANCE, container, level)
+				.forEach((recipe) -> {
 					int required = 24;
 					int matched = 0;
 
