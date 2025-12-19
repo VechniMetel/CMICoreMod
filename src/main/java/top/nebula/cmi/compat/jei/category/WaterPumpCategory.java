@@ -14,74 +14,76 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
+import top.nebula.cmi.compat.jei.category.multiblock.WaterPumpMulti;
 
 public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
-	private final IDrawable background;
-	private final IDrawable icon;
+    private final IDrawable background;
+    private final IDrawable icon;
+    private final WaterPumpMulti waterPump = new WaterPumpMulti();
 
-	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
-		return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
-	});
+    private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
+        return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
+    });
 
-	public static final RecipeType<WaterPumpRecipe> WATER_PUMP_TYPE =
-			new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpRecipe.class);
+    public static final RecipeType<WaterPumpRecipe> WATER_PUMP_TYPE =
+            new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpRecipe.class);
 
-	public WaterPumpCategory(IGuiHelper helper) {
-		this.background = helper.createBlankDrawable(0, 0);
-		this.icon = helper.createDrawableItemStack(ModBlocks.WATER_PUMP.get().asItem().getDefaultInstance());
-	}
+    public WaterPumpCategory(IGuiHelper helper) {
+        this.background = helper.createBlankDrawable(0, 0);
+        this.icon = helper.createDrawableItemStack(ModBlocks.WATER_PUMP.get().asItem().getDefaultInstance());
+    }
 
-	@Override
-	public @NotNull RecipeType<WaterPumpRecipe> getRecipeType() {
-		return WATER_PUMP_TYPE;
-	}
+    @Override
+    public @NotNull RecipeType<WaterPumpRecipe> getRecipeType() {
+        return WATER_PUMP_TYPE;
+    }
 
-	@Override
-	public @NotNull Component getTitle() {
-		return Component.translatable("jei.category.cmi.water_pump");
-	}
+    @Override
+    public @NotNull Component getTitle() {
+        return Component.translatable("jei.category.cmi.water_pump");
+    }
 
-	@Override
-	public @NotNull IDrawable getBackground() {
-		return this.background;
-	}
+    @Override
+    public @NotNull IDrawable getBackground() {
+        return this.background;
+    }
 
-	@Override
-	public @NotNull IDrawable getIcon() {
-		return this.icon;
-	}
+    @Override
+    public @NotNull IDrawable getIcon() {
+        return this.icon;
+    }
 
-	@Override
-	public int getWidth() {
-		return 178;
-	}
+    @Override
+    public int getWidth() {
+        return 178;
+    }
 
-	@Override
-	public int getHeight() {
-		return 72;
-	}
+    @Override
+    public int getHeight() {
+        return 72;
+    }
 
-	@Override
-	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 120, 5)
-				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
-	}
+    @Override
+    public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
+        builder.addSlot(RecipeIngredientRole.OUTPUT, 140, 25)
+                .setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
+                .addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 
-	@Override // emmm...我没搞明白如何手动添加一个draw(大格子)
-	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-		AllGuiTextures.JEI_SHADOW.render(graphics, 62, 47);
-		AllGuiTextures.JEI_DOWN_ARROW.render(graphics, 74, 10);
+    }
 
-		PoseStack pose = graphics.pose();
+    @Override // emmm...我没搞明白如何手动添加一个draw(大格子)
+    public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+        AllGuiTextures.JEI_ARROW.render(graphics, 90, 30);
+        this.waterPump.draw(graphics,  40, 5);
 
-		pose.popPose();
-	}
+        PoseStack pose = graphics.pose();
+
+        pose.popPose();
+    }
 }
