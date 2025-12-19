@@ -32,7 +32,7 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	private final IDrawable background;
 	private final IDrawable icon;
 
-	public static final Lazy<Item> ACCELERATOR_Item = Lazy.of(() -> {
+	public static final Lazy<Item> ACCELERATOR_ITEM = Lazy.of(() -> {
 		return BuiltInRegistries.ITEM.get(CMI.loadResource("accelerator"));
 	});
 	public static final Lazy<Block> ACCELERATOR_BLOCK = Lazy.of(() -> {
@@ -48,7 +48,7 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	public AcceleratorCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
 		this.icon = new DoubleItemIcon(
-				() -> ACCELERATOR_Item.get().getDefaultInstance(),
+				() -> ACCELERATOR_ITEM.get().getDefaultInstance(),
 				() -> PRECISION_MECHANISM.get().getDefaultInstance()
 		);
 	}

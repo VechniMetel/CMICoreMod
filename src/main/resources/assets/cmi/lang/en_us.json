@@ -10,5 +10,6 @@
 	"biome.cmi.andesite_cave": "Andesite Cave",
 	"jei.category.cmi.accelerator": "Mechanism Accelerator",
 	"jei.catalyst.cmi.accelerator.1": "Use a mechanism on the accelerator",
-	"jei.catalyst.cmi.accelerator.2": "Requires at least 24 triggerable blocks in a 5×5 area around"
+	"jei.catalyst.cmi.accelerator.2": "Requires at least 24 triggerable blocks in a 5×5 area around",
+	"jei.category.cmi.water_pump": "Multiblock Water Pump"
 }

@@ -5,16 +5,17 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.registration.IRecipeCatalystRegistration;
 import mezz.jei.api.registration.IRecipeCategoryRegistration;
 import mezz.jei.api.registration.IRecipeRegistration;
-import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
+import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
+import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.compat.jei.category.AcceleratorCategory;
+import top.nebula.cmi.compat.jei.category.WaterPumpCategory;
 
 import java.util.List;
 
@@ -28,26 +29,29 @@ public class ModJeiPlugin implements IModPlugin {
 	@Override
 	public void registerCategories(@NotNull IRecipeCategoryRegistration registration) {
 		registration.addRecipeCategories(new AcceleratorCategory(registration.getJeiHelpers().getGuiHelper()));
+		registration.addRecipeCategories(new WaterPumpCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
 	public void registerRecipes(IRecipeRegistration registration) {
-		RecipeManager recipeManager = Minecraft.getInstance().level.getRecipeManager();
+		RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
 
-		List<AcceleratorRecipe> acceleratorRecipe =
-				recipeManager.getAllRecipesFor(AcceleratorRecipe.Type.INSTANCE);
+		List<AcceleratorRecipe> acceleratorRecipe = manager.getAllRecipesFor(AcceleratorRecipe.Type.INSTANCE);
+		List<WaterPumpRecipe> waterPumpRecipe = List.of(new WaterPumpRecipe());
 
 		registration.addRecipes(AcceleratorCategory.ACCELERATOR_TYPE, acceleratorRecipe);
+		registration.addRecipes(WaterPumpCategory.WATER_PUMP_TYPE, waterPumpRecipe);
 	}
 
 	@Override
 	public void registerRecipeCatalysts(IRecipeCatalystRegistration registration) {
 		registration.addRecipeCatalyst(
-				new ItemStack(AcceleratorCategory.ACCELERATOR_Item.get())
-						.setHoverName(Component.translatable("jei.catalyst.cmi.accelerator.1")
-								.append(Component.translatable("jei.catalyst.cmi.accelerator.2")
-										.withStyle(ChatFormatting.GRAY))),
+				new ItemStack(AcceleratorCategory.ACCELERATOR_ITEM.get()),
 				AcceleratorCategory.ACCELERATOR_TYPE
+		);
+		registration.addRecipeCatalyst(
+				new ItemStack(ModBlocks.WATER_PUMP.get().asItem()),
+				WaterPumpCategory.WATER_PUMP_TYPE
 		);
 	}
 }
