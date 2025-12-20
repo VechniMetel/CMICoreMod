@@ -37,7 +37,7 @@ public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWa
 	});
 
 	public static final RecipeType<WaterPumpSeaWaterRecipe> WATER_PUMP_SEA_WATER_TYPE =
-			new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpSeaWaterRecipe.class);
+			new RecipeType<>(CMI.loadResource("water_pump_sea_water"), WaterPumpSeaWaterRecipe.class);
 
 	public WaterPumpSeaWaterCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
