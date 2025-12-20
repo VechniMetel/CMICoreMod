@@ -1,7 +1,6 @@
 package top.nebula.cmi.compat.jei.category;
 
 import com.google.common.collect.ImmutableList;
-import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
@@ -99,9 +98,5 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
 		CmiGuiTextures.WATER_PUMP_SEA_WATER_ARROW.render(graphics, 80, 20);
 		this.waterPump.draw(graphics, 30, 5);
-
-		PoseStack pose = graphics.pose();
-
-		pose.popPose();
 	}
 }
