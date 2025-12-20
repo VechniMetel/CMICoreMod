@@ -14,12 +14,11 @@ import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.Fluids;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
-import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
+import top.nebula.cmi.common.recipe.waterpump.WaterPumpSeaWaterRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.compat.jei.CmiGuiTextures;
 import top.nebula.cmi.compat.jei.category.multiblock.WaterPumpMultiblock;
@@ -28,27 +27,31 @@ import top.nebula.utils.client.ClientRenderUtils;
 import java.util.Collections;
 import java.util.List;
 
-public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
+public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWaterRecipe> {
 	private final IDrawable background;
 	private final IDrawable icon;
 	private final WaterPumpMultiblock waterPump = new WaterPumpMultiblock();
 
-	public static final RecipeType<WaterPumpRecipe> WATER_PUMP_TYPE =
-			new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpRecipe.class);
+	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
+		return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
+	});
 
-	public WaterPumpCategory(IGuiHelper helper) {
+	public static final RecipeType<WaterPumpSeaWaterRecipe> WATER_PUMP_SEA_WATER_TYPE =
+			new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpSeaWaterRecipe.class);
+
+	public WaterPumpSeaWaterCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
 		this.icon = helper.createDrawableItemStack(ModBlocks.WATER_PUMP.get().asItem().getDefaultInstance());
 	}
 
 	@Override
-	public @NotNull RecipeType<WaterPumpRecipe> getRecipeType() {
-		return WATER_PUMP_TYPE;
+	public @NotNull RecipeType<WaterPumpSeaWaterRecipe> getRecipeType() {
+		return WATER_PUMP_SEA_WATER_TYPE;
 	}
 
 	@Override
 	public @NotNull Component getTitle() {
-		return Component.translatable("jei.category.cmi.water_pump");
+		return Component.translatable("jei.category.cmi.water_pump_sea_water");
 	}
 
 	@Override
@@ -72,23 +75,29 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	}
 
 	@Override
-	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
+	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpSeaWaterRecipe recipe, @NotNull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 150, 30)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addFluidStack(Fluids.WATER, Integer.MAX_VALUE);
+				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 	}
 
 	@Override
-	public @NotNull List<Component> getTooltipStrings(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, double mouseX, double mouseY) {
-		if (ClientRenderUtils.isCursorInsideBounds(102, 21, 14, 14, mouseX, mouseY)) {
+	public @NotNull List<Component> getTooltipStrings(@NotNull WaterPumpSeaWaterRecipe recipe, @NotNull IRecipeSlotsView view, double mouseX, double mouseY) {
+		if (ClientRenderUtils.isCursorInsideBounds(86, 21, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.complete"));
+		}
+		if (ClientRenderUtils.isCursorInsideBounds(102, 21, 14, 14, mouseX, mouseY)) {
+			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.ocean"));
+		}
+		if (ClientRenderUtils.isCursorInsideBounds(118, 21, 14, 14, mouseX, mouseY)) {
+			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.pos"));
 		}
 		return Collections.emptyList();
 	}
 
 	@Override
-	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 80, 20);
+	public void draw(@NotNull WaterPumpSeaWaterRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
+		CmiGuiTextures.WATER_PUMP_SEA_WATER_ARROW.render(graphics, 80, 20);
 		this.waterPump.draw(graphics, 30, 5);
 		PoseStack pose = graphics.pose();
 		pose.popPose();
