@@ -3,6 +3,7 @@ package top.nebula.cmi.compat.jei.category;
 import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
+import com.simibubi.create.foundation.gui.AllGuiTextures;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -97,7 +98,7 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 
 	@Override
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 90, 30);
+		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 60, 30);
 		this.waterPump.draw(graphics, 40, 5);
 
 		PoseStack pose = graphics.pose();
