@@ -76,20 +76,20 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 
 	@Override
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
-		builder.addSlot(RecipeIngredientRole.OUTPUT, 140, 25)
+		builder.addSlot(RecipeIngredientRole.OUTPUT, 150, 30)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
 				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 	}
 
 	@Override
 	public @NotNull List<Component> getTooltipStrings(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, double mouseX, double mouseY) {
-		if (ClientRenderUtils.isCursorInsideBounds(80, 25, 14, 14, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(86, 21, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.complete"));
 		}
-		if (ClientRenderUtils.isCursorInsideBounds(100, 25, 14, 14, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(102, 21, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.ocean"));
 		}
-		if (ClientRenderUtils.isCursorInsideBounds(120, 25, 14, 14, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(118, 21, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.pos"));
 		}
 		return Collections.emptyList();
@@ -97,8 +97,8 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 
 	@Override
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 90, 30);
-		this.waterPump.draw(graphics, 40, 5);
+		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 80, 20);
+		this.waterPump.draw(graphics, 30, 5);
 
 		PoseStack pose = graphics.pose();
 

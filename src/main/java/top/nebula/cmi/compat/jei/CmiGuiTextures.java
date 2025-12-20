@@ -6,7 +6,7 @@ public class CmiGuiTextures {
 	public static final CmiGuiTexture WATER_PUMP_ARROW;
 
 	static {
-		WATER_PUMP_ARROW = addGuiTexture("water_pump_arrow", 1, 1, 61, 22);
+		WATER_PUMP_ARROW = addGuiTexture("water_pump_arrow", 1, 1, 63, 24);
 	}
 
 	public static CmiGuiTexture addGuiTexture(String path, int startX, int startY, int width, int height) {
