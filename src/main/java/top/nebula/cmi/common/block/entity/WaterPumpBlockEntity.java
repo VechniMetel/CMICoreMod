@@ -43,7 +43,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 	}
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
-		return BuiltInRegistries.FLUID.get(CMI.loadResource("sea_water"));
+		return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
 	});
 
 	private static final ResourceLocation STAIRS =
