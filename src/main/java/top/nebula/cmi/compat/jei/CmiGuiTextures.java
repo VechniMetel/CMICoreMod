@@ -3,9 +3,11 @@ package top.nebula.cmi.compat.jei;
 import top.nebula.cmi.compat.jei.api.CmiGuiTexture;
 
 public class CmiGuiTextures {
+	public static final CmiGuiTexture WATER_PUMP_SEA_WATER_ARROW;
 	public static final CmiGuiTexture WATER_PUMP_ARROW;
 
 	static {
+		WATER_PUMP_SEA_WATER_ARROW = addGuiTexture("water_pump_sea_water_arrow", 1, 1, 63, 24);
 		WATER_PUMP_ARROW = addGuiTexture("water_pump_arrow", 1, 1, 63, 24);
 	}
 
