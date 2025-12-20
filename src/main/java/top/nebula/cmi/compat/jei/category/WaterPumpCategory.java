@@ -1,8 +1,8 @@
 package top.nebula.cmi.compat.jei.category;
 
+import com.google.common.collect.ImmutableList;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.simibubi.create.compat.jei.category.CreateRecipeCategory;
-import com.simibubi.create.foundation.gui.AllGuiTextures;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
 import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
@@ -20,7 +20,12 @@ import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
+import top.nebula.cmi.compat.jei.CmiGuiTextures;
 import top.nebula.cmi.compat.jei.category.multiblock.WaterPumpMultiblock;
+import top.nebula.utils.client.ClientRenderUtils;
+
+import java.util.Collections;
+import java.util.List;
 
 public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	private final IDrawable background;
@@ -76,9 +81,23 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
 	}
 
-	@Override // emmm...我没搞明白如何手动添加一个draw(大格子)
+	@Override
+	public @NotNull List<Component> getTooltipStrings(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, double mouseX, double mouseY) {
+		if (ClientRenderUtils.isCursorInsideBounds(50, 50, 14, 14, mouseX, mouseY)) {
+			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.complete"));
+		}
+		if (ClientRenderUtils.isCursorInsideBounds(23, 1, 14, 15, mouseX, mouseY)) {
+			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.ocean"));
+		}
+		if (ClientRenderUtils.isCursorInsideBounds(41, 2, 11, 14, mouseX, mouseY)) {
+			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.pos"));
+		}
+		return Collections.emptyList();
+	}
+
+	@Override
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
-		AllGuiTextures.JEI_ARROW.render(graphics, 90, 30);
+		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 90, 30);
 		this.waterPump.draw(graphics, 40, 5);
 
 		PoseStack pose = graphics.pose();

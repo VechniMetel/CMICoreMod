@@ -11,5 +11,8 @@
 	"jei.category.cmi.accelerator": "Mechanism Accelerator",
 	"jei.catalyst.cmi.accelerator.1": "Use a mechanism on the accelerator",
 	"jei.catalyst.cmi.accelerator.2": "Requires at least 24 triggerable blocks in a 5×5 area around",
-	"jei.category.cmi.water_pump": "Multiblock Water Pump"
+	"jei.category.cmi.water_pump": "Multiblock Water Pump",
+	"jei.catalyst.cmi.water_pump.complete": "Structural Complete",
+	"jei.catalyst.cmi.water_pump.ocean": "In the ocean biome",
+	"jei.catalyst.cmi.water_pump.pos": "At coordinate Y = 62"
 }
