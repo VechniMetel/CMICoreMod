@@ -83,13 +83,13 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 
 	@Override
 	public @NotNull List<Component> getTooltipStrings(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, double mouseX, double mouseY) {
-		if (ClientRenderUtils.isCursorInsideBounds(50, 50, 14, 14, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(80, 25, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.complete"));
 		}
-		if (ClientRenderUtils.isCursorInsideBounds(23, 1, 14, 15, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(100, 25, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.ocean"));
 		}
-		if (ClientRenderUtils.isCursorInsideBounds(41, 2, 11, 14, mouseX, mouseY)) {
+		if (ClientRenderUtils.isCursorInsideBounds(120, 25, 14, 14, mouseX, mouseY)) {
 			return ImmutableList.of(Component.translatable("jei.catalyst.cmi.water_pump.pos"));
 		}
 		return Collections.emptyList();

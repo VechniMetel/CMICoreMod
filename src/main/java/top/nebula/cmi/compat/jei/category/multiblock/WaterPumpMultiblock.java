@@ -18,116 +18,130 @@ import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.common.register.ModBlocks;
 
 public class WaterPumpMultiblock extends AnimatedKinetics {
-	private static final Lazy<Block> STAIRS = Lazy.of(() -> {
-		return ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal"));
-	});
+    private static final Lazy<Block> STAIRS = Lazy.of(() -> {
+        return ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal"));
+    });
 
-	@Override
-	public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
-		PoseStack matrixStack = graphics.pose();
-		matrixStack.pushPose();
-		matrixStack.translate(xOffset, yOffset, 100.0F);
-		matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5F));
-		matrixStack.mulPose(Axis.YP.rotationDegrees(22.5F));
+    @Override
+    public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
+        PoseStack matrixStack = graphics.pose();
+        matrixStack.pushPose();
+        matrixStack.translate(xOffset, yOffset, 100.0F);
+        matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5F));
+        matrixStack.mulPose(Axis.YP.rotationDegrees(22.5F));
 
-		int scale = 15;
-		defaultBlockElement(ModBlocks.WATER_PUMP.get().defaultBlockState())
-				.atLocal(0.0F, 4.0F, 0.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(1.0F, 4.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(1.0F, 4.0F, 0.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(1.0F, 4.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(0.0F, 4.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(0.0F, 4.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(-1.0F, 4.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(-1.0F, 4.0F, 0.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
-				.atLocal(-1.0F, 4.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(1.0F, 3.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(1.0F, 3.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(-1.0F, 3.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(-1.0F, 3.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(1.0F, 2.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(1.0F, 2.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(-1.0F, 2.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
-				.atLocal(-1.0F, 2.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
-				.atLocal(-1.0F, 1.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
-				.atLocal(-1.0F, 1.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
-				.atLocal(1.0F, 1.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
-				.atLocal(1.0F, 1.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(STAIRS.get().defaultBlockState()
-				.setValue(StairBlock.FACING, Direction.WEST)
-				.setValue(StairBlock.HALF, Half.TOP)
-				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				.atLocal(0.0F, 1.0F, -1.0F)
-				.scale(scale)
-				.render(graphics);
-		defaultBlockElement(STAIRS.get().defaultBlockState()
-				.setValue(StairBlock.FACING, Direction.NORTH)
-				.setValue(StairBlock.HALF, Half.TOP)
-				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
-				.atLocal(0.0F, 1.0F, 1.0F)
-				.scale(scale)
-				.render(graphics);
-	}
+        int scale = 15;
+        defaultBlockElement(ModBlocks.WATER_PUMP.get().defaultBlockState())
+                .atLocal(0.0F, 4.0F, 0.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(1.0F, 4.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(1.0F, 4.0F, 0.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(1.0F, 4.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(0.0F, 4.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(0.0F, 4.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(-1.0F, 4.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(-1.0F, 4.0F, 0.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_WOOD.get(TreatedWoodStyles.HORIZONTAL).defaultBlockState())
+                .atLocal(-1.0F, 4.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(1.0F, 3.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(1.0F, 3.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(-1.0F, 3.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(-1.0F, 3.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(1.0F, 2.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(1.0F, 2.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(-1.0F, 2.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_FENCE.get().defaultBlockState())
+                .atLocal(-1.0F, 2.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
+                .atLocal(-1.0F, 1.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
+                .atLocal(-1.0F, 1.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
+                .atLocal(1.0F, 1.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(IEBlocks.WoodenDecoration.TREATED_SCAFFOLDING.get().defaultBlockState())
+                .atLocal(1.0F, 1.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(STAIRS.get().defaultBlockState()
+                .setValue(StairBlock.FACING, Direction.NORTH)
+                .setValue(StairBlock.HALF, Half.TOP)
+                .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+                .atLocal(0.0F, 1.0F, -1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(STAIRS.get().defaultBlockState()
+                .setValue(StairBlock.FACING, Direction.SOUTH)
+                .setValue(StairBlock.HALF, Half.TOP)
+                .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+                .atLocal(0.0F, 1.0F, 1.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(STAIRS.get().defaultBlockState()
+                .setValue(StairBlock.FACING, Direction.WEST)
+                .setValue(StairBlock.HALF, Half.TOP)
+                .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+                .atLocal(-1.0F, 1.0F, 0.0F)
+                .scale(scale)
+                .render(graphics);
+        defaultBlockElement(STAIRS.get().defaultBlockState()
+                .setValue(StairBlock.FACING, Direction.EAST)
+                .setValue(StairBlock.HALF, Half.TOP)
+                .setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+                .atLocal(1.0F, 1.0F, 0.0F)
+                .scale(scale)
+                .render(graphics);
+    }
 }
