@@ -6,6 +6,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
+import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 
 import java.util.function.Supplier;
 
@@ -13,11 +14,17 @@ public class ModRecipeSerializer {
 	public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS;
 	public static final Supplier<RecipeSerializer<AcceleratorRecipe>> ACCELERATOR;
 
+	public static final Supplier<RecipeSerializer<WaterPumpRecipe>> WATER_PUMP;
+
 	static {
 		SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CMI.MODID);
 
 		ACCELERATOR = SERIALIZERS.register("accelerator", () -> {
 			return AcceleratorRecipe.Serializer.INSTANCE;
+		});
+
+		WATER_PUMP = SERIALIZERS.register("water_pump", () -> {
+			return WaterPumpRecipe.Serializer.INSTANCE;
 		});
 	}
 
