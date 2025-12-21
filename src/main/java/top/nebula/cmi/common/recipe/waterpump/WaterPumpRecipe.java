@@ -78,7 +78,7 @@ public class WaterPumpRecipe implements Recipe<SimpleContainer> {
 
         @Override
         public @NotNull WaterPumpRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {
-            FluidStack stack = FluidStackLoadable.REQUIRED_STACK.deserialize(json.getAsJsonObject("water"));
+            FluidStack stack = FluidStackLoadable.REQUIRED_BUCKET.getIfPresent(json, "water");
             Ingredient ingredient  = Ingredient.fromJson(json.getAsJsonObject("input"));
             return new WaterPumpRecipe(id, ingredient, stack);
         }
