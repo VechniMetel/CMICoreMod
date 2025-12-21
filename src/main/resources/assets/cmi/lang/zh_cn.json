@@ -12,6 +12,7 @@
 	"jei.catalyst.cmi.accelerator.1": "对着催生器使用构件",
 	"jei.catalyst.cmi.accelerator.2": "需要周围5x5范围内至少24个可触发方块",
 	"jei.category.cmi.water_pump": "多方块水井",
+	"jei.category.cmi.water_pump_sea_water": "多方块水井",
 	"jei.catalyst.cmi.water_pump.complete": "结构完整",
 	"jei.catalyst.cmi.water_pump.ocean": "处于海洋群系",
 	"jei.catalyst.cmi.water_pump.pos": "处于坐标Y = 62"

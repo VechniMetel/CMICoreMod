@@ -116,17 +116,31 @@ public class WaterPumpMultiblock extends AnimatedKinetics {
 				.scale(scale)
 				.render(graphics);
 		defaultBlockElement(STAIRS.get().defaultBlockState()
-				.setValue(StairBlock.FACING, Direction.WEST)
+				.setValue(StairBlock.FACING, Direction.NORTH)
 				.setValue(StairBlock.HALF, Half.TOP)
 				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
 				.atLocal(0.0F, 1.0F, -1.0F)
 				.scale(scale)
 				.render(graphics);
 		defaultBlockElement(STAIRS.get().defaultBlockState()
-				.setValue(StairBlock.FACING, Direction.NORTH)
+				.setValue(StairBlock.FACING, Direction.SOUTH)
 				.setValue(StairBlock.HALF, Half.TOP)
 				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
 				.atLocal(0.0F, 1.0F, 1.0F)
+				.scale(scale)
+				.render(graphics);
+		defaultBlockElement(STAIRS.get().defaultBlockState()
+				.setValue(StairBlock.FACING, Direction.WEST)
+				.setValue(StairBlock.HALF, Half.TOP)
+				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.atLocal(-1.0F, 1.0F, 0.0F)
+				.scale(scale)
+				.render(graphics);
+		defaultBlockElement(STAIRS.get().defaultBlockState()
+				.setValue(StairBlock.FACING, Direction.EAST)
+				.setValue(StairBlock.HALF, Half.TOP)
+				.setValue(StairBlock.SHAPE, StairsShape.STRAIGHT))
+				.atLocal(1.0F, 1.0F, 0.0F)
 				.scale(scale)
 				.render(graphics);
 	}
