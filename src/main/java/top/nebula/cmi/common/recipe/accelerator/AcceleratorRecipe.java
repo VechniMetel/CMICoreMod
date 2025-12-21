@@ -35,8 +35,8 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 	@Override
 	public boolean matches(@NotNull SimpleContainer container, @NotNull Level level) {
 		ItemStack stack = container.getItem(0);
-		for (Ingredient ing : inputs) {
-			if (ing.test(stack)) {
+		for (Ingredient ingredient : inputs) {
+			if (ingredient.test(stack)) {
 				return true;
 			}
 		}
