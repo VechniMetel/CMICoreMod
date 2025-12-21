@@ -13,11 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.CMI;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
-import top.nebula.cmi.common.recipe.waterpump.WaterPumpSeaWaterRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.compat.jei.category.AcceleratorCategory;
 import top.nebula.cmi.compat.jei.category.WaterPumpCategory;
-import top.nebula.cmi.compat.jei.category.WaterPumpSeaWaterCategory;
 
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class ModJeiPlugin implements IModPlugin {
 	public void registerCategories(@NotNull IRecipeCategoryRegistration registration) {
 		registration.addRecipeCategories(new AcceleratorCategory(registration.getJeiHelpers().getGuiHelper()));
 		registration.addRecipeCategories(new WaterPumpCategory(registration.getJeiHelpers().getGuiHelper()));
-		registration.addRecipeCategories(new WaterPumpSeaWaterCategory(registration.getJeiHelpers().getGuiHelper()));
+		//registration.addRecipeCategories(new WaterPumpSeaWaterCategory(registration.getJeiHelpers().getGuiHelper()));
 	}
 
 	@Override
@@ -40,12 +38,12 @@ public class ModJeiPlugin implements IModPlugin {
 		RecipeManager manager = Minecraft.getInstance().level.getRecipeManager();
 
 		List<AcceleratorRecipe> acceleratorRecipe = manager.getAllRecipesFor(AcceleratorRecipe.Type.INSTANCE);
-		List<WaterPumpRecipe> waterPumpRecipe = List.of(new WaterPumpRecipe());
-		List<WaterPumpSeaWaterRecipe> waterPumpSeaWaterRecipe = List.of(new WaterPumpSeaWaterRecipe());
+		List<WaterPumpRecipe> waterPumpRecipe = manager.getAllRecipesFor(WaterPumpRecipe.Type.INSTANCE);
+		//List<WaterPumpSeaWaterRecipe> waterPumpSeaWaterRecipe = List.of(new WaterPumpSeaWaterRecipe());
 
 		registration.addRecipes(AcceleratorCategory.ACCELERATOR_TYPE, acceleratorRecipe);
 		registration.addRecipes(WaterPumpCategory.WATER_PUMP_TYPE, waterPumpRecipe);
-		registration.addRecipes(WaterPumpSeaWaterCategory.WATER_PUMP_SEA_WATER_TYPE, waterPumpSeaWaterRecipe);
+		//registration.addRecipes(WaterPumpSeaWaterCategory.WATER_PUMP_SEA_WATER_TYPE, waterPumpSeaWaterRecipe);
 	}
 
 	@Override
@@ -58,9 +56,9 @@ public class ModJeiPlugin implements IModPlugin {
 				new ItemStack(ModBlocks.WATER_PUMP.get().asItem()),
 				WaterPumpCategory.WATER_PUMP_TYPE
 		);
-		registration.addRecipeCatalyst(
-				new ItemStack(ModBlocks.WATER_PUMP.get().asItem()),
-				WaterPumpSeaWaterCategory.WATER_PUMP_SEA_WATER_TYPE
-		);
+		//registration.addRecipeCatalyst(
+		//		new ItemStack(ModBlocks.WATER_PUMP.get().asItem()),
+		//		WaterPumpSeaWaterCategory.WATER_PUMP_SEA_WATER_TYPE
+		//);
 	}
 }
