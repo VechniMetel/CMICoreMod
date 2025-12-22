@@ -1,6 +1,6 @@
 package top.nebula.cmi.common.register;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.block.custom.MercuryGeothermalVentBlock;
 import top.nebula.cmi.common.block.custom.MarsGeothermalVentBlock;
 import top.nebula.cmi.common.block.custom.TestGravelBlock;
@@ -38,7 +38,7 @@ public class ModBlocks {
 	}
 
 	static {
-		BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, CMI.MODID);
+		BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, Cmi.MODID);
 
 		TEST_GRAVEL = BLOCKS.register("test_gravel", TestGravelBlock::new);
 

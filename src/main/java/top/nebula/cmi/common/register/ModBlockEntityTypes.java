@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.block.entity.*;
 
 import java.util.function.Supplier;
@@ -19,7 +19,7 @@ public class ModBlockEntityTypes {
 	public static final Supplier<BlockEntityType<WaterPumpBlockEntity>> WATER_PUMP;
 
 	static {
-		BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, CMI.MODID);
+		BLOCK_ENTITIES = DeferredRegister.create(ForgeRegistries.BLOCK_ENTITY_TYPES, Cmi.MODID);
 
 		TEST_GRAVEL = register("test_gravel", TestGravelBlockEntity::new, ModBlocks.TEST_GRAVEL);
 

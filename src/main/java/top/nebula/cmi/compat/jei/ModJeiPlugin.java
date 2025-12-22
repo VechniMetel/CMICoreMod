@@ -10,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeManager;
 import org.jetbrains.annotations.NotNull;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpSeaWaterRecipe;
@@ -25,7 +25,7 @@ import java.util.List;
 public class ModJeiPlugin implements IModPlugin {
 	@Override
 	public @NotNull ResourceLocation getPluginUid() {
-		return CMI.loadResource("jei_plugin");
+		return Cmi.loadResource("jei_plugin");
 	}
 
 	@Override

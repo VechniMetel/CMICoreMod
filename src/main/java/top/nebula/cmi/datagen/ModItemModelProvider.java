@@ -1,7 +1,7 @@
 package top.nebula.cmi.datagen;
 
 import net.minecraft.core.registries.BuiltInRegistries;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.register.ModItems;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
 
 public class ModItemModelProvider extends ItemModelProvider {
 	public ModItemModelProvider(PackOutput output, ExistingFileHelper helper) {
-		super(output, CMI.MODID, helper);
+		super(output, Cmi.MODID, helper);
 	}
 
 	@Override
@@ -25,7 +25,7 @@ public class ModItemModelProvider extends ItemModelProvider {
 	private ItemModelBuilder simpleItem(Supplier<Item> item) {
 		String getItemKey = BuiltInRegistries.ITEM.getKey(item.get()).toString();
 		String getItemPath = BuiltInRegistries.ITEM.getKey(item.get()).getPath();
-		ResourceLocation texture = CMI.loadResource("item/" + getItemPath);
+		ResourceLocation texture = Cmi.loadResource("item/" + getItemPath);
 		ResourceLocation parent = ResourceLocation.withDefaultNamespace("item/generated");
 
 		return withExistingParent(getItemKey, parent)

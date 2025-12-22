@@ -1,7 +1,7 @@
 package top.nebula.cmi.common.register;
 
 import net.minecraft.world.item.BrushItem;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.item.NuclearMechanism;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -26,7 +26,7 @@ public class ModItems {
 	}
 
 	static {
-		ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, CMI.MODID);
+		ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, Cmi.MODID);
 
 		TEST_BRUSH = ITEMS.register("test_brush", () -> {
 			return new BrushItem(new Item.Properties()

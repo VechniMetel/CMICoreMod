@@ -25,7 +25,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.util.Lazy;
 import org.jetbrains.annotations.NotNull;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
 
 public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
@@ -33,17 +33,17 @@ public class AcceleratorCategory implements IRecipeCategory<AcceleratorRecipe> {
 	private final IDrawable icon;
 
 	public static final Lazy<Item> ACCELERATOR_ITEM = Lazy.of(() -> {
-		return BuiltInRegistries.ITEM.get(CMI.loadResource("accelerator"));
+		return BuiltInRegistries.ITEM.get(Cmi.loadResource("accelerator"));
 	});
 	public static final Lazy<Block> ACCELERATOR_BLOCK = Lazy.of(() -> {
-		return BuiltInRegistries.BLOCK.get(CMI.loadResource("accelerator"));
+		return BuiltInRegistries.BLOCK.get(Cmi.loadResource("accelerator"));
 	});
 	private static final Lazy<Item> PRECISION_MECHANISM = Lazy.of(() -> {
 		return BuiltInRegistries.ITEM.get(ResourceLocation.parse("create:precision_mechanism"));
 	});
-	public static final ResourceLocation UID = CMI.loadResource("accelerator");
+	public static final ResourceLocation UID = Cmi.loadResource("accelerator");
 	public static final RecipeType<AcceleratorRecipe> ACCELERATOR_TYPE =
-			RecipeType.create(CMI.MODID, "accelerator", AcceleratorRecipe.class);
+			RecipeType.create(Cmi.MODID, "accelerator", AcceleratorRecipe.class);
 
 	public AcceleratorCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);

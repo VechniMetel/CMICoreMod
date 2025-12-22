@@ -18,17 +18,17 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.utils.NebulaUtils;
 
 @SuppressWarnings("ALL")
-@Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = Cmi.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class ParchmentRightClick {
 	record PlayerPos(double x, double y, double z) {
 	}
 
 	public static final Lazy<Item> PARCHMEMT = Lazy.of(() -> {
-		return BuiltInRegistries.ITEM.get(CMI.loadResource("parchment"));
+		return BuiltInRegistries.ITEM.get(Cmi.loadResource("parchment"));
 	});
 
 	@SubscribeEvent

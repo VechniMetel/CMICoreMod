@@ -1,6 +1,6 @@
 package top.nebula.cmi.worldgen.biome;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BiomeDefaultFeatures;
 import net.minecraft.data.worldgen.BootstapContext;
@@ -53,6 +53,6 @@ public class ModBiomes {
 	}
 
 	private static ResourceKey<Biome> register(String name) {
-		return ResourceKey.create(Registries.BIOME, CMI.loadResource(name));
+		return ResourceKey.create(Registries.BIOME, Cmi.loadResource(name));
 	}
 }

@@ -13,8 +13,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import terrablender.api.Regions;
 import terrablender.api.SurfaceRuleManager;
 
-@Mod(CMI.MODID)
-public class CMI {
+@Mod(Cmi.MODID)
+public class Cmi {
 	public static final String MODID = "cmi";
 	public static final String NAME = "CMI";
 	public static final Logger LOGGER = LogManager.getLogger(NAME);
@@ -29,7 +29,7 @@ public class CMI {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
 	}
 
-	public CMI(FMLJavaModLoadingContext context) {
+	public Cmi(FMLJavaModLoadingContext context) {
 		IEventBus event = context.getModEventBus();
 
 		ModBlocks.register(event);
@@ -45,7 +45,7 @@ public class CMI {
 		event.enqueueWork(() -> {
 			Regions.register(new ModOverworldRegion(5));
 
-			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, CMI.MODID, ModSurfaceRuleData.makeRules());
+			SurfaceRuleManager.addSurfaceRules(SurfaceRuleManager.RuleCategory.OVERWORLD, Cmi.MODID, ModSurfaceRuleData.makeRules());
 			SurfaceRuleManager.addToDefaultSurfaceRulesAtStage(SurfaceRuleManager.RuleCategory.OVERWORLD, SurfaceRuleManager.RuleStage.AFTER_BEDROCK, 0, ModSurfaceRuleData.makeInjections());
 		});
 	}

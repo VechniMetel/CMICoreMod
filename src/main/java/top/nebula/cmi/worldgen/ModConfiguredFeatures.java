@@ -1,10 +1,9 @@
 package top.nebula.cmi.worldgen;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstapContext;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.ConstantInt;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -21,7 +20,7 @@ public class ModConfiguredFeatures {
 	public static ResourceKey<ConfiguredFeature<?, ?>> GOLDEN_TREE = registerKey("golden_tree");
 
 	private static ResourceKey<ConfiguredFeature<?, ?>> registerKey(String name) {
-		return ResourceKey.create(Registries.CONFIGURED_FEATURE, CMI.loadResource(name));
+		return ResourceKey.create(Registries.CONFIGURED_FEATURE, Cmi.loadResource(name));
 	}
 
 	private static TreeConfiguration.TreeConfigurationBuilder createStraightBlobTree(Block logBlock, Block leavesBlock, int baseHeight, int heightRandA, int heightRandB, int radius) {

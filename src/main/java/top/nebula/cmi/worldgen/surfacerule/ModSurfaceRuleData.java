@@ -1,9 +1,8 @@
 package top.nebula.cmi.worldgen.surfacerule;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.worldgen.biome.ModBiomes;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
@@ -16,7 +15,7 @@ public class ModSurfaceRuleData {
 	private static final SurfaceRules.RuleSource ANDESITE = makeStateRule(Blocks.ANDESITE);
 	private static final SurfaceRules.RuleSource STONE = makeStateRule(Blocks.STONE);
 	private static final SurfaceRules.RuleSource PEAT = makeStateRule(
-			BuiltInRegistries.BLOCK.get(CMI.loadResource("peat_block")));
+			BuiltInRegistries.BLOCK.get(Cmi.loadResource("peat_block")));
 
 	public static SurfaceRules.RuleSource makeRules() {
 		return SurfaceRules.sequence(SurfaceRules.ifTrue(SurfaceRules.isBiome(ModBiomes.ANDESITE_CAVE), ANDESITE));

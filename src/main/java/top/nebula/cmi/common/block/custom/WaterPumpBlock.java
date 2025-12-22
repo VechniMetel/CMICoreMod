@@ -12,7 +12,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.register.ModBlockEntityTypes;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.common.block.entity.WaterPumpBlockEntity;
@@ -20,7 +20,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 
 @SuppressWarnings("ALL")
-@Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = Cmi.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
 	public WaterPumpBlock() {
 		super(Properties.copy(Blocks.OAK_PLANKS));

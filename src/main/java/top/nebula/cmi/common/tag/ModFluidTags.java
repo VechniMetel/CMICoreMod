@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.FluidTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.material.Fluid;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 
 public class ModFluidTags {
 	public static TagKey<Fluid> createTag(String namespace, String name) {
@@ -13,6 +13,6 @@ public class ModFluidTags {
 	}
 
 	public static TagKey<Fluid> createTag(String name) {
-		return FluidTags.create(CMI.loadResource(name));
+		return FluidTags.create(Cmi.loadResource(name));
 	}
 }

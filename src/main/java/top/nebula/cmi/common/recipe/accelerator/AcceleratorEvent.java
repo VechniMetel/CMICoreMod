@@ -18,13 +18,13 @@ import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 
 @SuppressWarnings("ALL")
-@Mod.EventBusSubscriber(modid = CMI.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
+@Mod.EventBusSubscriber(modid = Cmi.MODID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class AcceleratorEvent {
 	public static final Lazy<Block> ACCELERATOR_BLOCK = Lazy.of(() -> {
-		return BuiltInRegistries.BLOCK.get(CMI.loadResource("accelerator"));
+		return BuiltInRegistries.BLOCK.get(Cmi.loadResource("accelerator"));
 	});
 
 	@SubscribeEvent

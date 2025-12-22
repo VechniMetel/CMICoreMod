@@ -15,7 +15,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 
 import java.util.*;
 
@@ -92,7 +92,7 @@ public class AcceleratorRecipe implements Recipe<SimpleContainer> {
 
 	public static class Serializer implements RecipeSerializer<AcceleratorRecipe> {
 		public static final Serializer INSTANCE = new Serializer();
-		public static final ResourceLocation ID = CMI.loadResource("accelerator");
+		public static final ResourceLocation ID = Cmi.loadResource("accelerator");
 
 		@Override
 		public @NotNull AcceleratorRecipe fromJson(@NotNull ResourceLocation id, @NotNull JsonObject json) {

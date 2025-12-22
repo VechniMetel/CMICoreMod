@@ -15,7 +15,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.compat.jei.CmiGuiTextures;
@@ -30,8 +30,11 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	private final IDrawable icon;
 	private final WaterPumpMultiblock waterPump = new WaterPumpMultiblock();
 
-	public static final RecipeType<WaterPumpRecipe> WATER_PUMP_TYPE =
-			new RecipeType<>(CMI.loadResource("water_pump"), WaterPumpRecipe.class);
+	public static final RecipeType<WaterPumpRecipe> WATER_PUMP_TYPE = RecipeType.create(
+			Cmi.MODID,
+			"water_pump",
+			WaterPumpRecipe.class
+	);
 
 	public WaterPumpCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
@@ -87,5 +90,7 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
 		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 80, 20);
 		this.waterPump.draw(graphics, 30, 5);
+		PoseStack pose = graphics.pose();
+		pose.popPose();
 	}
 }

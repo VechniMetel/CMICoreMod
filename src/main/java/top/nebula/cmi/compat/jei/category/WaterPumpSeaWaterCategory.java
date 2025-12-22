@@ -17,7 +17,7 @@ import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistries;
 import org.jetbrains.annotations.NotNull;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.recipe.waterpump.WaterPumpSeaWaterRecipe;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.compat.jei.CmiGuiTextures;
@@ -33,11 +33,14 @@ public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWa
 	private final WaterPumpMultiblock waterPump = new WaterPumpMultiblock();
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
-		return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
+		return ForgeRegistries.FLUIDS.getValue(Cmi.loadResource("sea_water"));
 	});
 
-	public static final RecipeType<WaterPumpSeaWaterRecipe> WATER_PUMP_SEA_WATER_TYPE =
-			new RecipeType<>(CMI.loadResource("water_pump_sea_water"), WaterPumpSeaWaterRecipe.class);
+	public static final RecipeType<WaterPumpSeaWaterRecipe> WATER_PUMP_SEA_WATER_TYPE = RecipeType.create(
+			Cmi.MODID,
+			"water_pump_sea_water",
+			WaterPumpSeaWaterRecipe.class
+	);
 
 	public WaterPumpSeaWaterCategory(IGuiHelper helper) {
 		this.background = helper.createBlankDrawable(0, 0);
@@ -99,5 +102,7 @@ public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWa
 	public void draw(@NotNull WaterPumpSeaWaterRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
 		CmiGuiTextures.WATER_PUMP_SEA_WATER_ARROW.render(graphics, 80, 20);
 		this.waterPump.draw(graphics, 30, 5);
+		PoseStack pose = graphics.pose();
+		pose.popPose();
 	}
 }

@@ -5,7 +5,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.level.block.Block;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 
 public class ModBlockTags {
 	public static TagKey<Block> createTag(String namespace, String name) {
@@ -13,7 +13,7 @@ public class ModBlockTags {
 	}
 
 	public static TagKey<Block> createTag(String name) {
-		return BlockTags.create(CMI.loadResource(name));
+		return BlockTags.create(Cmi.loadResource(name));
 	}
 
 	public static TagKey<Block> HEAT_SOURCES;

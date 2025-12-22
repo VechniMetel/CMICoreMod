@@ -1,6 +1,6 @@
 package top.nebula.cmi.datagen;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.register.ModBlocks;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -13,7 +13,7 @@ import java.util.function.Supplier;
 
 public class ModBlockStateProvider extends BlockStateProvider {
 	public ModBlockStateProvider(PackOutput output, ExistingFileHelper helper) {
-		super(output, CMI.MODID, helper);
+		super(output, Cmi.MODID, helper);
 	}
 
 	@Override

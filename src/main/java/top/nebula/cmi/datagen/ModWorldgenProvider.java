@@ -1,6 +1,6 @@
 package top.nebula.cmi.datagen;
 
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.worldgen.ModConfiguredFeatures;
 import top.nebula.cmi.worldgen.biome.ModBiomes;
 import net.minecraft.core.HolderLookup;
@@ -18,6 +18,6 @@ public class ModWorldgenProvider extends DatapackBuiltinEntriesProvider {
 			.add(Registries.BIOME, ModBiomes::bootstrap);
 
 	public ModWorldgenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
-		super(output, registries, BUILDER, Set.of(CMI.MODID));
+		super(output, registries, BUILDER, Set.of(Cmi.MODID));
 	}
 }

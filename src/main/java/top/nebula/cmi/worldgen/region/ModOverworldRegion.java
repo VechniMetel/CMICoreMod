@@ -1,7 +1,7 @@
 package top.nebula.cmi.worldgen.region;
 
 import com.mojang.datafixers.util.Pair;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.worldgen.biome.ModBiomes;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
@@ -15,7 +15,7 @@ import java.util.function.Consumer;
 
 public class ModOverworldRegion extends Region {
 	public ModOverworldRegion(int weight) {
-		super(CMI.loadResource("overworld"), RegionType.OVERWORLD, weight);
+		super(Cmi.loadResource("overworld"), RegionType.OVERWORLD, weight);
 	}
 
 	@Override

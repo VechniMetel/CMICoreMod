@@ -8,7 +8,7 @@ import net.minecraft.world.level.block.StairBlock;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.block.state.properties.StairsShape;
 import net.minecraftforge.registries.ForgeRegistries;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.register.ModBlockEntityTypes;
 import top.nebula.cmi.common.register.ModBlocks;
 import top.nebula.cmi.util.ModLang;
@@ -43,7 +43,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 	}
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
-		return ForgeRegistries.FLUIDS.getValue(CMI.loadResource("sea_water"));
+		return ForgeRegistries.FLUIDS.getValue(Cmi.loadResource("sea_water"));
 	});
 
 	private static final ResourceLocation STAIRS =
@@ -212,7 +212,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		if (isShowMultiblock()) {
 			PatchouliAPI.get().showMultiblock(
 					STRUCTURE.get(),
-					Component.translatable("multiblock.building." + CMI.MODID + ".water_pump"),
+					Component.translatable("multiblock.building." + Cmi.MODID + ".water_pump"),
 					worldPosition.offset(0, -1, 0),
 					Rotation.NONE
 			);

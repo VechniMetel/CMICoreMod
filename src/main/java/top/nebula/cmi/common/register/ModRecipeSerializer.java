@@ -4,9 +4,8 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 import top.nebula.cmi.common.recipe.accelerator.AcceleratorRecipe;
-import top.nebula.cmi.common.recipe.waterpump.WaterPumpRecipe;
 
 import java.util.function.Supplier;
 
@@ -17,7 +16,7 @@ public class ModRecipeSerializer {
 //	public static final Supplier<RecipeSerializer<WaterPumpRecipe>> WATER_PUMP;
 
 	static {
-		SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CMI.MODID);
+		SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, Cmi.MODID);
 
 		ACCELERATOR = SERIALIZERS.register("accelerator", () -> {
 			return AcceleratorRecipe.Serializer.INSTANCE;

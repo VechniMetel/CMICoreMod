@@ -6,7 +6,7 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
-import top.nebula.cmi.CMI;
+import top.nebula.cmi.Cmi;
 
 public class CmiGuiTexture implements ScreenElement {
 	public final ResourceLocation location;
@@ -20,7 +20,7 @@ public class CmiGuiTexture implements ScreenElement {
 	}
 
 	public CmiGuiTexture(String path, int startX, int startY, int width, int height) {
-		this.location = CMI.loadResource(String.format("textures/gui/jei/%s.png", path));
+		this.location = Cmi.loadResource(String.format("textures/gui/jei/%s.png", path));
 		this.startX = startX;
 		this.startY = startY;
 		this.width = width;
