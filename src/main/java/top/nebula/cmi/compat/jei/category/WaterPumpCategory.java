@@ -13,6 +13,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.material.Fluids;
 import org.jetbrains.annotations.NotNull;
 import top.nebula.cmi.Cmi;
@@ -75,7 +76,8 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 150, 30)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addFluidStack(Fluids.WATER, Integer.MAX_VALUE);
+				.addFluidStack(Fluids.WATER, Integer.MAX_VALUE)
+				.addItemStack(Items.WATER_BUCKET.getDefaultInstance());
 	}
 
 	@Override

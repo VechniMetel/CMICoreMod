@@ -13,6 +13,7 @@ import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.material.Fluid;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -34,6 +35,10 @@ public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWa
 
 	private static final Lazy<Fluid> SEA_WATER = Lazy.of(() -> {
 		return ForgeRegistries.FLUIDS.getValue(Cmi.loadResource("sea_water"));
+	});
+
+	private static final Lazy<Item> SEA_WATER_BUCKET = Lazy.of(() -> {
+		return ForgeRegistries.ITEMS.getValue(Cmi.loadResource("sea_water_bucket"));
 	});
 
 	public static final RecipeType<WaterPumpSeaWaterRecipe> WATER_PUMP_SEA_WATER_TYPE = RecipeType.create(
@@ -81,7 +86,8 @@ public class WaterPumpSeaWaterCategory implements IRecipeCategory<WaterPumpSeaWa
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpSeaWaterRecipe recipe, @NotNull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 150, 30)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
-				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE);
+				.addFluidStack(SEA_WATER.get(), Integer.MAX_VALUE)
+				.addItemStack(SEA_WATER_BUCKET.get().getDefaultInstance());
 	}
 
 	@Override
