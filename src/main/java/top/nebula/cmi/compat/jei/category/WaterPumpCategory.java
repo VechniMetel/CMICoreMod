@@ -87,7 +87,5 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	public void draw(@NotNull WaterPumpRecipe recipe, @NotNull IRecipeSlotsView view, @NotNull GuiGraphics graphics, double mouseX, double mouseY) {
 		CmiGuiTextures.WATER_PUMP_ARROW.render(graphics, 80, 20);
 		this.waterPump.draw(graphics, 30, 5);
-		PoseStack pose = graphics.pose();
-		pose.popPose();
 	}
 }
