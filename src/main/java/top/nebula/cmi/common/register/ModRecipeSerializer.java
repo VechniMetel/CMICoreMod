@@ -14,7 +14,7 @@ public class ModRecipeSerializer {
 	public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS;
 	public static final Supplier<RecipeSerializer<AcceleratorRecipe>> ACCELERATOR;
 
-	public static final Supplier<RecipeSerializer<WaterPumpRecipe>> WATER_PUMP;
+//	public static final Supplier<RecipeSerializer<WaterPumpRecipe>> WATER_PUMP;
 
 	static {
 		SERIALIZERS = DeferredRegister.create(ForgeRegistries.RECIPE_SERIALIZERS, CMI.MODID);
@@ -23,9 +23,9 @@ public class ModRecipeSerializer {
 			return AcceleratorRecipe.Serializer.INSTANCE;
 		});
 
-		WATER_PUMP = SERIALIZERS.register("water_pump", () -> {
-			return WaterPumpRecipe.Serializer.INSTANCE;
-		});
+//		WATER_PUMP = SERIALIZERS.register("water_pump", () -> {
+//			return WaterPumpRecipe.Serializer.INSTANCE;
+//		});
 	}
 
 	public static void register(IEventBus event) {

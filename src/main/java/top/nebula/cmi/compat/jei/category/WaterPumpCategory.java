@@ -71,7 +71,6 @@ public class WaterPumpCategory implements IRecipeCategory<WaterPumpRecipe> {
 	@Override
 	public void setRecipe(@NotNull IRecipeLayoutBuilder builder, @NotNull WaterPumpRecipe recipe, @NotNull IFocusGroup focuses) {
 		builder.addSlot(RecipeIngredientRole.OUTPUT, 150, 30)
-				.addIngredients(recipe.input)
 				.setBackground(CreateRecipeCategory.getRenderedSlot(), -1, -1)
 				.addFluidStack(Fluids.WATER, Integer.MAX_VALUE);
 	}

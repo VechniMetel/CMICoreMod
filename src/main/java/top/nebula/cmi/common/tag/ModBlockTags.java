@@ -1,0 +1,24 @@
+package top.nebula.cmi.common.tag;
+
+
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
+import top.nebula.cmi.CMI;
+
+public class ModBlockTags {
+	public static TagKey<Block> createTag(String namespace, String name) {
+		return BlockTags.create(ResourceLocation.fromNamespaceAndPath(namespace, name));
+	}
+
+	public static TagKey<Block> createTag(String name) {
+		return BlockTags.create(CMI.loadResource(name));
+	}
+
+	public static TagKey<Block> HEAT_SOURCES;
+
+	static {
+		HEAT_SOURCES = createTag("heat_sources");
+	}
+}

@@ -15,7 +15,7 @@ public class ModRecipeType {
 
 	public static final Supplier<RecipeType<AcceleratorRecipe>> ACCELERATOR;
 
-	public static final Supplier<RecipeType<WaterPumpRecipe>> WATER_PUMP;
+//	public static final Supplier<RecipeType<WaterPumpRecipe>> WATER_PUMP;
 
 	static {
 		RECIPE_TYPES = DeferredRegister.create(ForgeRegistries.RECIPE_TYPES, CMI.MODID);
@@ -24,9 +24,9 @@ public class ModRecipeType {
 			return AcceleratorRecipe.Type.INSTANCE;
 		});
 
-		WATER_PUMP = RECIPE_TYPES.register("water_pump", () ->  {
-			return WaterPumpRecipe.Type.INSTANCE;
-		});
+//		WATER_PUMP = RECIPE_TYPES.register("water_pump", () ->  {
+//			return WaterPumpRecipe.Type.INSTANCE;
+//		});
 	}
 
 	public static void register(IEventBus event) {

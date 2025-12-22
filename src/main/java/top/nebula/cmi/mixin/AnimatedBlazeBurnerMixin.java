@@ -6,12 +6,14 @@ import com.simibubi.create.compat.jei.category.animations.AnimatedBlazeBurner;
 import com.simibubi.create.compat.jei.category.animations.AnimatedKinetics;
 import com.simibubi.create.content.processing.burner.BlazeBurnerBlock;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.Block;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import top.nebula.cmi.common.tag.ModBlockTags;
+import top.nebula.utils.client.TagAnimatedBlock;
 
 @Mixin(value = AnimatedBlazeBurner.class, remap = false)
 public abstract class AnimatedBlazeBurnerMixin extends AnimatedKinetics {
@@ -19,7 +21,7 @@ public abstract class AnimatedBlazeBurnerMixin extends AnimatedKinetics {
 	private BlazeBurnerBlock.HeatLevel heatLevel;
 
 	@Inject(method = "draw", at = @At("HEAD"), remap = false, cancellable = true)
-	public void draw(GuiGraphics graphics, int xOffset, int yOffset, CallbackInfo ci) {
+	public void draw(GuiGraphics graphics, int xOffset, int yOffset, CallbackInfo info) {
 		if (heatLevel == BlazeBurnerBlock.HeatLevel.valueOf("GRILLED")) {
 			PoseStack matrixStack = graphics.pose();
 			matrixStack.pushPose();
@@ -27,11 +29,15 @@ public abstract class AnimatedBlazeBurnerMixin extends AnimatedKinetics {
 			matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5F));
 			matrixStack.mulPose(Axis.YP.rotationDegrees(22.5F));
 			int scale = 23;
-			blockElement(Blocks.FIRE.defaultBlockState())
-					.atLocal((double) 0.0F, 1.65, (double) 0.0F).scale((double) scale)
+
+			Block block = TagAnimatedBlock.get(ModBlockTags.HEAT_SOURCES, 20f);
+			blockElement(block.defaultBlockState())
+					.atLocal(0.0F, 1.65, 0.0F)
+					.scale(scale)
 					.render(graphics);
+
 			matrixStack.popPose();
-			ci.cancel();
+			info.cancel();
 		}
 	}
 }
