@@ -65,6 +65,10 @@ modId = "alexscaves"
 mandatory = true
 versionRange = "[2.0.2,)"
 [[dependencies."${mod_id}"]]
+modId = "ad_astra"
+mandatory = true
+versionRange = "[1.15.19,)"
+[[dependencies."${mod_id}"]]
 modId = "kubejs"
 mandatory = true
 versionRange = "[2001.6.5-build.16,)"

@@ -13,7 +13,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(FireBlock.class)
 public class FireBlockMixin {
-	@Inject(method = "onPlace", at = @At("RETURN"))
+	@Inject(
+			method = "onPlace",
+			at = @At("RETURN")
+	)
 	private void onPlace(BlockState state, Level level, BlockPos pos, BlockState oldState, boolean isMoving, CallbackInfo info) {
 		BlockEntity blockEntity = level.getBlockEntity(pos.above());
 		if (blockEntity instanceof BasinBlockEntity basinBlockEntity) {

@@ -127,6 +127,8 @@ dependencies {
     implementation fg.deobf("curse.maven:mantle-74924:6642332")
     // Alex Cave
     implementation fg.deobf("curse.maven:alexs-caves-924854:5848216")
+    // Ad Astra
+    implementation fg.deobf("curse.maven:ad-astra-635042:5914893")
     // Rhino
     implementation fg.deobf("curse.maven:rhino-416294:6186971")
     // Jade
