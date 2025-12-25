@@ -28,10 +28,11 @@ public class PlayerDrownInNether {
 			return;
 		}
 
-		if (player.level().dimension().equals(Level.NETHER)) {
-			int air = player.getAirSupply();
-			player.setAirSupply(air - 1);
+		// 每20 tick 执行一次
+		if (player.tickCount % 20 == 0) {
+			int playerAir = player.getAirSupply();
+			player.setAirSupply(playerAir - 10);
+			// player.hurt(player.damageSources().drown(), 1.0F);
 		}
-//		player.hurt(player.damageSources().drown(), 1.0F);
 	}
 }

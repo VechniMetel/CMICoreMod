@@ -1,5 +1,6 @@
 package top.nebula.cmi;
 
+import dev.latvian.mods.kubejs.typings.Info;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.eventbus.api.IEventBus;
 import org.apache.logging.log4j.LogManager;
@@ -22,9 +23,12 @@ public class Cmi {
 	/**
 	 * 加载ResourceLocation资源
 	 *
-	 * @param path
+	 * @param path 命名空间下的资源路径
+	 *             <p>
+	 *             Resource path under namespace
 	 * @return
 	 */
+	@Info("加载\"cmi\"命名空间下的资源\n\nLoad resource under namespace \"cmi\"")
 	public static ResourceLocation loadResource(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MODID, path);
 	}
