@@ -21,10 +21,11 @@ public class ModRecipeSerializer {
 		ACCELERATOR = SERIALIZERS.register("accelerator", () -> {
 			return AcceleratorRecipe.Serializer.INSTANCE;
 		});
-
-//		WATER_PUMP = SERIALIZERS.register("water_pump", () -> {
-//			return WaterPumpRecipe.Serializer.INSTANCE;
-//		});
+		/*
+		WATER_PUMP = SERIALIZERS.register("water_pump", () -> {
+			return WaterPumpRecipe.Serializer.INSTANCE;
+		});
+		 */
 	}
 
 	public static void register(IEventBus event) {

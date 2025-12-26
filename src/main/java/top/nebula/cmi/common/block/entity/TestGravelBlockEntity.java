@@ -32,8 +32,7 @@ public class TestGravelBlockEntity extends BrushableBlockEntity {
 
 		// 设置战利品表
 		if (player.getMainHandItem().is(ModItems.TEST_BRUSH.get())) {
-			ResourceLocation customLootTables =
-					ResourceLocation.fromNamespaceAndPath(Cmi.MODID, "archaeology/custom_brush_loot");
+			ResourceLocation customLootTables = Cmi.loadResource("archaeology/custom_brush_loot");
 			this.setLootTable(customLootTables, gameTime);
 		} else {
 			ResourceLocation vanillaLootTables =

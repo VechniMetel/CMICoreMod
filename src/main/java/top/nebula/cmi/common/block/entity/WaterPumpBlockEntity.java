@@ -179,12 +179,12 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		}
 
 		@Override
-		public @NotNull FluidStack drain(int i, FluidAction fluidAction) {
+		public @NotNull FluidStack drain(int amount, FluidAction fluidAction) {
 			if (isStructureValid()) {
 				if (isOcean()) {
-					return new FluidStack(SEA_WATER.get(), i);
+					return new FluidStack(SEA_WATER.get(), amount);
 				}
-				return new FluidStack(Fluids.WATER, i);
+				return new FluidStack(Fluids.WATER, amount);
 			}
 			return FluidStack.EMPTY;
 		}
@@ -201,7 +201,7 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 		return isShowMultiblock;
 	}
 
-	/**
+	/*
 	 * 显示结构
 	 * 由于客户端渲染因为某些不可抗因素 需要Y轴下沉一格
 	 */
@@ -210,9 +210,10 @@ public class WaterPumpBlockEntity extends BlockEntity implements IHaveGoggleInfo
 			return;
 		}
 		if (isShowMultiblock()) {
+			String tranKey = String.format("multiblock.building.%s.water_pump", Cmi.MODID);
 			PatchouliAPI.get().showMultiblock(
 					STRUCTURE.get(),
-					Component.translatable("multiblock.building." + Cmi.MODID + ".water_pump"),
+					Component.translatable(tranKey),
 					worldPosition.offset(0, -1, 0),
 					Rotation.NONE
 			);

@@ -3,7 +3,6 @@ package top.nebula.cmi.common.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -75,10 +74,6 @@ public class MercuryGeothermalVentBlock extends BaseEntityBlock {
 	public boolean isSpawningParticles(BlockPos pos, LevelAccessor level) {
 		BlockState above = level.getBlockState(pos.above());
 		return (above.isAir() || !above.blocksMotion());
-	}
-
-	public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource source) {
-
 	}
 
 	@Nullable

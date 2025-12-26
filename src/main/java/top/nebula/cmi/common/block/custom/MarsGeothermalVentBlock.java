@@ -3,7 +3,6 @@ package top.nebula.cmi.common.block.custom;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.tags.FluidTags;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
@@ -78,13 +77,9 @@ public class MarsGeothermalVentBlock extends BaseEntityBlock {
 		return (above.isAir() || !above.blocksMotion());
 	}
 
-	public void animateTick(@NotNull BlockState state, @NotNull Level level, @NotNull BlockPos pos, @NotNull RandomSource source) {
-
-	}
-
 	@Nullable
 	public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, @NotNull BlockState state, @NotNull BlockEntityType<T> type) {
-		if (level.isClientSide) {
+		if (level.isClientSide()) {
 			return state.getValue(SMOKE_TYPE) > 0 && state.getValue(SPAWNING_PARTICLES) ?
 					createTickerHelper(type, ModBlockEntityTypes.MARS_GEO.get(),
 							MarsGeothermalVentBlockEntity::particleTick) : null;

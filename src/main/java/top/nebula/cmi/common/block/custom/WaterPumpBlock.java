@@ -45,7 +45,7 @@ public class WaterPumpBlock extends Block implements IBE<WaterPumpBlockEntity> {
 		ItemStack item = player.getItemInHand(hand);
 		BlockState state = level.getBlockState(pos);
 
-		if (!level.isClientSide) {
+		if (!level.isClientSide()) {
 			return;
 		}
 
