@@ -19,7 +19,8 @@ import top.nebula.cmi.common.register.ModBlocks;
 
 public class WaterPumpMultiblock extends AnimatedKinetics {
 	private static final Lazy<Block> STAIRS = Lazy.of(() -> {
-		return ForgeRegistries.BLOCKS.getValue(ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal"));
+		ResourceLocation resouce = ResourceLocation.parse("immersiveengineering:stairs_treated_wood_horizontal");
+		return ForgeRegistries.BLOCKS.getValue(resouce);
 	});
 
 	@Override
