@@ -24,10 +24,10 @@ public class WaterPumpMultiblock extends AnimatedKinetics {
 	});
 
 	@Override
-	public void draw(@NotNull GuiGraphics graphics, int xOffset, int yOffset) {
+	public void draw(@NotNull GuiGraphics graphics, int offsetX, int offsetY) {
 		PoseStack matrixStack = graphics.pose();
 		matrixStack.pushPose();
-		matrixStack.translate(xOffset, yOffset, 100.0F);
+		matrixStack.translate(offsetX, offsetY, 100.0F);
 		matrixStack.mulPose(Axis.XP.rotationDegrees(-15.5F));
 		matrixStack.mulPose(Axis.YP.rotationDegrees(22.5F));
 
